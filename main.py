@@ -12,10 +12,8 @@ from app.config import ADMIN_API_KEY, init_openai_client
 from app.database import init_supabase
 from app.feedback import feedback_logger
 from app.rate_limiter import rate_limiter
-from app.render import VALID_THEMES, capture_tweet_screenshot, generate_tweet_html
 from app.schemas import (
     FeedbackRequest,
-    ImageRequest,
     RateLimitStatus,
     TweetRequest,
     TweetResponse,
@@ -93,7 +91,6 @@ async def root():
         "version": "2.0.0",
         "endpoints": {
             "POST /improve": "Improve a tweet with AI (3 variations)",
-            "POST /generate-image": "Render a tweet as a PNG image",
             "GET  /rate-limit/status": "Check remaining free generations",
             "POST /feedback": "Submit feedback",
             "GET  /health": "Health check",
@@ -138,30 +135,6 @@ async def improve_tweet(request: TweetRequest, req: Request):
     )
 
     return TweetResponse(original=request.text, variations=variations)
-
-
-@app.post("/generate-image", tags=["tweets"])
-async def generate_image(request: ImageRequest, req: Request):
-    """Render *text* as a styled PNG tweet card and return it as base64."""
-    ip = _get_client_ip(req)
-    status = rate_limiter.check_limit(ip)
-    if not status["allowed"]:
-        _rate_limit_error(status)
-
-    theme = request.theme if request.theme in VALID_THEMES else "light"
-    html = generate_tweet_html(request.text, theme)
-
-    try:
-        image_b64 = await capture_tweet_screenshot(html, request.text)
-    except Exception as exc:
-        logger.exception("Screenshot generation failed")
-        raise HTTPException(status_code=500, detail=f"Image generation failed: {exc}") from exc
-
-    return {
-        "success": True,
-        "image": f"data:image/png;base64,{image_b64}",
-        "theme": theme,
-    }
 
 
 @app.get("/rate-limit/status", response_model=RateLimitStatus, tags=["rate-limit"])

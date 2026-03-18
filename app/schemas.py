@@ -30,18 +30,6 @@ class TweetResponse(BaseModel):
     variations: List[TweetVariation]
 
 
-class ImageRequest(BaseModel):
-    text: str = Field(..., min_length=1, description="Tweet text to render")
-    theme: str = Field("light", description="Visual theme for the card")
-
-    @field_validator("text")
-    @classmethod
-    def text_must_not_be_blank(cls, v: str) -> str:
-        if not v.strip():
-            raise ValueError("Text cannot be blank")
-        return v.strip()
-
-
 class FeedbackRequest(BaseModel):
     feedback: str = Field(..., min_length=1, max_length=2000, description="User feedback text")
 

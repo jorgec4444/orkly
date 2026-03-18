@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TweetCraft AI — Mejora tus tweets</title>
+  <title>Postly — Publish faster. Manage better.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* Light theme (default) */
     :root {
       --bg:           #f4f2ed;
       --bg-2:         #ffffff;
@@ -32,7 +31,6 @@
       --font-mono:    'DM Mono', monospace;
     }
 
-    /* Dark theme */
     [data-theme="dark"] {
       --bg:           #0e0e16;
       --bg-2:         #15151e;
@@ -63,26 +61,25 @@
       transition: background .25s, color .25s;
     }
 
-    /* ── Layout ── */
     .page { max-width: 820px; margin: 0 auto; padding: 0 24px 100px; }
 
     /* ── Header ── */
     header {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 24px 0 36px;
+      padding: 24px 0 32px;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 48px;
+      margin-bottom: 52px;
     }
     .logo {
       font-family: var(--font-display); font-weight: 800; font-size: 18px;
       letter-spacing: -.4px; color: var(--text);
-      display: flex; align-items: center; gap: 9px;
+      display: flex; align-items: center; gap: 9px; text-decoration: none;
     }
     .logo-mark {
-      width: 30px; height: 30px; border-radius: 9px;
+      width: 32px; height: 32px; border-radius: 9px;
       background: var(--accent); color: #fff;
       display: flex; align-items: center; justify-content: center;
-      font-size: 15px; line-height: 1;
+      font-size: 16px; line-height: 1; flex-shrink: 0;
     }
     .header-right { display: flex; align-items: center; gap: 10px; }
 
@@ -108,16 +105,42 @@
     @keyframes spin   { to { transform: rotate(360deg); } }
 
     /* ── Hero ── */
-    .hero { margin-bottom: 36px; }
+    .hero { margin-bottom: 40px; }
+    .hero-eyebrow {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block; width: 20px; height: 2px;
+      background: var(--accent); border-radius: 2px;
+    }
     .hero h1 {
-      font-family: var(--font-display); font-size: clamp(30px, 5.5vw, 54px);
-      font-weight: 800; line-height: 1.07; letter-spacing: -1.5px;
-      margin-bottom: 12px; color: var(--text);
+      font-family: var(--font-display); font-size: clamp(32px, 5.5vw, 56px);
+      font-weight: 800; line-height: 1.06; letter-spacing: -1.5px;
+      margin-bottom: 16px; color: var(--text);
     }
     .hero h1 .hl { color: var(--accent); }
-    .hero p { color: var(--text-2); font-size: 15px; max-width: 440px; }
+    .hero p {
+      color: var(--text-2); font-size: 16px; max-width: 460px; line-height: 1.65;
+      margin-bottom: 24px;
+    }
+    .hero-platforms {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--font-mono); font-size: 11px; color: var(--muted);
+    }
+    .platform-pill {
+      padding: 4px 10px; border-radius: 100px;
+      border: 1px solid var(--border-2); background: var(--card-bg);
+      color: var(--text-2); font-size: 11px;
+    }
 
     /* ── Compose ── */
+    .compose-label {
+      font-family: var(--font-mono); font-size: 11px;
+      color: var(--muted); letter-spacing: .05em; text-transform: uppercase;
+      margin-bottom: 10px;
+    }
     .compose-card {
       background: var(--card-bg); border: 1px solid var(--border-2);
       border-radius: var(--radius); padding: 22px; margin-bottom: 12px;
@@ -134,7 +157,7 @@
       width: 100%; background: transparent; border: none; outline: none;
       resize: none; color: var(--text);
       font-family: var(--font-body); font-size: 16px; line-height: 1.65;
-      min-height: 108px;
+      min-height: 110px;
     }
     textarea::placeholder { color: var(--muted); }
     .compose-footer {
@@ -147,7 +170,7 @@
 
     /* ── Templates ── */
     .templates {
-      display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 30px; align-items: center;
+      display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 32px; align-items: center;
     }
     .templates-label { font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin-right: 2px; }
     .tpl-btn {
@@ -189,6 +212,7 @@
     /* ── Results ── */
     #resultsSection { display: none; }
     #resultsSection.visible { display: block; }
+
     .results-header {
       display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
     }
@@ -200,6 +224,7 @@
       font-size: 12px; color: var(--muted);
       max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
+
     .variations-grid { display: grid; gap: 10px; margin-bottom: 24px; }
 
     .variation-card {
@@ -301,8 +326,7 @@
       background: var(--bg-2); border: 1px solid var(--border-2);
       border-radius: 18px; padding: 34px; max-width: 400px; width: 100%;
       box-shadow: 0 8px 40px rgba(0,0,0,.15);
-      transform: translateY(10px); transition: transform .2s;
-      position: relative;
+      transform: translateY(10px); transition: transform .2s; position: relative;
     }
     .modal-backdrop.open .modal { transform: translateY(0); }
     .modal h2 {
@@ -384,6 +408,34 @@
       header { flex-direction: column; align-items: flex-start; gap: 12px; }
       .share-grid { grid-template-columns: 1fr; }
       .original-preview { display: none; }
+      .hero-platforms { flex-wrap: wrap; }
+    }
+
+    /* ── Tweet card template (html2canvas) ── */
+    #tweetTemplateInner {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #ffffff; border: 2px solid #eff3f4;
+      border-radius: 16px; padding: 32px; width: 600px;
+    }
+    #tweetTemplateInner .tweet-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, #5a4af4, #818cf8); margin-bottom: 12px;
+    }
+    #tweetTemplateInner .tweet-name {
+      font-weight: 700; font-size: 16px; color: #0f1419; margin-bottom: 2px;
+    }
+    #tweetTemplateInner .tweet-handle { font-size: 14px; color: #536471; margin-bottom: 16px; }
+    #tweetTemplateInner .tweet-body {
+      font-size: 20px; line-height: 1.5; color: #0f1419;
+      margin-bottom: 16px; word-wrap: break-word;
+    }
+    #tweetTemplateInner .tweet-footer {
+      font-size: 14px; color: #536471;
+      padding-top: 16px; border-top: 1px solid #eff3f4; margin-bottom: 16px;
+    }
+    #tweetTemplateInner .tweet-watermark {
+      text-align: center; font-size: 12px; color: #536471;
+      padding-top: 12px; border-top: 1px solid #eff3f4;
     }
   </style>
 </head>
@@ -393,127 +445,149 @@
   <header>
     <div class="logo">
       <div class="logo-mark">✦</div>
-      TweetCraft AI
+      Postly
     </div>
     <div class="header-right">
       <div id="usageChip" style="display:none"></div>
-      <button id="themeToggle" title="Cambiar tema" onclick="toggleTheme()">🌙</button>
+      <button id="themeToggle" title="Toggle theme" onclick="toggleTheme()">🌙</button>
     </div>
   </header>
 
   <section class="hero">
-    <h1>Tweets que<br>la gente <span class="hl">lee.</span></h1>
-    <p>Pega tu borrador. La IA lo transforma en 3 versiones listas para publicar — profesional, casual o viral.</p>
+    <div class="hero-eyebrow">AI Content Tool</div>
+    <h1>Publish faster.<br><span class="hl">Manage better.</span></h1>
+    <p>Paste your draft and let AI rewrite it in 3 styles — professional, casual or viral. Then generate a ready-to-share image in seconds.</p>
+    <div class="hero-platforms">
+      <span>Built for</span>
+      <span class="platform-pill">Instagram</span>
+      <span class="platform-pill">Twitter / X</span>
+      <span class="platform-pill">LinkedIn</span>
+    </div>
   </section>
 
+  <p class="compose-label">Your draft</p>
   <div class="compose-card">
-    <textarea id="tweetInput" placeholder="Escribe o pega tu tweet aquí…" maxlength="500" rows="5"></textarea>
+    <textarea id="tweetInput" placeholder="Write or paste your post here…" maxlength="500" rows="5"></textarea>
     <div class="compose-footer">
       <span class="char-count" id="charCount">0 / 500</span>
       <button id="improveBtn">
-        <span>Mejorar tweet</span>
+        <span>Improve post</span>
         <span>→</span>
       </button>
     </div>
   </div>
 
   <div class="templates">
-    <span class="templates-label">plantillas →</span>
-    <button class="tpl-btn" onclick="useTemplate('launch')">🚀 Lanzamiento</button>
+    <span class="templates-label">templates →</span>
+    <button class="tpl-btn" onclick="useTemplate('launch')">🚀 Launch</button>
     <button class="tpl-btn" onclick="useTemplate('milestone')">🎯 Milestone</button>
-    <button class="tpl-btn" onclick="useTemplate('lesson')">💡 Lección</button>
-    <button class="tpl-btn" onclick="useTemplate('announcement')">📢 Anuncio</button>
-    <button class="tpl-btn" onclick="useTemplate('question')">❓ Pregunta</button>
+    <button class="tpl-btn" onclick="useTemplate('lesson')">💡 Lesson</button>
+    <button class="tpl-btn" onclick="useTemplate('announcement')">📢 Announcement</button>
+    <button class="tpl-btn" onclick="useTemplate('question')">❓ Question</button>
   </div>
 
   <div id="loadingState">
     <div class="spinner"></div>
-    <div class="loading-text">Generando <strong>3 variaciones</strong> con IA…</div>
+    <div class="loading-text">Generating <strong>3 variations</strong> with AI…</div>
   </div>
 
   <section id="resultsSection">
     <div class="results-header">
-      <span class="results-label">Variaciones generadas</span>
+      <span class="results-label">Generated variations</span>
       <span class="original-preview" id="originalPreview"></span>
     </div>
 
     <div class="variations-grid">
       <div class="variation-card" id="card-professional" onclick="selectVariation('professional', this)">
         <div class="variation-header">
-          <span class="style-badge badge-professional">Profesional</span>
-          <span class="variation-desc">Tono LinkedIn · claro y directo</span>
+          <span class="style-badge badge-professional">Professional</span>
+          <span class="variation-desc">LinkedIn tone · clear and direct</span>
         </div>
         <div class="variation-text" id="professionalText">—</div>
         <div class="variation-footer">
           <span class="var-meta" id="professionalMeta"></span>
-          <button class="copy-btn" onclick="copyVariation(event, 'professional')">Copiar</button>
+          <button class="copy-btn" onclick="copyVariation(event, 'professional')">Copy</button>
         </div>
       </div>
 
       <div class="variation-card" id="card-casual" onclick="selectVariation('casual', this)">
         <div class="variation-header">
           <span class="style-badge badge-casual">Casual</span>
-          <span class="variation-desc">Cercano · con emojis</span>
+          <span class="variation-desc">Friendly · with emojis</span>
         </div>
         <div class="variation-text" id="casualText">—</div>
         <div class="variation-footer">
           <span class="var-meta" id="casualMeta"></span>
-          <button class="copy-btn" onclick="copyVariation(event, 'casual')">Copiar</button>
+          <button class="copy-btn" onclick="copyVariation(event, 'casual')">Copy</button>
         </div>
       </div>
 
       <div class="variation-card" id="card-viral" onclick="selectVariation('viral', this)">
         <div class="variation-header">
           <span class="style-badge badge-viral">Viral</span>
-          <span class="variation-desc">Máximo engagement</span>
+          <span class="variation-desc">Max engagement</span>
         </div>
         <div class="variation-text" id="viralText">—</div>
         <div class="variation-footer">
           <span class="var-meta" id="viralMeta"></span>
-          <button class="copy-btn" onclick="copyVariation(event, 'viral')">Copiar</button>
+          <button class="copy-btn" onclick="copyVariation(event, 'viral')">Copy</button>
         </div>
       </div>
     </div>
 
     <div id="imageSection">
       <hr class="section-divider" />
-      <p class="section-title">Generar imagen</p>
+      <p class="section-title">Generate image</p>
       <div class="themes-row" id="themesRow"></div>
       <button id="generateBtn" onclick="generateImage()">
-        <span>🎨</span> Generar imagen
+        <span>🎨</span> Generate image
       </button>
       <div id="imagePreview">
         <div class="image-wrapper">
-          <img id="generatedImage" src="" alt="Tweet generado" />
+          <img id="generatedImage" src="" alt="Generated post" />
         </div>
         <div class="image-actions">
-          <button class="action-btn action-btn-primary" onclick="downloadImage()">↓ Descargar PNG</button>
-          <button class="action-btn action-btn-secondary" onclick="openShareModal()">Compartir</button>
+          <button class="action-btn action-btn-primary" onclick="downloadImage()">↓ Download PNG</button>
+          <button class="action-btn action-btn-secondary" onclick="openShareModal()">Share</button>
         </div>
       </div>
     </div>
   </section>
 
   <footer>
-    <p>TweetCraft AI &copy; 2026</p>
-    <button class="feedback-link" onclick="openFeedbackModal()">Dejar feedback</button>
+    <p>Postly &copy; 2025</p>
+    <button class="feedback-link" onclick="openFeedbackModal()">Leave feedback</button>
   </footer>
+
+  <!-- Hidden template for html2canvas capture -->
+  <div id="tweetTemplate" style="position:fixed; left:-9999px; top:0; width:600px;">
+    <div id="tweetTemplateInner">
+      <div class="tweet-avatar"></div>
+      <div>
+        <div class="tweet-name">Postly User</div>
+        <div class="tweet-handle">@postly</div>
+      </div>
+      <div class="tweet-body" id="tweetTemplateText"></div>
+      <div class="tweet-footer" id="tweetTemplateDate"></div>
+      <div class="tweet-watermark">✦ Created with Postly</div>
+    </div>
+  </div>
 </div>
 
 <!-- Upgrade modal -->
 <div class="modal-backdrop" id="upgradeModal">
   <div class="modal">
     <button class="modal-close-x" onclick="closeModal('upgradeModal')">✕</button>
-    <h2>Límite diario</h2>
-    <p>Has usado tus <strong id="upgradeUsed">5</strong> generaciones gratuitas de hoy. Se reinicia a medianoche.</p>
+    <h2>Daily limit reached</h2>
+    <p>You've used your <strong id="upgradeUsed">5</strong> free generations for today. Resets at midnight.</p>
     <div class="usage-bar-wrap">
       <div class="usage-bar-fill" id="upgradeBar" style="width:100%"></div>
     </div>
     <div class="modal-actions">
       <button class="action-btn action-btn-primary" style="justify-content:center" onclick="closeModal('upgradeModal');openFeedbackModal()">
-        Quiero acceso ilimitado
+        I want unlimited access
       </button>
-      <button class="modal-dismiss" onclick="closeModal('upgradeModal')">Volver mañana</button>
+      <button class="modal-dismiss" onclick="closeModal('upgradeModal')">Come back tomorrow</button>
     </div>
   </div>
 </div>
@@ -522,14 +596,14 @@
 <div class="modal-backdrop" id="feedbackModal">
   <div class="modal">
     <button class="modal-close-x" onclick="closeModal('feedbackModal')">✕</button>
-    <h2>Tu opinión</h2>
-    <p>¿Qué mejorarías? ¿Qué echas en falta?</p>
-    <textarea class="feedback-textarea" id="feedbackText" placeholder="Escribe aquí…"></textarea>
+    <h2>Your feedback</h2>
+    <p>What would you improve? What's missing?</p>
+    <textarea class="feedback-textarea" id="feedbackText" placeholder="Write here…"></textarea>
     <div class="modal-actions">
       <button class="action-btn action-btn-primary" style="justify-content:center" id="feedbackSubmit" onclick="submitFeedback()">
-        Enviar
+        Send
       </button>
-      <button class="modal-dismiss" onclick="closeModal('feedbackModal')">Cancelar</button>
+      <button class="modal-dismiss" onclick="closeModal('feedbackModal')">Cancel</button>
     </div>
   </div>
 </div>
@@ -538,19 +612,20 @@
 <div class="modal-backdrop" id="shareModal">
   <div class="modal">
     <button class="modal-close-x" onclick="closeModal('shareModal')">✕</button>
-    <h2>Compartir</h2>
-    <p>Descarga la imagen y compártela donde quieras.</p>
+    <h2>Share</h2>
+    <p>Download the image and share it wherever you want.</p>
     <div class="share-grid">
       <button class="share-btn" onclick="shareToTwitter()"><span>🐦</span><span>Twitter / X</span></button>
       <button class="share-btn" onclick="shareToLinkedIn()"><span>💼</span><span>LinkedIn</span></button>
       <button class="share-btn" onclick="shareViaWhatsApp()"><span>💬</span><span>WhatsApp</span></button>
-      <button class="share-btn" onclick="copyImageToClipboard()"><span>📋</span><span>Copiar imagen</span></button>
+      <button class="share-btn" onclick="copyImageToClipboard()"><span>📋</span><span>Copy image</span></button>
     </div>
-    <button class="modal-dismiss" onclick="closeModal('shareModal')">Cerrar</button>
+    <button class="modal-dismiss" onclick="closeModal('shareModal')">Close</button>
   </div>
 </div>
 
 <div id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="main.js"></script>
 </body>
 </html>

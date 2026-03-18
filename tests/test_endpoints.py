@@ -103,41 +103,6 @@ class TestImprove:
         assert r.status_code == 422
 
 
-# ── POST /generate-image ──────────────────────────────────────────────────────
-
-class TestGenerateImage:
-    @pytest.fixture()
-    def image_client(self):
-        fake_b64 = base64.b64encode(b"fake-png-data").decode()
-        with (
-            patch("app.database._supabase_client", _make_supabase()),
-            patch("app.config._openai_client", _make_openai_client()),
-            patch(
-                "app.render.capture_tweet_screenshot",
-                new=AsyncMock(return_value=fake_b64),
-            ),
-        ):
-            from main import app
-            with TestClient(app) as c:
-                yield c
-
-    def test_returns_base64_image(self, image_client):
-        r = image_client.post("/generate-image", json={"text": "Hello", "theme": "dark"})
-        assert r.status_code == 200
-        data = r.json()
-        assert data["success"] is True
-        assert data["image"].startswith("data:image/png;base64,")
-
-    def test_invalid_theme_falls_back_to_light(self, image_client):
-        r = image_client.post("/generate-image", json={"text": "hi", "theme": "invalid"})
-        assert r.status_code == 200
-        assert r.json()["theme"] == "light"
-
-    def test_empty_text_returns_422(self, image_client):
-        r = image_client.post("/generate-image", json={"text": ""})
-        assert r.status_code == 422
-
-
 # ── GET /rate-limit/status ────────────────────────────────────────────────────
 
 class TestRateLimitStatus:

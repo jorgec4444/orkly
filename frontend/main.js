@@ -224,6 +224,40 @@ async function fetchRateLimitStatus() {
   }
 }
 
+function applyThemeToTemplate(theme) {
+  const inner = document.getElementById('tweetTemplateInner');
+  const body  = document.getElementById('tweetTemplateText');
+  const handle = document.getElementById('tweetTemplateDate');
+
+  // Resetear estilos inline anteriores
+  inner.removeAttribute('style');
+
+  const themes = {
+    light:    { bg: '#ffffff', text: '#0f1419', secondary: '#536471', border: '#eff3f4' },
+    dark:     { bg: '#15202b', text: '#ffffff', secondary: '#8b98a5', border: '#38444d' },
+    gradient: { bg: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', text: '#ffffff', secondary: '#e0e0e0', border: 'rgba(255,255,255,.2)' },
+    sunset:   { bg: 'linear-gradient(135deg, #ff6b6b 0%, #feca57 100%)', text: '#ffffff', secondary: '#f5f5f5', border: 'rgba(255,255,255,.3)' },
+    ocean:    { bg: 'linear-gradient(135deg, #667eea 0%, #48dbfb 100%)', text: '#ffffff', secondary: '#e8f8ff', border: 'rgba(255,255,255,.3)' },
+    forest:   { bg: 'linear-gradient(135deg, #38ada9 0%, #78e08f 100%)', text: '#ffffff', secondary: '#e8f5e9', border: 'rgba(255,255,255,.3)' },
+    fire:     { bg: 'linear-gradient(135deg, #ee5a6f 0%, #f7b731 100%)', text: '#ffffff', secondary: '#fff3e0', border: 'rgba(255,255,255,.3)' },
+    midnight: { bg: 'linear-gradient(135deg, #2c3e50 0%, #34495e 100%)', text: '#ffffff', secondary: '#bdc3c7', border: 'rgba(255,255,255,.2)' },
+  };
+
+  const t = themes[theme] || themes.light;
+
+  inner.style.background   = t.bg;
+  inner.style.borderColor  = t.border;
+
+  // Texto principal y secundario
+  document.getElementById('tweetTemplateText').style.color = t.text;
+  document.querySelector('#tweetTemplateInner .tweet-name').style.color    = t.text;
+  document.querySelector('#tweetTemplateInner .tweet-handle').style.color  = t.secondary;
+  document.querySelector('#tweetTemplateInner .tweet-footer').style.color  = t.secondary;
+  document.querySelector('#tweetTemplateInner .tweet-footer').style.borderTopColor   = t.border;
+  document.querySelector('#tweetTemplateInner .tweet-watermark').style.color         = t.secondary;
+  document.querySelector('#tweetTemplateInner .tweet-watermark').style.borderTopColor = t.border;
+}
+
 // ── Image generation ──────────────────────────────────────────────────────────
 async function generateImage() {
   if (!selectedVariation) {
@@ -231,36 +265,38 @@ async function generateImage() {
     return;
   }
 
-  const btn = $('generateBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner" style="width:14px;height:14px;border-width:2px;display:inline-block;vertical-align:middle;margin-right:8px"></span> Generando…';
+  const btn = document.getElementById('generateBtn');
+  btn.disabled    = true;
+  btn.innerHTML = '<span> class="spinner" style="width:14px;height:14px;border-width:2px;display:inline-block;vertical-align:middle;margin-right:8px"></span> Generando…';
 
   try {
-    const res = await fetch(`${API_URL}/generate-image`, {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ text: selectedVariation.text, theme: selectedTheme }),
+    const templateText = document.getElementById('tweetTemplateText');
+    const templateDate = document.getElementById('tweetTemplateDate');
+    templateText.textContent = selectedVariation.text;
+    templateDate.textContent = new Date().toLocaleDateString('es-ES', {
+      hour: '2-digit', minute: '2-digit',
+      day: 'numeric', month: 'short', year: 'numeric'
     });
 
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.detail || `Error ${res.status}`);
-    }
+    applyThemeToTemplate(selectedTheme);
 
-    const data = await res.json();
+    const inner = document.getElementById('tweetTemplateInner');
+    const canvas = await html2canvas(inner, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: null,
+    });
 
-    const img = $('generatedImage');
-    img.src = data.image;
-    img.onload = () => {
-      $('imagePreview').classList.add('visible');
-      $('imagePreview').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      btn.innerHTML = '<span>✓</span> Imagen generada';
-    };
-    img.onerror = () => { throw new Error('Error al cargar la imagen'); };
+    const img = document.getElementById('generatedImage');
+    img.src = canvas.toDataURL('image/png');
+    document.getElementById('imagePreview').classList.add('visible');
+    document.getElementById('imagePreview').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    btn.innerHTML = '<span>✓</span> Imagen generada';
 
   } catch (err) {
     showToast(`Error: ${err.message}`, 4000);
-    btn.disabled  = false;
+    btn.disabled = false;
     btn.innerHTML = '<span>🎨</span> Generar imagen';
   }
 }

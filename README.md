@@ -1,71 +1,75 @@
-# 🎨 TweetCraft AI
+# Postly
 
-> Convierte tus borradores en tweets que la gente lee — con IA que mejora tu contenido y genera imágenes listas para compartir.
+**Publish faster. Manage better.**
+
+Postly is an open-source social media management tool for community managers and agencies. Create AI-powered content, schedule posts, and manage multiple client accounts — all in one place.
 
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.111-green.svg)](https://fastapi.tiangolo.com/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o--mini-purple.svg)](https://openai.com/)
-[![License](https://img.shields.io/badge/License-AGPL--3.0%20%2B%20Commons%20Clause-red.svg)](#-licencia)
+[![License](https://img.shields.io/badge/License-AGPL--3.0%20%2B%20Commons%20Clause-red.svg)](#license)
 
 ---
 
-## ✨ Características
+## ✨ Features
 
-- 🤖 **IA Inteligente** — GPT-4o-mini genera 3 variaciones por tweet (profesional, casual, viral)
-- ⚡ **Rápido** — variaciones en 2-3 segundos con llamadas en paralelo
-- 🎨 **8 temas visuales** — claro, oscuro, gradiente, sunset, ocean, forest, fire, midnight
-- 📸 **Imágenes HD** — screenshots reales con Playwright (Linux) o Pillow (Windows dev)
-- 🔒 **Rate limiting** — límite diario por IP con fallback en memoria si Supabase no está disponible
-- 🧪 **Tests incluidos** — unitarios, integración y mocks de OpenAI/Supabase
+- 🤖 **AI Content Generation** — GPT-4o-mini rewrites your draft in 3 styles: professional, casual and viral
+- 📸 **Image Generation** — capture your post as a shareable PNG directly in the browser (no server needed)
+- 🎨 **8 visual themes** — light, dark, gradient, sunset, ocean, forest, fire, midnight
+- 🔒 **Rate limiting** — daily limit per IP with in-memory fallback if Supabase is unavailable
+- 🧪 **Tests included** — unit tests, integration tests and mocks for OpenAI/Supabase
+
+### Coming soon
+- 📅 **Post scheduling** — schedule content for a specific date, time or on a recurring basis
+- 📱 **Instagram publishing** — publish photos, carousels and reels via the Meta Graph API
+- 💼 **LinkedIn & Twitter/X** — multi-platform support
+- 👥 **Multiple accounts** — manage several client profiles from a single dashboard
+- 💳 **Stripe payments** — Free, Pro and Agency plans
 
 ---
 
 ## 🚀 Quick Start
 
 ```bash
-# 1. Clonar el repositorio
-git clone https://github.com/tuusuario/tweetcraft-ai.git
-cd tweetcraft-ai
+# 1. Clone the repository
+git clone https://github.com/tuusuario/postly.git
+cd postly
 
-# 2. Crear entorno virtual
+# 2. Create a virtual environment
 python -m venv venv
 source venv/bin/activate   # Windows: venv\Scripts\activate
 
-# 3. Instalar dependencias
+# 3. Install dependencies
 pip install -r requirements.txt
 
-# 4. Instalar Playwright (Linux/Mac — en Windows se usa Pillow automáticamente)
-playwright install chromium
-
-# 5. Configurar variables de entorno
+# 4. Set up environment variables
 cp .env.example .env
-# Edita .env con tus credenciales
+# Edit .env with your credentials
 
-# 6. Arrancar el backend
+# 5. Start the backend
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 
-# 7. Servir el frontend (en otra terminal)
+# 6. Serve the frontend (in a second terminal)
 cd frontend && python -m http.server 3000
 ```
 
-Abre **http://localhost:3000** en el navegador.
+Open **http://localhost:3000** in your browser.
 
 ---
 
-## 📁 Estructura del proyecto
+## 📁 Project structure
 
 ```
-tweetcraft-ai/
+postly/
 ├── app/
 │   ├── __init__.py
-│   ├── ai.py           # Llamadas a OpenAI
-│   ├── config.py       # Variables de entorno y clientes
-│   ├── database.py     # Cliente Supabase
-│   ├── feedback.py     # Persistencia de feedback
-│   ├── prompts.py      # Prompts de mejora de tweets
-│   ├── rate_limiter.py # Límite diario por IP + analytics
-│   ├── render.py       # Generación HTML + screenshot
-│   └── schemas.py      # Modelos Pydantic
+│   ├── ai.py           # OpenAI calls
+│   ├── config.py       # Environment variables and clients
+│   ├── database.py     # Supabase client
+│   ├── feedback.py     # Feedback persistence
+│   ├── prompts.py      # AI improvement prompts
+│   ├── rate_limiter.py # Daily IP rate limiting + analytics
+│   └── schemas.py      # Pydantic models
 ├── frontend/
 │   ├── index.html
 │   └── main.js
@@ -75,9 +79,8 @@ tweetcraft-ai/
 │   ├── test_config.py
 │   ├── test_endpoints.py
 │   ├── test_rate_limiter.py
-│   ├── test_render.py
 │   └── test_schemas.py
-├── main.py             # Entry point FastAPI
+├── main.py             # FastAPI entry point
 ├── requirements.txt
 ├── pytest.ini
 └── .env.example
@@ -85,58 +88,58 @@ tweetcraft-ai/
 
 ---
 
-## 💡 Cómo funciona
+## 💡 How it works
 
 ```
-Usuario escribe tweet
+User writes a draft
         ↓
-POST /improve  →  OpenAI genera 3 variaciones en paralelo
+POST /improve  →  OpenAI generates 3 variations in parallel
         ↓
-Usuario selecciona su favorita
+User picks their favourite
         ↓
-POST /generate-image  →  Playwright renderiza HTML y captura PNG
+html2canvas captures the styled card as PNG in the browser
         ↓
-Usuario descarga / comparte la imagen
+User downloads or shares the image
 ```
 
 ---
 
-## 🛠️ Stack
+## 🛠️ Tech stack
 
-| Capa | Tecnología |
-|------|-----------|
+| Layer | Technology |
+|-------|-----------|
 | Backend | FastAPI + Pydantic v2 |
-| IA | OpenAI GPT-4o-mini |
-| Base de datos | Supabase (PostgreSQL) |
-| Imágenes | Playwright (prod) · Pillow (dev Windows) |
+| AI | OpenAI GPT-4o-mini |
+| Database | Supabase (PostgreSQL) |
+| Image generation | html2canvas (browser-side) |
 | Frontend | HTML + CSS + Vanilla JS |
 | Tests | pytest + pytest-asyncio |
-| Deploy | Railway (backend) · cualquier static host (frontend) |
+| Deploy | Railway (backend) · any static host (frontend) |
 
 ---
 
-## ⚙️ Variables de entorno
+## ⚙️ Environment variables
 
-Copia `.env.example` a `.env` y rellena:
+Copy `.env.example` to `.env` and fill in your credentials:
 
 ```env
 OPENAI_API_KEY=sk-...
-OPENAI_MODEL=gpt-4o-mini          # opcional, default: gpt-4o-mini
+OPENAI_MODEL=gpt-4o-mini          # optional, default: gpt-4o-mini
 
 SUPABASE_URL=https://xxxx.supabase.co
-SUPABASE_KEY=eyJ...               # usa la service_role key
+SUPABASE_KEY=eyJ...               # use the service_role key
 
-MAX_FREE_GENERATIONS_PER_DAY=5    # opcional, default: 5
-ADMIN_API_KEY=cambia-esto
+MAX_FREE_GENERATIONS_PER_DAY=5    # optional, default: 5
+ADMIN_API_KEY=change-me
 ```
 
-> **Importante**: usa siempre la `service_role` key de Supabase en el backend, nunca la `anon` key. Nunca subas el `.env` a GitHub.
+> **Important**: always use the Supabase `service_role` key in the backend, never the `anon` key. Never commit your `.env` file to Git.
 
 ---
 
-## 🗄️ Base de datos (Supabase)
+## 🗄️ Database setup (Supabase)
 
-Ejecuta este SQL en el **SQL Editor** de tu proyecto Supabase:
+Run this SQL in your Supabase **SQL Editor**:
 
 ```sql
 create table rate_limits (
@@ -171,125 +174,125 @@ create table feedback_logs (
 ## 🧪 Tests
 
 ```bash
-# Todos los tests
+# Run all tests
 pytest
 
-# Verbose con detalle de fallos
+# Verbose output
 pytest --tb=short -v
 
-# Un módulo concreto
+# Single module
 pytest tests/test_endpoints.py -v
 ```
 
-Los tests mockean completamente OpenAI y Supabase — no necesitas credenciales reales para ejecutarlos.
+Tests mock OpenAI and Supabase completely — no real credentials needed.
 
 ---
 
-## 🌐 Endpoints
+## 🌐 API endpoints
 
-| Método | Ruta | Descripción |
-|--------|------|-------------|
-| `GET`  | `/` | Info de la API |
+| Method | Route | Description |
+|--------|-------|-------------|
+| `GET`  | `/` | API info |
 | `GET`  | `/health` | Health check |
-| `POST` | `/improve` | Mejora un tweet (3 variaciones) |
-| `POST` | `/generate-image` | Genera PNG del tweet |
-| `GET`  | `/rate-limit/status` | Estado del límite del usuario |
-| `POST` | `/feedback` | Enviar feedback |
-| `GET`  | `/admin/stats?api_key=` | Estadísticas (protegido) |
+| `POST` | `/improve` | Improve a post (3 variations) |
+| `GET`  | `/rate-limit/status` | Current rate limit status |
+| `POST` | `/feedback` | Submit feedback |
+| `GET`  | `/admin/stats?api_key=` | Usage statistics (protected) |
 
-Documentación interactiva disponible en `http://localhost:8000/docs`.
+Interactive docs available at `http://localhost:8000/docs`.
 
 ---
 
-## 🚢 Deploy en Railway
+## 🚢 Deploy on Railway
 
-1. Sube el proyecto a GitHub
-2. Conecta el repo en [railway.app](https://railway.app)
-3. Añade las variables de entorno del `.env.example` en el panel de Railway
-4. Comando de inicio: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-5. Build command: `pip install -r requirements.txt && playwright install chromium --with-deps`
-6. Actualiza `API_URL` en `frontend/main.js` con la URL que Railway te asigne
+1. Push the project to GitHub
+2. Connect the repo on [railway.app](https://railway.app)
+3. Add the environment variables from `.env.example` in the Railway dashboard
+4. Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+5. Update `API_URL` in `frontend/main.js` with the URL Railway assigns you
 
 ---
 
 ## 🗺️ Roadmap
 
-### ✅ Fase 1 — MVP
-- [x] Backend FastAPI + OpenAI
-- [x] 3 estilos de mejora (profesional, casual, viral)
-- [x] 8 temas visuales
-- [x] Generación de imágenes con Playwright
-- [x] Rate limiting por IP con fallback en memoria
-- [x] Tests unitarios e integración
-- [x] Frontend con modo claro/oscuro
+### ✅ Phase 1 — MVP
+- [x] FastAPI backend + OpenAI
+- [x] 3 improvement styles (professional, casual, viral)
+- [x] 8 visual themes
+- [x] Browser-side image generation with html2canvas
+- [x] IP rate limiting with in-memory fallback
+- [x] Unit and integration tests
+- [x] Light / dark mode frontend
 
-### 🚧 Fase 2 — Autenticación
-- [ ] Sistema de usuarios (Supabase Auth)
-- [ ] Dashboard personal
-- [ ] Historial de tweets generados
+### 🚧 Phase 2 — Authentication
+- [ ] User accounts (Supabase Auth)
+- [ ] Personal dashboard
+- [ ] Generation history
 
-### 📋 Fase 3 — Monetización
-- [ ] Integración Stripe
-- [ ] Planes: Free (5/día), Pro (ilimitado, €12/mes), Teams (€39/mes)
-- [ ] Webhooks para suscripciones
+### 📋 Phase 3 — Social publishing
+- [ ] Instagram publishing (Meta Graph API) — photos, carousels, reels
+- [ ] Twitter / X publishing
+- [ ] LinkedIn publishing
+- [ ] Multiple client account management
 
-### 🎨 Fase 4 — Features avanzadas
-- [ ] Optimización por plataforma (LinkedIn, Instagram, Threads)
-- [ ] Personalización de imágenes (logo propio, colores, fuentes)
-- [ ] Análisis de engagement estimado por variación
-- [ ] Soporte para threads largos
-- [ ] Exportación a múltiples formatos
-- [ ] Soporte multilingüe (en, fr, pt)
-- [ ] Publicación directa vía Twitter/X API
+### 📅 Phase 4 — Scheduling
+- [ ] Schedule posts for a specific date and time
+- [ ] Recurring posts
+- [ ] Content calendar view
 
----
-
-## 🤝 Contribuir
-
-Las contribuciones son bienvenidas. Por favor:
-
-1. Abre un issue antes de empezar un cambio grande
-2. Haz fork del repositorio y crea una rama: `git checkout -b feature/mi-feature`
-3. Asegúrate de que los tests pasan: `pytest`
-4. Abre un Pull Request describiendo el cambio
-
-> **Nota de licencia**: al contribuir aceptas que tu código se distribuye bajo los mismos términos que este proyecto (AGPL-3.0 + Commons Clause). El proyecto puede usarse libremente de forma no comercial, pero **no puede usarse para ofrecer un servicio de pago** sin permiso explícito del autor.
+### 💳 Phase 5 — Monetisation
+- [ ] Stripe integration
+- [ ] Plans: Free (5/day), Pro (unlimited, €15/mo), Agency (multi-account, €39/mo)
+- [ ] Video support (Pro feature)
 
 ---
 
-## 📄 Licencia
+## 🤝 Contributing
 
-Copyright © 2026 Jorge Vinagre
+Contributions are welcome. Please:
 
-Este proyecto está licenciado bajo **GNU AGPLv3 con Commons Clause**.
+1. Open an issue before starting a large change
+2. Fork the repo and create a branch: `git checkout -b feature/my-feature`
+3. Make sure tests pass: `pytest`
+4. Open a Pull Request describing the change
 
-| ¿Puedo...? | |
-|---|---|
-| Ver y estudiar el código | ✅ |
-| Modificarlo y mejorarlo | ✅ |
-| Usarlo para proyectos personales | ✅ |
-| Distribuir versiones modificadas | ✅ con la misma licencia |
-| Ofrecerlo como servicio SaaS de pago | ❌ sin permiso |
-| Venderlo o sublicenciarlo | ❌ sin permiso |
-
-Para licencias comerciales: [jorgecdev444@gmail.com](mailto:jorgecdev444@gmail.com)
-
-El texto completo está en el archivo [`LICENSE`](./LICENSE).
+> **License note**: by contributing you agree your code is distributed under the same terms as this project (AGPL-3.0 + Commons Clause). The project can be used freely for non-commercial purposes, but **cannot be used to offer a paid service** without explicit permission from the author.
 
 ---
 
-## ⚠️ Aviso legal
+## 📄 License
 
-TweetCraft AI utiliza la API de OpenAI. Los usuarios deben cumplir con los [términos de uso de OpenAI](https://openai.com/policies). El autor no se responsabiliza por el contenido generado por los usuarios.
+Copyright © 2025 Jorge Vinagre
+
+Licensed under **GNU AGPLv3 with Commons Clause**.
+
+| Can I...? | |
+|-----------|---|
+| View and study the code | ✅ |
+| Modify and improve it | ✅ |
+| Use it for personal projects | ✅ |
+| Distribute modified versions | ✅ same license |
+| Offer it as a paid SaaS | ❌ without permission |
+| Sell or sublicense it | ❌ without permission |
+
+For commercial licensing: [jorgecdev444@gmail.com](mailto:jorgecdev444@gmail.com)
+
+Full license text in [`LICENSE`](./LICENSE).
 
 ---
 
-## 📞 Contacto
+## ⚠️ Legal notice
+
+Postly uses the OpenAI API. Users must comply with [OpenAI's usage policies](https://openai.com/policies). The author is not responsible for content generated by users.
+
+---
+
+## 📞 Contact
 
 - 📧 [jorgecdev444@gmail.com](mailto:jorgecdev444@gmail.com)
 - 🐦 [@vinagre444](https://x.com/vinagre444)
-- 💬 [Discord](https://discord.gg/TtEeWScb)
+- 💬 [Discord](https://discord.gg/fxJXWPF5)
 
 ---
 
-**Hecho con ❤️ para la comunidad de creators**
+**Built for the creator and agency community ❤️**
