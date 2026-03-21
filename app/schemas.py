@@ -19,6 +19,26 @@ class TextRequest(BaseModel):
         return v.strip()
 
 
+class SaveTextVariationRequest(BaseModel):
+    original_text: str = Field(..., min_length=1, max_length=500, description="Text to improve")
+    selected_text: str = Field(..., min_length=1, max_length=1000, description="Text to improve")
+    style: str = Field(..., description="Improvement style")
+
+    @field_validator("original_text")
+    @classmethod
+    def validate_original_text(cls, v: str) -> str:
+        if not v.strip():
+            raise ValueError("Original text cannot be blank")
+        return v.strip()
+    
+    @field_validator("selected_text")
+    @classmethod
+    def validate_selected_text(cls, v: str) -> str:
+        if not v.strip():
+            raise ValueError("Selected text cannot be blank")
+        return v.strip()
+    
+
 class TextVariation(BaseModel):
     version: str
     text: str

@@ -8,24 +8,25 @@
 const API_URL = 'https://mi-backend-767444481459.europe-west1.run.app';
 
 // ── State ─────────────────────────────────────────────────────────────────────
+let originalText       = '';
 let selectedVariation = null; // { version, text }
 let selectedTheme     = 'light';
 let rateLimitStatus   = null;
 
 // ── Templates ─────────────────────────────────────────────────────────────────
 const TEMPLATES = {
-  launch:       'Después de [X meses] de trabajo, hoy lanzamos [nombre del producto]. [Breve descripción de qué hace]. Estoy [emoción] por compartir esto con todos.',
-  milestone:    '🎯 Milestone alcanzado: [número/logro]. Hace [tiempo] empezamos con [situación inicial]. Hoy celebramos [logro específico]. Gracias a [quién/qué ayudó].',
-  lesson:       '💡 Lección que aprendí [donde/cuando]: [lección principal]. Antes pensaba [creencia antigua]. Ahora entiendo que [nueva perspectiva]. [Consejo accionable].',
-  announcement: '📢 Anuncio importante: [qué anuncias]. A partir de [cuándo], [qué cambia]. Esto significa [beneficio para la audiencia]. [Call to action].',
-  question:     'Pregunta para la comunidad: [pregunta específica]? En mi experiencia [tu contexto]. ¿Cómo lo hacéis vosotros? [Emoji relevante]',
+  launch:       'After [X months] of work, today we launch [product name]. [Brief description of what it does]. I am [emotion] to share this with everyone.',
+  milestone:    '🎯 Milestone achieved: [number/achievement]. [Time] ago we started with [initial situation]. Today we celebrate [specific achievement]. Thanks to [who/what helped].',
+  lesson:       '💡 Lesson I learned [where/when]: [main lesson]. Before I thought [old belief]. Now I understand that [new perspective]. [Actionable advice].',
+  announcement: '📢 Important announcement: [what you are announcing]. Starting from [when], [what changes]. This means [benefit for the audience]. [Call to action].',
+  question:     'Question for the community: [specific question]? In my experience [your context]. How do you do it? [Relevant emoji]',
 };
 
 // ── Themes ────────────────────────────────────────────────────────────────────
 const THEMES = [
-  { id: 'light',    label: '☀️ Claro'    },
-  { id: 'dark',     label: '🌙 Oscuro'   },
-  { id: 'gradient', label: '🎨 Gradiente' },
+  { id: 'light',    label: '☀️ Light'    },
+  { id: 'dark',     label: '🌙 Dark'   },
+  { id: 'gradient', label: '🎨 Gradient' },
   { id: 'sunset',   label: '🌅 Sunset'   },
   { id: 'ocean',    label: '🌊 Ocean'    },
   { id: 'forest',   label: '🌲 Forest'   },
@@ -113,6 +114,7 @@ function buildThemePills() {
 // ── Variation cards ───────────────────────────────────────────────────────────
 function renderVariations(data) {
   $('originalPreview').textContent = data.original;
+  originalText = data.original;
 
   data.variations.forEach(({ version, text }) => {
     const textEl = $(`${version}Text`);
@@ -127,13 +129,15 @@ function renderVariations(data) {
     if (diff > 0)    parts.push(`+${diff} chars`);
     if (diff < 0)    parts.push(`${diff} chars`);
     if (emojis > 0)  parts.push(`${emojis} emojis`);
-    metaEl.textContent = parts.join(' · ') || 'mejorado';
+    metaEl.textContent = parts.join(' · ') || 'improved';
   });
 }
 
-function selectVariation(version, cardEl) {
+async function selectVariation(version, cardEl) {
   const text = $(`${version}Text`).textContent;
   selectedVariation = { version, text };
+
+  saveGeneration(text, version);
 
   // Update card selection styles
   document.querySelectorAll('.variation-card').forEach(c => c.classList.remove('selected'));
@@ -144,8 +148,25 @@ function selectVariation(version, cardEl) {
 
   // Reset generate button and hide previous image
   $('generateBtn').disabled = false;
-  $('generateBtn').innerHTML = '<span>🎨</span> Generar imagen';
+  $('generateBtn').innerHTML = '<span>🎨</span> Generate Image';
   $('imagePreview').classList.remove('visible');
+}
+
+async function saveGeneration(selectedText, style) {
+  try {
+    const res = await fetch(`${API_URL}/save-generation`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ original_text: originalText, selected_text: selectedText, style }),
+    });
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      console.error(err.detail || `Error ${res.status}`);
+    }
+  } catch {
+    // Non-critical — silently ignore errors here
+  }
 }
 
 async function copyVariation(event, version) {
@@ -153,9 +174,9 @@ async function copyVariation(event, version) {
   const text = $(`${version}Text`).textContent;
   try {
     await navigator.clipboard.writeText(text);
-    showToast('✓ Copiado al portapapeles');
+    showToast('✓ Copied to clipboard');
   } catch {
-    showToast('No se pudo copiar — prueba manualmente');
+    showToast('Error copying — try copying manually');
   }
 }
 

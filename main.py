@@ -7,6 +7,7 @@ import logging
 from contextlib import asynccontextmanager
 from datetime import datetime
 
+from click import style
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -18,9 +19,10 @@ from app.rate_limiter import rate_limiter
 from app.schemas import (
     FeedbackRequest,
     RateLimitStatus,
+    SaveTextVariationRequest,
     TextRequest,
     TextResponse,
-    TextVariation,
+    TextVariation
 )
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s  %(name)s: %(message)s")
@@ -129,13 +131,6 @@ async def improve_text(request: TextRequest, req: Request):
     ]
 
     rate_limiter.increment(ip)
-    # Persist first variation for analytics (best-effort, non-blocking)
-    rate_limiter.save_generation(
-        ip=ip,
-        original=request.text,
-        improved=professional,
-        style="professional",
-    )
 
     return TextResponse(original=request.text, variations=variations)
 
