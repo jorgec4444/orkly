@@ -142,32 +142,70 @@ ADMIN_API_KEY=change-me
 Run this SQL in your Supabase **SQL Editor**:
 
 ```sql
-create table rate_limits (
-  id           bigserial primary key,
-  ip           text not null,
-  date         date not null,
-  count        int  not null default 1,
-  last_used_at timestamptz,
-  created_at   timestamptz default now(),
-  unique(ip, date)
-);
+-- WARNING: This schema is for context only and is not meant to be run.
+-- Table order and constraints may not be valid for execution.
 
-create table generations (
-  id             bigserial primary key,
-  ip             text,
+CREATE TABLE public.clients (
+  id bigint NOT NULL DEFAULT nextval('clients_id_seq'::regclass),
+  user_id uuid NOT NULL,
+  client_name text NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT clients_pkey PRIMARY KEY (id),
+  CONSTRAINT clients_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.feedback_logs (
+  id bigint NOT NULL DEFAULT nextval('feedback_logs_id_seq'::regclass),
+  ip text,
+  feedback_text text,
+  created_at timestamp with time zone DEFAULT now(),
+  user_id uuid,
+  CONSTRAINT feedback_logs_pkey PRIMARY KEY (id),
+  CONSTRAINT feedback_logs_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.generations (
+  id bigint NOT NULL DEFAULT nextval('generations_id_seq'::regclass),
+  ip text,
   text_original text,
   text_improved text,
-  style          text,
-  created_at     timestamptz default now()
+  style text,
+  created_at timestamp with time zone DEFAULT now(),
+  client_id bigint,
+  CONSTRAINT generations_pkey PRIMARY KEY (id),
+  CONSTRAINT generations_client_id_fkey FOREIGN KEY (client_id) REFERENCES public.clients(id)
 );
-
-create table feedback_logs (
-  id            bigserial primary key,
-  ip            text,
-  feedback_text text,
-  created_at    timestamptz default now()
+CREATE TABLE public.profiles (
+  id bigint NOT NULL DEFAULT nextval('profiles_id_seq'::regclass),
+  user_id uuid NOT NULL,
+  current_plan USER-DEFINED NOT NULL DEFAULT 'free'::plan_type,
+  created_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT profiles_pkey PRIMARY KEY (id),
+  CONSTRAINT profiles_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.rate_limits (
+  id bigint NOT NULL DEFAULT nextval('rate_limits_id_seq'::regclass),
+  ip text NOT NULL,
+  date date NOT NULL,
+  count integer NOT NULL DEFAULT 1,
+  last_used_at timestamp with time zone,
+  created_at timestamp with time zone DEFAULT now(),
+  user_id uuid,
+  CONSTRAINT rate_limits_pkey PRIMARY KEY (id),
+  CONSTRAINT rate_limits_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.social_accounts (
+  id bigint NOT NULL DEFAULT nextval('social_accounts_id_seq'::regclass),
+  platform USER-DEFINED NOT NULL,
+  username text NOT NULL,
+  access_token text NOT NULL,
+  token_expires_at timestamp with time zone NOT NULL,
+  client_id bigint NOT NULL,
+  status USER-DEFINED NOT NULL,
+  account_id text NOT NULL,
+  CONSTRAINT social_accounts_pkey PRIMARY KEY (id),
+  CONSTRAINT social_accounts_client_id_fkey FOREIGN KEY (client_id) REFERENCES public.clients(id)
 );
 ```
+![Postly logo](assets/supabase-schema.svg)
 
 ---
 
