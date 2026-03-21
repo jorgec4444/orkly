@@ -68,3 +68,9 @@ rate_limits.json
 
 # ── Frontend (por si en el futuro usas npm) ───────────────────────────────────
 node_modules/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
