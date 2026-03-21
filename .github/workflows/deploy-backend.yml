@@ -28,3 +28,4 @@ jobs:
           region: europe-west1
           env_vars:
             OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+          flags: '--clear-base-image'
