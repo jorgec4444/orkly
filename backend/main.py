@@ -10,12 +10,12 @@ from datetime import datetime
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 
-from .app.ai import improve_text_with_ai
-from .app.config import ADMIN_API_KEY, init_openai_client
-from .app.database import init_supabase
-from .app.feedback import feedback_logger
-from .app.rate_limiter import rate_limiter
-from .app.schemas import (
+from backend.app.ai import improve_text_with_ai
+from backend.app.config import ADMIN_API_KEY, init_openai_client
+from backend.app.database import init_supabase
+from backend.app.feedback import feedback_logger
+from backend.app.rate_limiter import rate_limiter
+from backend.app.schemas import (
     FeedbackRequest,
     RateLimitStatus,
     TextRequest,
