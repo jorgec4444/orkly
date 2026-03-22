@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: AGPL-3.0-only WITH Commons-Clause
 
 """Unit tests for app.config."""
-import importlib
 import sys
 from unittest.mock import MagicMock, patch
 
@@ -10,9 +9,9 @@ from unittest.mock import MagicMock, patch
 def _reload_config(env: dict):
     """Reload config module with a custom environment."""
     with patch.dict("os.environ", env, clear=True):
-        if "app.config" in sys.modules:
-            del sys.modules["app.config"]
-        import app.config as cfg
+        if "backend.app.config" in sys.modules:
+            del sys.modules["backend.app.config"]
+        import backend.app.config as cfg
         return cfg
 
 
@@ -46,9 +45,9 @@ class TestInitOpenAIClient:
     def test_returns_none_without_key(self):
         with patch.dict("os.environ", {}, clear=True):
             with patch("openai.OpenAI", side_effect=Exception("should not be called")):
-                if "app.config" in sys.modules:
-                    del sys.modules["app.config"]
-                import app.config as cfg
+                if "backend.app.config" in sys.modules:
+                    del sys.modules["backend.app.config"]
+                import backend.app.config as cfg
                 cfg._openai_client = None # Reset cached client
                 result = cfg.init_openai_client()
         assert result is None

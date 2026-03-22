@@ -61,15 +61,20 @@ Open **http://localhost:3000** in your browser.
 
 ```
 postly/
-├── app/
-│   ├── __init__.py
-│   ├── ai.py           # OpenAI calls
-│   ├── config.py       # Environment variables and clients
-│   ├── database.py     # Supabase client
-│   ├── feedback.py     # Feedback persistence
-│   ├── prompts.py      # AI improvement prompts
-│   ├── rate_limiter.py # Daily IP rate limiting + analytics
-│   └── schemas.py      # Pydantic models
+postly/
+├── backend/
+│   ├── app/
+│     ├── __init__.py
+│     ├── ai.py           # OpenAI calls
+│     ├── config.py       # Environment variables and clients
+│     ├── database.py     # Supabase client
+│     ├── feedback.py     # Feedback persistence
+│     ├── prompts.py      # AI improvement prompts
+│     ├── rate_limiter.py # Daily IP rate limiting + analytics
+│     └── schemas.py      # Pydantic models
+|   ├── main.py           # FastAPI entry point
+│   ├── requirements.txt
+│   └── Dockerfile
 ├── frontend/
 │   ├── index.html
 │   └── main.js
@@ -80,8 +85,6 @@ postly/
 │   ├── test_endpoints.py
 │   ├── test_rate_limiter.py
 │   └── test_schemas.py
-├── main.py             # FastAPI entry point
-├── requirements.txt
 ├── pytest.ini
 └── .env.example
 ```

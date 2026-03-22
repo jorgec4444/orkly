@@ -7,19 +7,17 @@ import logging
 from contextlib import asynccontextmanager
 from datetime import datetime
 
-from click import style
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.ai import improve_text_with_ai
-from app.config import ADMIN_API_KEY, init_openai_client
-from app.database import init_supabase
-from app.feedback import feedback_logger
-from app.rate_limiter import rate_limiter
-from app.schemas import (
+from .app.ai import improve_text_with_ai
+from .app.config import ADMIN_API_KEY, init_openai_client
+from .app.database import init_supabase
+from .app.feedback import feedback_logger
+from .app.rate_limiter import rate_limiter
+from .app.schemas import (
     FeedbackRequest,
     RateLimitStatus,
-    SaveTextVariationRequest,
     TextRequest,
     TextResponse,
     TextVariation

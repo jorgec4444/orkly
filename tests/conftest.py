@@ -4,7 +4,7 @@
 """Shared pytest fixtures for Postly tests."""
 import sys
 from pathlib import Path
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import MagicMock, patch
 
 import pytest
 from fastapi.testclient import TestClient
@@ -57,10 +57,10 @@ def mock_openai_client():
 @pytest.fixture()
 def app_client(mock_supabase, mock_openai_client):
     with (
-        patch("app.database._supabase_client", mock_supabase),
-        patch("app.config._openai_client", mock_openai_client),
-        patch("app.ai.get_openai_client", return_value=mock_openai_client),
+        patch("backend.app.database._supabase_client", mock_supabase),
+        patch("backend.app.config._openai_client", mock_openai_client),
+        patch("backend.app.ai.get_openai_client", return_value=mock_openai_client),
     ):
-        from main import app
+        from backend.main import app
         with TestClient(app, raise_server_exceptions=True) as client:
             yield client

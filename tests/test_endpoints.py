@@ -2,8 +2,7 @@
 # SPDX-License-Identifier: AGPL-3.0-only WITH Commons-Clause
 
 """Integration tests for Postly AI endpoints."""
-import base64
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import MagicMock, patch
 
 import pytest
 from fastapi.testclient import TestClient
@@ -34,11 +33,11 @@ def _make_supabase(rows=None):
 @pytest.fixture()
 def client():
     with (
-        patch("app.database._supabase_client", _make_supabase()),
-        patch("app.config._openai_client", _make_openai_client()),
-        patch("app.ai.get_openai_client", return_value=_make_openai_client()),
+        patch("backend.app.database._supabase_client", _make_supabase()),
+        patch("backend.app.config._openai_client", _make_openai_client()),
+        patch("backend.app.ai.get_openai_client", return_value=_make_openai_client()),
     ):
-        from main import app
+        from backend.main import app
         with TestClient(app) as c:
             yield c
 
@@ -92,10 +91,10 @@ class TestImprove:
         assert r.status_code == 422
 
     def test_rate_limit_blocks_after_limit(self, client):
-        from app.config import FREE_DAILY_LIMIT
+        from backend.app.config import FREE_DAILY_LIMIT
         rows = [{"count": FREE_DAILY_LIMIT}]
-        with patch("app.database._supabase_client", _make_supabase(rows)):
-            from main import app
+        with patch("backend.app.database._supabase_client", _make_supabase(rows)):
+            from backend.main import app
             with TestClient(app) as blocked_client:
                 r = blocked_client.post("/improve", json={"text": "hello"})
         assert r.status_code == 429
@@ -153,10 +152,9 @@ class TestAdminStats:
         r = client.get("/admin/stats?api_key=wrongkey")
         assert r.status_code == 401
 
-    # test_endpoints.py - reemplaza este test
-    def test_authorized_with_correct_key(self, client):
-        with patch("main.ADMIN_API_KEY", "secret"):
-            from main import app
+    def test_authorized_with_correct_key(self):
+        with patch("backend.main.ADMIN_API_KEY", "secret"):
+            from backend.main import app
             with TestClient(app) as admin_client:
                 r = admin_client.get("/admin/stats?api_key=secret")
         assert r.status_code == 200

@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - app/**
+      - backend/**
     
 
 jobs:
@@ -24,8 +24,8 @@ jobs:
         uses: 'google-github-actions/deploy-cloudrun@v3'
         with:
           service: mi-backend
-          source: './app'
+          source: ./backend
           region: europe-west1
           env_vars:
             OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
-          flags: '--clear-base-image'
+          flags: --clear-base-image

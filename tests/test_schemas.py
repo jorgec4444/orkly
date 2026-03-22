@@ -5,7 +5,7 @@
 import pytest
 from pydantic import ValidationError
 
-from app.schemas import FeedbackRequest, TextRequest
+from backend.app.schemas import FeedbackRequest, TextRequest
 
 
 class TestTextRequest:
