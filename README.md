@@ -153,6 +153,7 @@ CREATE TABLE public.clients (
   user_id uuid NOT NULL,
   client_name text NOT NULL,
   created_at timestamp with time zone NOT NULL DEFAULT now(),
+  brand_voice text NULL,
   CONSTRAINT clients_pkey PRIMARY KEY (id),
   CONSTRAINT clients_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
 );
@@ -208,7 +209,7 @@ CREATE TABLE public.social_accounts (
   CONSTRAINT social_accounts_client_id_fkey FOREIGN KEY (client_id) REFERENCES public.clients(id)
 );
 ```
-![Postly logo](assets/supabase-schema.svg)
+![Postly dabase schema](assets/supabase-schema.svg)
 
 ---
 
@@ -244,13 +245,97 @@ Interactive docs available at `http://localhost:8000/docs`.
 
 ---
 
-## 🚢 Deploy on Railway
+## 🚢 Deploy
 
-1. Push the project to GitHub
-2. Connect the repo on [railway.app](https://railway.app)
-3. Add the environment variables from `.env.example` in the Railway dashboard
-4. Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-5. Update `API_URL` in `frontend/main.js` with the URL Railway assigns you
+The backend runs in **Google Cloud Run** and the frontend as **Cloudflare Worker** with CI/CD via GitHub Actions.
+
+---
+
+### 🔧 Backend — Google Cloud Run
+
+#### Pre-requisites
+- [Google Cloud CLI](https://cloud.google.com/sdk/docs/install) installed and authenticated
+- Docker installed
+- GCP proyect created
+
+#### Environment variables
+
+| Variable | Description |
+|---|---|
+| `OPENAI_API_KEY` | Your OpenAI API key |
+
+#### Steps for deploying
+```bash
+# 1. Authenticate in GCP
+gcloud auth login
+gcloud config set project YOUR_PROJECT_ID
+
+# 2. Enable necessary services (only the first time)
+gcloud services enable run.googleapis.com cloudbuild.googleapis.com
+
+# 3. Build and push the image
+gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/YOUR_SERVICE_NAME
+
+# 4. Deploy in Cloud Run
+gcloud run deploy YOUR_SERVICE_NAME \
+  --image gcr.io/YOUR_PROJECT_ID/YOUR_SERVICE_NAME \
+  --platform managed \
+  --region YOUR_REGION \
+  --allow-unauthenticated \
+  --set-env-vars OPENAI_API_KEY=your_api_key_here
+```
+
+Once deployed, GCP will give you an URL like this one:
+`https://YOUR_SERVICE_NAME-xxxxxxxxxx-XX.a.run.app`
+
+Then, the deploy is done with **GitHub Actions** when pushing to `main` branch.
+To do that, you will need to access gcloud, IAM tab and create a user that will have pormisions to deploy the backend from github to gcloud.
+After creating it you will be able to generate a json as an access key for that user to do those actions. That json will be used for CI in github. 
+
+#### Secrets in GitHub Actions
+
+Ensure to have these secrets configured in **Settings → Secrets → Actions** of your repo:
+
+| Secret | Description |
+|---|---|
+| `GCP_CREDENTIALS` | GCP json generated when creating an IAM user in gcloud |
+| `OPENAI_API_KEY`  | Your OpenAI api key |
+
+
+---
+
+### 🌐 Frontend — Cloudflare Workers
+
+#### Connect wit the backend
+
+In main.js, update the backend URL provided by Cloud Run:
+```javascript
+const API_URL = "https://YOUR_SERVICE_NAME-xxxxxxxxxx-XX.a.run.app";
+```
+
+#### Deploy
+
+The deploy is automatic via **GitHub Actions** when pushing to `main` branch.
+
+to re-deploy manually:
+```bash
+# Install Wrangler before
+npm install -g wrangler
+
+# Manual deploy
+wrangler deploy
+```
+
+---
+
+### 🔁 Complete flow
+```
+GitHub push → Actions build → wrangler deploy → Cloudflare Worker
+                                                        ↓
+                                              calls Cloud Run (backend)
+                                                        ↓
+                                                  OpenAI API
+```
 
 ---
 
@@ -264,27 +349,38 @@ Interactive docs available at `http://localhost:8000/docs`.
 - [x] IP rate limiting with in-memory fallback
 - [x] Unit and integration tests
 - [x] Light / dark mode frontend
-
-### 🚧 Phase 2 — Authentication
-- [ ] User accounts (Supabase Auth)
-- [ ] Personal dashboard
-- [ ] Generation history
-
-### 📋 Phase 3 — Social publishing
+- [x] Auto-updating footer year
+ 
+### 🚧 Phase 2 — Authentication & client management
+- [ ] Google OAuth login (Supabase Auth)
+- [ ] Client dashboard — manage all clients from one place
+- [ ] Brand kit per client — tone of voice, custom prompt, examples
+- [ ] Generation history per client
+- [ ] Personal account settings
+ 
+### 📝 Phase 3 — AI content features
+- [ ] Platform-specific generation — Instagram, LinkedIn, TikTok each get tailored output
+- [ ] Custom tones per client — brand voice used automatically in every generation
+- [ ] Hashtag recommendations per post and platform
+- [ ] Content repurposing — paste a long text, get posts for every platform
+- [ ] Carousel generation — structured slide-by-slide content for Instagram
+ 
+### 📋 Phase 4 — Social publishing
 - [ ] Instagram publishing (Meta Graph API) — photos, carousels, reels
-- [ ] Twitter / X publishing
 - [ ] LinkedIn publishing
-- [ ] Multiple client account management
-
-### 📅 Phase 4 — Scheduling
+- [ ] Twitter / X publishing
+- [ ] Multiple social accounts per client
+ 
+### 📅 Phase 5 — Scheduling & calendar
 - [ ] Schedule posts for a specific date and time
 - [ ] Recurring posts
-- [ ] Content calendar view
-
-### 💳 Phase 5 — Monetisation
+- [ ] AI-powered content calendar — suggest a full week of content per client
+ 
+### 💳 Phase 6 — Monetisation
 - [ ] Stripe integration
-- [ ] Plans: Free (5/day), Pro (unlimited, €15/mo), Agency (multi-account, €39/mo)
+- [ ] Plans: Free (5/day, no account), Starter (€12/mo, 1 client), Pro (€29/mo, 5 clients), Agency (€79/mo, unlimited clients)
 - [ ] Video support (Pro feature)
+- [ ] Donations via Ko-fi or Buy Me a Coffee
 
 ---
 

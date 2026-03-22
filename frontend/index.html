@@ -393,11 +393,11 @@
     footer {
       margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--border);
       display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 12px;
+      flex-wrap: wrap; gap: 14px;
     }
-    footer p { color: var(--muted); font-size: 13px; }
+    footer p { color: var(--muted); font-size: 15px; }
     .feedback-link {
-      font-family: var(--font-mono); font-size: 12px; color: var(--muted);
+      font-family: var(--font-mono); font-size: 14px; color: var(--muted);
       border: none; background: none; cursor: pointer;
       text-decoration: underline; text-underline-offset: 3px; transition: color .18s;
     }
@@ -544,7 +544,7 @@
       </button>
       <div id="imagePreview">
         <div class="image-wrapper">
-          <img id="generatedImage" src="" alt="Generated post" />
+          <img id="generatedImage" src="" alt="Generated post"/>
         </div>
         <div class="image-actions">
           <button class="action-btn action-btn-primary" onclick="downloadImage()">↓ Download PNG</button>
@@ -555,7 +555,7 @@
   </section>
 
   <footer>
-    <p>Postly &copy; 2026</p>
+    <p>Postly &copy; <span id="currentYear"></span></p>
     <button class="feedback-link" onclick="openFeedbackModal()">Leave feedback</button>
   </footer>
 

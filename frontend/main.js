@@ -280,6 +280,13 @@ function applyThemeToTemplate(theme) {
   document.querySelector('#textTemplateInner .text-watermark').style.borderTopColor = t.border;
 }
 
+function getActualYear() {
+  const yearEl = document.getElementById('currentYear');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
+}
+
 // ── Image generation ──────────────────────────────────────────────────────────
 async function generateImage() {
   if (!selectedVariation) {
@@ -428,6 +435,8 @@ function initTheme() {
 
 // ── Init ──────────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  // Set actual year in footer
+  getActualYear();
   // Restore saved theme
   initTheme();
   // Character counter
