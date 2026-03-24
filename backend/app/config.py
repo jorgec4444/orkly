@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: AGPL-3.0-only WITH Commons-Clause
 
 """Central configuration and shared clients.
-
 Reads environment variables, validates them at startup, and initialises
 the OpenAI client lazily so unit tests can patch it without side-effects.
 """
@@ -13,7 +12,7 @@ from typing import Optional
 from dotenv import load_dotenv
 
 # Load .env from the project root (one level above /app)
-_env_path = Path(__file__).parent.parent / ".env"
+_env_path = Path(__file__).parent.parent.parent / ".env"
 load_dotenv(_env_path)
 
 # ── OpenAI ──────────────────────────────────────────────────────────────────

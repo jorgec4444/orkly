@@ -39,7 +39,7 @@ app = FastAPI(
     description="Orchestrate your content, and more with AI.",
     version="2.0.0",
     contact={"name": "Jorge Vinagre", "email": "jorgecdev444@gmail.com"},
-    lifespan=lifespan,
+    lifespan=lifespan
 )
 
 app.add_middleware(
@@ -47,7 +47,7 @@ app.add_middleware(
     allow_origins=["https://orkly.vinagre444.workers.dev", "https://orkly.app"],
     allow_credentials=False,
     allow_methods=["GET", "POST"],
-    allow_headers=["*"],
+    allow_headers=["*"]
 )
 
 

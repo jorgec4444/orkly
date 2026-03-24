@@ -4,10 +4,10 @@
 
 from fastapi import APIRouter, Request
 
-from text_generation.service import save_generation_handler
+from .service import save_generation_handler
 
 from .schemas import SaveGenerationRequest
-from utils.http import get_client_ip
+from app.utils.http import get_client_ip
 
 router = APIRouter()
 

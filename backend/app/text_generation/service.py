@@ -6,9 +6,9 @@ import logging
 
 from fastapi import Request
 
-from utils.http import get_client_ip
+from app.utils.http import get_client_ip
 from .schemas import SaveGenerationRequest
-from database import get_supabase
+from app.database import get_supabase
 
 logger = logging.getLogger(__name__)
 

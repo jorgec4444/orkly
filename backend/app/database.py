@@ -19,7 +19,7 @@ def init_supabase():
     if _supabase_client is not None:
         return _supabase_client
 
-    from .config import SUPABASE_URL, SUPABASE_KEY
+    from app.config import SUPABASE_URL, SUPABASE_KEY
 
     if not SUPABASE_URL or not SUPABASE_KEY:
         logger.warning(

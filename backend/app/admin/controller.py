@@ -5,7 +5,7 @@
 import logging
 
 from fastapi import APIRouter, HTTPException
-from config import ADMIN_API_KEY
+from app.config import ADMIN_API_KEY
 from .service import get_stats
 
 logger = logging.getLogger(__name__)

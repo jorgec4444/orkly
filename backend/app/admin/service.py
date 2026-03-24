@@ -4,9 +4,9 @@
 
 import logging
 
-from config import FREE_DAILY_LIMIT
-from rate_limit.service import _today
-from database import get_supabase
+from app.config import FREE_DAILY_LIMIT
+from app.rate_limit.service import _today
+from app.database import get_supabase
 
 logger = logging.getLogger(__name__)
 

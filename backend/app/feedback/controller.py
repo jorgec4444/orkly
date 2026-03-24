@@ -2,7 +2,7 @@ import logging
 
 from fastapi import APIRouter, Request
 from datetime import datetime
-from utils.http import get_client_ip
+from app.utils.http import get_client_ip
 from .schemas import FeedbackRequest
 from .service import feedback_logger
 
