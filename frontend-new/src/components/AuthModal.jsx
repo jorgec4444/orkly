@@ -41,7 +41,7 @@ export default function AuthModal({ isOpen, onClose }) {
                 <span className="text-xs font-semibold text-primary uppercase tracking-widest">Orkly</span>
               </div>
               <h2 className="text-xl font-bold text-gray-900 leading-tight">
-                Welcome back
+                Welcome back, please sign in to continue.
               </h2>
               <p className="text-sm text-gray-500">
                 Sign in to manage your clients and content.

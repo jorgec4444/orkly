@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import AuthModal from "../components/AuthModal";
 import Footer from "../components/Footer";
 
-const API_BASE = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+// const API_BASE = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+const API_BASE = "http://127.0.0.1:8000";
 
 const TEMPLATES = {
   launch: "After [X months] of work, today we launch [product name]. [Brief description of what it does]. I am [emotion] to share this with everyone.",
@@ -59,7 +60,7 @@ export default function Landing() {
     setVariations(null);
     setSelected(null);
     try {
-      const res = await fetch(`${API_BASE}/improve-text`, {
+      const res = await fetch(`${API_BASE}/text-generation/improve-text`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: text.trim() }),
