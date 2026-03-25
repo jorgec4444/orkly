@@ -1,7 +1,9 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { Search } from "lucide-react";
 import { supabase } from "../supabase";
+import { useOutletContext } from "react-router-dom";
 import ClientCard from "../components/ClientCard";
+import AddClientModal from "../components/AddClientModal";
 
 const API_BASE = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
@@ -29,24 +31,12 @@ async function apiFetch(path, options = {}) {
 }
 
 function Clients() {
-  const [clients, setClients] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { clients, setClients, clientsLoading: loading } = useOutletContext();
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState("alphabetical");
+  const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const data = await apiFetch("/clients");
-        setClients(data);
-      } catch (e) {
-        setError(e.message);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
 
   const filteredClients = useMemo(() => {
     let filtered = clients.filter((c) =>
@@ -71,14 +61,23 @@ function Clients() {
     }
   }, [clients, search, sortBy]);
 
+  const handleDeleted = (id) => setClients((prev) => prev.filter((c) => c.id !== id));
+  const handleUpdated = (updated) => setClients((prev) => prev.map((c) => c.id === updated.id ? updated : c));
+
   return (
     <div>
       {/* Header */}
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Clients</h1>
-        <p className="text-gray-500 mt-1">
-          Orchestrate and organise all your clients in one place
-        </p>
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Clients</h1>
+          <p className="text-gray-500 mt-1">Orchestrate and organise all your clients in one place</p>
+        </div>
+        <button
+          onClick={() => setShowModal(true)}
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-br from-primary to-accent text-white text-sm font-semibold hover:opacity-90 transition shadow-sm"
+        >
+          + New client
+        </button>
       </div>
 
       {/* Search + Sort */}
@@ -156,15 +155,25 @@ function Clients() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredClients.map((client) => (
             <ClientCard
-              key={client.id}
-              client={client}
-              apiFetch={apiFetch}
-            />
+            key={client.id}
+            client={client}
+            apiFetch={apiFetch}
+            onDeleted={handleDeleted}
+            onUpdated={handleUpdated}
+          />
           ))}
         </div>
+      )}
+
+      {showModal && (
+        <AddClientModal
+          onClose={() => setShowModal(false)}
+          onCreated={(newClient) => setClients((prev) => [newClient, ...prev])}
+          apiFetch={apiFetch}
+        />
       )}
     </div>
   );
 }
-
+ 
 export default Clients;

@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+button, [role="button"], select {
+  cursor: pointer;
+}
+
 :root {
   --color-primary: #0F6E56;
   --color-primary-light: #1D9E75;

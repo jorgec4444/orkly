@@ -9,10 +9,10 @@ from datetime import datetime, timezone
 
 logger = logging.getLogger(__name__)
 
-db = get_supabase()
-
 async def get_clients_by_user(user_id: str) -> list[dict]:
     """Return all active clients for a given user_id (soft-delete aware)."""
+
+    db = get_supabase()
 
     response = (
         db.table("clients")
@@ -22,7 +22,7 @@ async def get_clients_by_user(user_id: str) -> list[dict]:
         .order("created_at", desc=True)
         .execute()
     )
-    logger.info(f"Retrieved clients for user {user_id}: {len(response.data)}")
+    logger.info(f"Retrieved clients for user: {len(response.data)}")
 
     return response.data or []
 
@@ -36,6 +36,8 @@ async def create_client(user_id: str, client_name: str, brand_voice: str | None)
         "brand_voice": brand_voice,
     }
 
+    db = get_supabase()
+
     response = db.table("clients").insert(payload).execute()
     return response.data[0]
 
@@ -45,15 +47,15 @@ async def update_client(
 ) -> dict | None:
     """Update a client's name/brand_voice. Returns None if not found or not owned."""
 
-    logger.info(f"Updating client {client_id} for user {user_id}")
-
     payload = {}
     if client_name is not None:
         payload["client_name"] = client_name
-    if brand_voice is not None:
-        payload["brand_voice"] = brand_voice
+        
+    payload["brand_voice"] = brand_voice
     if not payload:
         return None
+
+    db = get_supabase()
 
     response = (
         db.table("clients")
@@ -63,11 +65,16 @@ async def update_client(
         .is_("deleted_at", "null")
         .execute()
     )
+
+    logger.info(f"Updated client {client_name} for user {user_id}")
+
     return response.data[0] if response.data else None
 
 
 async def soft_delete_client(client_id: int, user_id: str) -> bool:
     """Soft-delete a client. Returns True if deleted, False if not found."""
+
+    db = get_supabase()
 
     response = (
         db.table("clients")
@@ -77,4 +84,5 @@ async def soft_delete_client(client_id: int, user_id: str) -> bool:
         .is_("deleted_at", "null")
         .execute()
     )
+
     return bool(response.data)

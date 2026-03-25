@@ -45,9 +45,9 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://orkly.vinagre444.workers.dev", "https://orkly.app", "http://localhost:5173/"],
+    allow_origins=["https://orkly.vinagre444.workers.dev", "https://orkly.app", "http://localhost:5173", "http://127.0.0.1:8000"],
     allow_credentials=False,
-    allow_methods=["GET", "POST"],
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"]
 )
 
@@ -66,8 +66,8 @@ async def root():
         "service": "Orkly",
         "version": "2.0.0",
         "endpoints": {
-            "POST /improve": "Improve a text with AI (3 variations)",
-            "POST /save-generation": "Save a text generation record for analytics",
+            "POST /text-generation/improve": "Improve a text with AI (3 variations)",
+            "POST /text-generation/save": "Save a text generation record for analytics",
             "GET  /rate-limit/status": "Check remaining free generations",
             "POST /feedback": "Submit feedback",
             "GET  /health": "Health check",

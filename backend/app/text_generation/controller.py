@@ -4,12 +4,18 @@
 
 from fastapi import APIRouter, Request
 
-from .service import save_generation_handler
+from .service import save_generation_handler, improve_text
+from .schemas import SaveGenerationRequest, TextRequest, TextResponse, TextRequest
 
-from .schemas import SaveGenerationRequest
 from app.utils.http import get_client_ip
 
 router = APIRouter(prefix="/text-generation", tags=["text-generation"])
+
+@router.post("/improve-text", response_model=TextResponse, tags=["text-improvement"])
+async def improve(request: TextRequest, req: Request):
+    """Improve the submitted text with AI, returning three variations."""
+
+    return await improve_text(request, req)
 
 @router.post("/save", response_model=dict)
 async def save_generation(request: Request, payload: SaveGenerationRequest):

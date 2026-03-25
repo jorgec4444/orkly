@@ -5,17 +5,28 @@ import { toast } from 'react-hot-toast'
 
 import Sidebar from "../components/Sidebar";
 
+const API_BASE = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+
 function Dashboard() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
+    const [clients, setClients] = useState([]);
+    const [clientsLoading, setClientsLoading] = useState(true);
 
     useEffect(() => {
         async function checkSession() {
             const { data: { session } } = await supabase.auth.getSession();
             if (!session) {
-                toast.error('You need to be logged in to access the dashboard')
+                toast('Please sign in to access the dashboard')
                 navigate("/");
+                return;
             }
+            const data = await fetch(`${API_BASE}/client/list`, {
+                headers: { Authorization: `Bearer ${session.access_token}` }
+            });
+            const json = await data.json();
+            setClients(json);
+            setClientsLoading(false);
             setLoading(false);
         }
         checkSession();
@@ -27,7 +38,7 @@ function Dashboard() {
         <div>
             <Sidebar />
              <main className="ml-64 p-8 min-h-screen bg-bg">
-                <Outlet />
+                <Outlet context={{ clients, setClients, clientsLoading }} />
             </main>
         </div>
     );
