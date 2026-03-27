@@ -70,7 +70,7 @@ export default function AuthModal({ isOpen, onClose }) {
             Continue with Google
           </button>
 
-          {/* Footer note */}
+          {/* Footer note*/}
           <p className="text-xs text-center text-gray-400 leading-relaxed">
             By signing in you agree to our{" "}
             <a href="./public/terms" className="underline hover:text-gray-600 transition-colors">Terms</a>
