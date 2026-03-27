@@ -40,7 +40,7 @@ app = FastAPI(
     description="Orchestrate your content, and more with AI.",
     version="2.0.0",
     contact={"name": "Jorge Vinagre", "email": "jorgecdev444@gmail.com"},
-    lifespan=lifespan
+    lifespan=lifespan 
 )
 
 app.add_middleware(
