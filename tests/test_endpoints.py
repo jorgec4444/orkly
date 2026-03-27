@@ -1,7 +1,7 @@
 # Copyright © 2026 Jorge Vinagre
 # SPDX-License-Identifier: AGPL-3.0-only WITH Commons-Clause
 
-"""Integration tests for Postly AI endpoints."""
+"""Integration tests for Orkly AI endpoints."""
 from unittest.mock import MagicMock, patch
 
 import pytest

@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { useOutletContext } from "react-router-dom";
 import { supabase } from "../supabase";
 import { ChevronDown, Check } from "lucide-react";
+import toast from 'react-hot-toast';
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
@@ -222,7 +223,7 @@ export default function CreateContent() {
       });
       setVariations(data);
     } catch (e) {
-      setError(e.message);
+      toast.error(e.message);
     } finally {
       setLoading(false);
     }
@@ -244,14 +245,16 @@ export default function CreateContent() {
         }),
       });
       setSaved(true);
+      toast.success('Saved to history');
     } catch (e) {
-      console.error("Save failed:", e.message);
+      toast.error('Could not save to history');
     }
   };
 
   const handleCopy = async (version, txt) => {
     await navigator.clipboard.writeText(txt);
     setCopied(version);
+    toast.success('Copied to clipboard');
     setTimeout(() => setCopied(null), 2000);
   };
 

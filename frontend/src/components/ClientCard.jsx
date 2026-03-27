@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Calendar, AlertCircle, CheckCircle2, Pencil, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast';
 
 export default function ClientCard({ client, onDeleted, onUpdated, apiFetch }) {
   const [editing, setEditing] = useState(false);
@@ -39,9 +40,10 @@ export default function ClientCard({ client, onDeleted, onUpdated, apiFetch }) {
         }),
       });
       onUpdated(updated);
+      toast.success('Changes saved');
       setEditing(false);
     } catch (e) {
-      setError(e.message);
+      toast.error(e.message);
     } finally {
       setSaving(false);
     }
@@ -53,8 +55,9 @@ export default function ClientCard({ client, onDeleted, onUpdated, apiFetch }) {
     try {
       await apiFetch(`/client/${client.id}`, { method: "DELETE" });
       onDeleted(client.id);
+      toast.success('Client deleted');
     } catch (e) {
-      setError(e.message);
+      toast.error(e.message);
       setDeleting(false);
     }
   };

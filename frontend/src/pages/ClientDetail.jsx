@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { supabase } from "../supabase";
 import { ArrowLeft, Pencil, Check, X, Plus, Folder, FolderOpen,Trash2} from "lucide-react";
+import toast from 'react-hot-toast';
 
 //const API_BASE = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 const API_BASE = "http://127.0.0.1:8000";
@@ -102,13 +103,17 @@ function ClientDetail() {
     try {
       const updated = await apiFetch(`/client/${id}`, {
         method: "PUT",
-        body: JSON.stringify({ brand_voice: voiceDraft.trim() || null }),
+        body: JSON.stringify({
+          client_name: client.client_name,
+          brand_voice: voiceDraft.trim() || null,
+        }),
       });
       setClient(updated);
       setClients(prev => prev.map(c => c.id === updated.id ? updated : c));
       setEditingVoice(false);
+      toast.success('Brand voice updated');
     } catch (e) {
-      console.error(e);
+      toast.error(e.message);
     } finally {
       setSavingVoice(false);
     }
@@ -125,8 +130,9 @@ function ClientDetail() {
         method: "PUT",
         body: JSON.stringify({ platforms: updated }),
       });
+      toast.success('Platforms updated');
     } catch (e) {
-      console.error(e);
+      toast.error(e.message);
     } finally {
       setSavingPlatforms(false);
     }
@@ -152,8 +158,9 @@ function ClientDetail() {
         await apiFetch(`/client/${client.id}`, { method: "DELETE" });
         setClients(prev => prev.filter(c => c.id !== parseInt(id)));
         navigate("/dashboard/clients", { replace: true });
+        toast.success('Client deleted');
       } catch (e) {
-        setError(e.message);
+        toast.error(e.message);
         setDeleting(false);
       }
     };

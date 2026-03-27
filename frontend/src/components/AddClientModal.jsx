@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { X, Building2 } from "lucide-react";
+import toast from 'react-hot-toast';
 
 export default function AddClientModal({ onClose, onCreated, apiFetch }) {
   const [clientName, setClientName] = useState("");
@@ -26,10 +27,11 @@ export default function AddClientModal({ onClose, onCreated, apiFetch }) {
           brand_voice: brandVoice.trim() || null,
         }),
       });
+      toast.success('Client created');
       onCreated(newClient);
       onClose();
     } catch (e) {
-      setError(e.message);
+      toast.error(e.message);
     } finally {
       setLoading(false);
     }

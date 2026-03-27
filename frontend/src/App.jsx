@@ -9,6 +9,7 @@ import AuthListener from './components/AuthListener'
 import StaticPage from './components/StaticPage'
 import ClientDetail from './pages/ClientDetail'
 import CreateContent from './pages/CreateContent'
+import Settings from './pages/Settings'
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
           <Route path="clients" element={<Clients />} />
           <Route path="clients/:id" element={<ClientDetail />} />
           <Route path="create" element={<CreateContent />} />
-          <Route path="settings" element={<div>Settings</div>} />
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </BrowserRouter>

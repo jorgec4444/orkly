@@ -72,7 +72,7 @@ class RateLimiter:
 
     def _fallback_status(self) -> dict:
         """Return permissive status when DB is unavailable."""
-        return self._build_status(0)
+        return self._build_status(0, FREE_DAILY_LIMIT)
 
     # ── check ─────────────────────────────────────────────────────────────────
 
@@ -80,7 +80,7 @@ class RateLimiter:
         """Return rate-limit status for *ip*."""
         if not self._db:
             count = _memory_counts[_memory_key(ip)]
-            return self._build_status(count)
+            return self._build_status(count, FREE_DAILY_LIMIT)
 
         try:
             resp = (
@@ -91,7 +91,7 @@ class RateLimiter:
                 .execute()
             )
             count = resp.data[0]["count"] if resp.data else 0
-            return self._build_status(count)
+            return self._build_status(count, FREE_DAILY_LIMIT)
         except Exception as exc:
             logger.error("check_limit DB error for ip=%s: %s", ip, exc)
             return self._fallback_status()

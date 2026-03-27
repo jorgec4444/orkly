@@ -13,6 +13,7 @@ function Dashboard() {
     const [loading, setLoading] = useState(true);
     const [clients, setClients] = useState([]);
     const [clientsLoading, setClientsLoading] = useState(true);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         async function checkSession() {
@@ -26,6 +27,7 @@ function Dashboard() {
                 headers: { Authorization: `Bearer ${session.access_token}` }
             });
             const json = await data.json();
+            setUser(session.user);
             setClients(json);
             setClientsLoading(false);
             setLoading(false);
@@ -39,7 +41,7 @@ function Dashboard() {
         <div>
             <Sidebar />
              <main className="ml-64 p-8 min-h-screen bg-bg">
-                <Outlet context={{ clients, setClients, clientsLoading }} />
+                <Outlet context={{ clients, setClients, clientsLoading, user }} />
             </main>
         </div>
     );
