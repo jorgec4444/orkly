@@ -384,7 +384,7 @@ function ClientDetail() {
               </span>
             </h2>
 
-            {/* Platform filter */}
+            {/* Platform filter*/}
             <select
               value={platformFilter}
               onChange={(e) => setPlatformFilter(e.target.value)}
