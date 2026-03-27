@@ -6,7 +6,7 @@ import logging
 
 from app.database import get_supabase
 from app.text_generation.service import fetch_client_generations
-from datetime import datetime, timezone
+from datetime import datetime, timezone 
 
 from app.text_generation.schemas import GenerationsResponse
 
