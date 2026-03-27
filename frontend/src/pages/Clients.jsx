@@ -2,12 +2,10 @@ import { useState, useMemo } from "react";
 import { Search } from "lucide-react";
 import { supabase } from "../supabase";
 import { useOutletContext } from "react-router-dom";
-import toast from 'react-hot-toast';
 import ClientCard from "../components/ClientCard";
 import AddClientModal from "../components/AddClientModal";
 
-// const API_BASE = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
 async function apiFetch(path, options = {}) {
   const {

@@ -22,6 +22,14 @@ jobs:
         run: npm ci
         working-directory: ./frontend
 
+      - name: Build frontend
+        run: npm run build
+        working-directory: ./frontend
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL_PRODUCTION }}
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLIC_KEY: ${{ secrets.VITE_SUPABASE_PUBLIC_KEY }}
+
       - name: Deploy to Cloudflare Workers
         run: npx wrangler deploy
         env:

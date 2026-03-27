@@ -5,6 +5,10 @@ venv/
 env/
 ENV/
 .venv/
+.env
+.env/
+.env.production
+.env.testing
 
 # ── Variables de entorno (NUNCA subir a Git!) ─────────────────────────────────
 .env

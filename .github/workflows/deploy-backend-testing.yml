@@ -1,0 +1,31 @@
+name: Deploy-Backend-Testing
+
+on:
+  push:
+    branches:
+      - testing
+    paths:
+      - backend/**
+    
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v3
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Deploy to Cloud Run testing environment
+        uses: 'google-github-actions/deploy-cloudrun@v3'
+        with:
+          service: mi-backend-testing
+          source: ./backend
+          region: europe-west1
+          env_vars:
+            OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+          flags: --clear-base-image

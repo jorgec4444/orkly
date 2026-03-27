@@ -4,8 +4,7 @@ import { supabase } from "../supabase";
 import { ArrowLeft, Pencil, Check, X, Plus, Folder, FolderOpen,Trash2} from "lucide-react";
 import toast from 'react-hot-toast';
 
-//const API_BASE = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
 async function apiFetch(path, options = {}) {
   const { data: { session } } = await supabase.auth.getSession();
