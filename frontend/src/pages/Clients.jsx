@@ -67,21 +67,21 @@ function Clients() {
   return (
     <div>
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Clients</h1>
           <p className="text-gray-500 mt-1">Orchestrate and organise all your clients in one place</p>
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-br from-primary to-accent text-white text-sm font-semibold hover:opacity-90 transition shadow-sm"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-br from-primary to-accent text-white text-sm font-semibold hover:opacity-90 transition shadow-sm"
         >
           + New client
         </button>
       </div>
 
       {/* Search + Sort */}
-      <div className="flex items-center gap-4 mb-6 bg-white border border-gray-200 rounded-xl p-3">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-6 bg-white border border-gray-200 rounded-xl p-3">
         <div className="flex items-center gap-2 flex-1">
           <Search className="w-4 h-4 text-gray-400" />
           <input
@@ -105,7 +105,7 @@ function Clients() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <div className="bg-white border border-gray-200 rounded-xl p-4">
           <p className="text-sm text-gray-500">Total clients</p>
           <p className="text-2xl font-bold mt-1">{clients.length}</p>

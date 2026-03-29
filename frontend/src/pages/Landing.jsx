@@ -98,7 +98,7 @@ export default function Landing() {
         </div>
       </nav>
 
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
 
         {/* ── Hero ── */}
         <section className="pt-16 pb-14 text-center">
@@ -230,14 +230,14 @@ export default function Landing() {
             </div>
 
             {/* CTA to sign in */}
-            <div className="mt-6 bg-gradient-to-r from-primary/8 to-accent/10 border border-primary/20 rounded-2xl p-5 flex items-center justify-between gap-4">
+            <div className="mt-6 mb-10 bg-gradient-to-r from-primary/8 to-accent/10 border border-primary/20 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
                 <p className="text-sm font-semibold text-gray-900">Save this for a client</p>
                 <p className="text-xs text-gray-500 mt-0.5">Sign in to manage clients, brand voices and generation history.</p>
               </div>
               <button
                 onClick={() => setIsAuthModalOpen(true)}
-                className="flex-shrink-0 px-4 py-2 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary-light transition-colors"
+                className="w-full sm:w-auto flex-shrink-0 px-4 py-2 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary-light transition-colors"
               >
                 Sign in free →
               </button>
