@@ -76,7 +76,7 @@ function Clients() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{t('clients.title')}</h1>
-          <p className="text-gray-500 mt-1 text-sm">{t('clients.subtitle')}</p>
+          <p className="text-gray-600 mt-1 text-sm">{t('clients.subtitle')}</p>
         </div>
         <button
           onClick={() => setShowModal(true)}
@@ -89,7 +89,7 @@ function Clients() {
       {/* Search + Sort */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-6 bg-white border border-gray-200 rounded-xl p-3">
         <div className="flex items-center gap-2 flex-1">
-          <Search className="w-4 h-4 text-gray-400" />
+          <Search className="w-4 h-4 text-gray-500" />
           <input
             type="text"
             placeholder={t('clients.searchPlaceholder')}
@@ -112,17 +112,17 @@ function Clients() {
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <div className="bg-white border border-gray-200 rounded-xl p-4">
-          <p className="text-sm text-gray-500">{t('clients.totalClients')}</p>
+          <p className="text-sm text-gray-600">{t('clients.totalClients')}</p>
           <p className="text-2xl font-bold mt-1">{clients.length}</p>
         </div>
         <div className="bg-white border border-gray-200 rounded-xl p-4">
-          <p className="text-sm text-gray-500">{t('clients.withBrandVoice')}</p>
+          <p className="text-sm text-gray-600">{t('clients.withBrandVoice')}</p>
           <p className="text-2xl font-bold mt-1 text-emerald-500">
             {clients.filter((c) => c.brand_voice).length}
           </p>
         </div>
         <div className="bg-white border border-gray-200 rounded-xl p-4">
-          <p className="text-sm text-gray-500">{t('clients.addedThisMonth')}</p>
+          <p className="text-sm text-gray-600">{t('clients.addedThisMonth')}</p>
           <p className="text-2xl font-bold mt-1 text-primary">
             {clients.filter(
               (c) =>
@@ -135,18 +135,18 @@ function Clients() {
 
       {/* States */}
       {loading && (
-        <div className="text-center py-12 text-gray-400">
+        <div className="text-center py-12 text-gray-500">
           {t('clients.loading')}
         </div>
       )}
 
       {error && (
-        <div className="text-center py-12 text-red-400">{error}</div>
+        <div className="text-center py-12 text-red-500">{error}</div>
       )}
 
       {!loading && !error && filteredClients.length === 0 && (
         <div className="text-center py-12 bg-white rounded-xl border border-gray-200">
-          <p className="text-gray-400">{t('clients.noClientsFound')}</p>
+          <p className="text-gray-500">{t('clients.noClientsFound')}</p>
         </div>
       )}
 

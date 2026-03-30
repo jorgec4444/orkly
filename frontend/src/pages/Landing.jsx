@@ -115,7 +115,7 @@ export default function Landing() {
         </div>
       </nav>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 flex-1 w-full">
 
         {/* ── Hero ── */}
         <section className="pt-16 pb-14 text-center">
@@ -127,10 +127,10 @@ export default function Landing() {
             {t('hero.title1')}<br />
             <span className="text-primary">{t('hero.title2')}</span>
           </h1>
-          <p className="text-lg text-gray-500 max-w-md mx-auto mb-8 leading-relaxed">
+          <p className="text-lg text-gray-600 max-w-md mx-auto mb-8 leading-relaxed">
             {t('hero.subtitle')}
           </p>
-          <div className="flex items-center justify-center gap-2 text-xs text-gray-400 flex-wrap">
+          <div className="flex items-center justify-center gap-2 text-xs text-gray-500 flex-wrap">
             <span>{t('hero.builtFor')}</span>
             {["Instagram", "Twitter / X", "LinkedIn"].map((p) => (
               <span key={p} className="px-2.5 py-1 rounded-full border border-gray-200 bg-white text-gray-600">
@@ -142,7 +142,7 @@ export default function Landing() {
 
         {/* ── Compose ── */}
         <div className="mb-2">
-          <p className="text-xs font-medium text-gray-400 uppercase tracking-widest mb-3">
+          <p className="text-xs font-medium text-gray-500 uppercase tracking-widest mb-3">
             {t('compose.label')}
           </p>
           <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/10 transition-all">
@@ -159,7 +159,7 @@ export default function Landing() {
               className="w-full bg-transparent resize-none outline-none text-gray-900 placeholder-gray-400 text-[15px] leading-relaxed"
             />
             <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-              <span className={`text-xs font-mono ${charOver ? "text-red-500" : charWarn ? "text-amber-500" : "text-gray-400"}`}>
+              <span className={`text-xs font-mono ${charOver ? "text-red-500" : charWarn ? "text-amber-500" : "text-gray-500"}`}>
                 {t('compose.charLimit', { count: charCount })}
               </span>
               <button
@@ -182,7 +182,7 @@ export default function Landing() {
 
         {/* ── Templates ── */}
         <div className="flex items-center gap-2 flex-wrap mb-10">
-          <span className="text-xs font-mono text-gray-400 mr-1">{t('templates.label')}</span>
+          <span className="text-xs font-mono text-gray-500 mr-1">{t('templates.label')}</span>
           {Object.entries(TEMPLATE_LABELS).map(([key, label]) => (
             <button
               key={key}
@@ -203,7 +203,7 @@ export default function Landing() {
 
         {/* ── Loading ── */}
         {loading && (
-          <div className="flex items-center gap-4 py-8 text-gray-500 text-sm">
+          <div className="flex items-center gap-4 py-8 text-gray-600 text-sm">
             <span className="w-5 h-5 border-2 border-gray-200 border-t-primary rounded-full animate-spin flex-shrink-0" />
             <span dangerouslySetInnerHTML={{ __html: t('loading.generating') }} />
           </div>
@@ -213,11 +213,11 @@ export default function Landing() {
         {variations && (
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between mb-1">
-              <p className="text-xs font-medium text-gray-400 uppercase tracking-widest">
+              <p className="text-xs font-medium text-gray-500 uppercase tracking-widest">
                 {t('variations.label')}
               </p>
               {variations.original && (
-                <p className="text-xs text-gray-400 truncate max-w-xs">
+                <p className="text-xs text-gray-500 truncate max-w-xs">
                   "{variations.original.slice(0, 50)}{variations.original.length > 50 ? "…" : ""}"
                 </p>
               )}
@@ -239,7 +239,7 @@ export default function Landing() {
                       <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${STYLE_COLORS[version]}`}>
                         {STYLE_META[version]?.label}
                       </span>
-                      <p className="text-xs text-gray-400 mt-1">{STYLE_META[version]?.desc}</p>
+                      <p className="text-xs text-gray-500 mt-1">{STYLE_META[version]?.desc}</p>
                     </div>
                     {selected === version && (
                       <span className="text-primary text-sm flex-shrink-0">✓</span>
@@ -248,7 +248,7 @@ export default function Landing() {
                   <p className="text-sm text-gray-700 leading-relaxed flex-1">{varText}</p>
                   <button
                     onClick={(e) => { e.stopPropagation(); handleCopy(version, varText); }}
-                    className="self-end text-xs text-gray-400 hover:text-primary transition-colors"
+                    className="self-end text-xs text-gray-500 hover:text-primary transition-colors"
                   >
                     {copied === version ? t('variations.copied') : t('variations.copy')}
                   </button>
@@ -260,7 +260,7 @@ export default function Landing() {
             <div className="mt-6 mb-10 bg-gradient-to-r from-primary/8 to-accent/10 border border-primary/20 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
                 <p className="text-sm font-semibold text-gray-900">{t('cta.title')}</p>
-                <p className="text-xs text-gray-500 mt-0.5">{t('cta.subtitle')}</p>
+                <p className="text-xs text-gray-600 mt-0.5">{t('cta.subtitle')}</p>
               </div>
               <button
                 onClick={() => setIsAuthModalOpen(true)}
@@ -271,7 +271,7 @@ export default function Landing() {
             </div>
           </div>
         )}
-      </div>
+      </main>
 
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
       <Footer />

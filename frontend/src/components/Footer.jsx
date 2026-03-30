@@ -37,7 +37,7 @@ function FeedbackModal({ onClose }) {
         <div className="p-6 flex flex-col gap-4">
           <div>
             <h2 className="text-base font-bold text-gray-900">{t('feedback.title')}</h2>
-            <p className="text-sm text-gray-500 mt-0.5">{t('feedback.subtitle')}</p>
+            <p className="text-sm text-gray-600 mt-0.5">{t('feedback.subtitle')}</p>
           </div>
           {sent ? (
             <p className="text-sm text-primary font-medium py-4 text-center">{t('feedback.thanks')}</p>
@@ -54,7 +54,7 @@ function FeedbackModal({ onClose }) {
               <div className="flex gap-2 justify-end">
                 <button
                   onClick={onClose}
-                  className="px-4 py-2 rounded-xl text-sm font-medium text-gray-500 hover:bg-gray-100 transition"
+                  className="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition"
                 >
                   {t('feedback.cancel')}
                 </button>
@@ -85,13 +85,13 @@ export default function Footer() {
           {/* Left — brand */}
           <div className="flex items-center gap-2 flex-shrink-0">
             <img src="/favicon.svg" alt="Orkly" className="w-8 h-8" />
-            <span className="text-sm text-gray-400 whitespace-nowrap">
+            <span className="text-sm text-gray-500 whitespace-nowrap">
               {"© "}{new Date().getFullYear()}{" Orkly · Jorge Vinagre"}
             </span>
           </div>
 
           {/* Right — links */}
-          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-5 gap-y-2 text-sm text-gray-400">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-5 gap-y-2 text-sm text-gray-600">
             <button
               onClick={() => setShowFeedback(true)}
               className="hover:text-primary transition-colors whitespace-nowrap"

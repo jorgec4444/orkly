@@ -46,13 +46,13 @@ export default function AuthModal({ isOpen, onClose }) {
               <h2 className="text-xl font-bold text-gray-900 leading-tight">
                 {t('auth.welcome')}
               </h2>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-600">
                 {t('auth.subtitle')}
               </p>
             </div>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition flex-shrink-0"
+              className="p-1.5 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition flex-shrink-0"
             >
               <X className="w-4 h-4" />
             </button>
@@ -73,7 +73,7 @@ export default function AuthModal({ isOpen, onClose }) {
           </button>
 
           {/* Footer note */}
-          <p className="text-xs text-center text-gray-400 leading-relaxed">
+          <p className="text-xs text-center text-gray-500 leading-relaxed">
             {t('auth.terms')}{" "}
             <a href="/terms" className="underline hover:text-gray-600 transition-colors">{t('auth.termsLink')}</a>
             {" "}{t('and')}{" "}

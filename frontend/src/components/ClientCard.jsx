@@ -104,14 +104,14 @@ export default function ClientCard({ client, onDeleted, onUpdated, apiFetch }) {
           {!editing && (
             hasBrandVoice
               ? <CheckCircle2 className="w-4 h-4 text-green-500" />
-              : <AlertCircle className="w-4 h-4 text-amber-400" />
+              : <AlertCircle className="w-4 h-4 text-amber-500" />
           )}
           {!editing && (
             <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity ml-1">
               <button
                 onClick={(e) => { e.stopPropagation(); setEditing(true); }}
                 title="Edit"
-                className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 dark:hover:text-[var(--color-text-primary)] hover:bg-gray-100 dark:hover:bg-[var(--color-bg)] transition"
+                className="p-1.5 rounded-lg text-gray-500 hover:text-gray-700 dark:hover:text-[var(--color-text-primary)] hover:bg-gray-100 dark:hover:bg-[var(--color-bg)] transition"
               >
                 <Pencil className="w-3.5 h-3.5" />
               </button>
@@ -119,7 +119,7 @@ export default function ClientCard({ client, onDeleted, onUpdated, apiFetch }) {
                 onClick={(e) => { e.stopPropagation(); handleDelete(); }}
                 disabled={deleting}
                 title="Delete"
-                className="p-1.5 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-400/10 transition disabled:opacity-40"
+                className="p-1.5 rounded-lg text-gray-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-400/10 transition disabled:opacity-40"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
@@ -130,7 +130,7 @@ export default function ClientCard({ client, onDeleted, onUpdated, apiFetch }) {
 
       {/* ── Brand voice ── */}
       <div className="flex flex-col gap-1.5">
-        <p className="text-xs font-medium text-gray-400 dark:text-[var(--color-text-muted)] uppercase tracking-wide">
+        <p className="text-xs font-medium text-gray-500 dark:text-[var(--color-text-muted)] uppercase tracking-wide">
           {t('clientCard.brandVoice')}
         </p>
         {editing ? (
@@ -145,7 +145,7 @@ export default function ClientCard({ client, onDeleted, onUpdated, apiFetch }) {
         ) : (
           <p className="text-sm text-gray-600 dark:text-[var(--color-text-secondary)] line-clamp-3 leading-relaxed">
             {client.brand_voice || (
-              <span className="text-gray-400 dark:text-[var(--color-text-muted)] italic">
+              <span className="text-gray-500 dark:text-[var(--color-text-muted)] italic">
                 {t('clientCard.noBrandVoice')}
               </span>
             )}
@@ -166,7 +166,7 @@ export default function ClientCard({ client, onDeleted, onUpdated, apiFetch }) {
           <div className="flex gap-2 w-full justify-end">
             <button
               onClick={handleCancelEdit}
-              className="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-500 hover:bg-gray-100 dark:hover:bg-[var(--color-bg)] transition"
+              className="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 dark:hover:bg-[var(--color-bg)] transition"
             >
               {t('clientCard.cancel')}
             </button>
@@ -180,7 +180,7 @@ export default function ClientCard({ client, onDeleted, onUpdated, apiFetch }) {
           </div>
         ) : (
           <div className="flex items-center justify-between w-full">
-            <div className="flex items-center gap-1.5 text-xs text-gray-400 dark:text-[var(--color-text-muted)]">
+            <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-[var(--color-text-muted)]">
               <Calendar className="w-3.5 h-3.5" />
               <span>{t('clientCard.added', { date: formattedDate })}</span>
             </div>
@@ -189,7 +189,7 @@ export default function ClientCard({ client, onDeleted, onUpdated, apiFetch }) {
                 {t('clientCard.voiceSet')}
               </span>
             ) : (
-              <span className="text-xs bg-amber-50 dark:bg-amber-400/10 text-amber-600 dark:text-amber-400 px-2.5 py-0.5 rounded-full">
+              <span className="text-xs bg-amber-50 dark:bg-amber-400/10 text-amber-600 dark:text-amber-500 px-2.5 py-0.5 rounded-full">
                 {t('clientCard.noVoice')}
               </span>
             )}

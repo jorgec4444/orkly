@@ -56,7 +56,7 @@ function ClientSelector({ clients, selected, onSelect }) {
         className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl border text-sm transition-all ${
           selected
             ? "bg-white border-primary/40 text-gray-900 shadow-sm"
-            : "bg-gray-50 border-gray-200 text-gray-400 hover:border-gray-300"
+            : "bg-gray-50 border-gray-200 text-gray-500 hover:border-gray-300"
         }`}
       >
         <div className="flex items-center gap-2.5 min-w-0">
@@ -83,7 +83,7 @@ function ClientSelector({ clients, selected, onSelect }) {
         <div className="absolute top-full left-0 right-0 mt-1.5 bg-white border border-gray-200 rounded-xl shadow-lg z-20 overflow-hidden">
           <button
             onClick={() => { onSelect(null); setOpen(false); }}
-            className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-gray-400 hover:bg-gray-50 transition-colors"
+            className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-gray-500 hover:bg-gray-50 transition-colors"
           >
             {t('createContent.noClient')}
           </button>
@@ -127,7 +127,7 @@ function VariationCard({ variation, selected, onSelect, onCopy, copied }) {
           <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${colorClass}`}>
             {meta.label}
           </span>
-          <p className="text-xs text-gray-400 mt-1">{meta.desc}</p>
+          <p className="text-xs text-gray-500 mt-1">{meta.desc}</p>
         </div>
         {selected && <Check className="w-4 h-4 text-primary flex-shrink-0" />}
       </div>
@@ -275,14 +275,14 @@ export default function CreateContent() {
       {/* ── Header ── */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">{t('createContent.title')}</h1>
-        <p className="text-sm text-gray-500 mt-1">{t('createContent.subtitle')}</p>
+        <p className="text-sm text-gray-600 mt-1">{t('createContent.subtitle')}</p>
       </div>
 
       <div className="flex flex-col gap-5">
 
         {/* ── Step 1: Client + Platform ── */}
         <section className="bg-white border border-gray-200 rounded-2xl p-5 flex flex-col gap-4">
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">
+          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
             {t('createContent.step1')}
           </p>
 
@@ -316,7 +316,7 @@ export default function CreateContent() {
                 className={`flex flex-col items-center gap-1 px-2 py-2.5 rounded-xl border text-xs font-medium transition-all ${
                   selectedPlatform === id
                     ? "bg-primary/8 border-primary/30 text-primary shadow-sm"
-                    : "bg-gray-50 border-gray-200 text-gray-500 hover:border-gray-300"
+                    : "bg-gray-50 border-gray-200 text-gray-600 hover:border-gray-300"
                 }`}
               >
                 <span className="text-lg leading-none">{emoji}</span>
@@ -328,13 +328,13 @@ export default function CreateContent() {
 
         {/* ── Step 2: Text + Creativity ── */}
         <section className="bg-white border border-gray-200 rounded-2xl p-5 flex flex-col gap-4">
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">
+          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
             {t('createContent.step2')}
           </p>
 
           {/* Templates */}
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs text-gray-400 font-mono">{t('createContent.templatesLabel')}</span>
+            <span className="text-xs text-gray-500 font-mono">{t('createContent.templatesLabel')}</span>
             {Object.entries(t('createContent.templateLabels', { returnObjects: true })).map(([key, label]) => (
               <button
                 key={key}
@@ -345,7 +345,7 @@ export default function CreateContent() {
                 className={`text-xs font-mono px-2.5 py-1 rounded-full border transition-colors ${
                   activeTemplate === key
                     ? 'border-primary text-primary bg-primary/5'
-                    : 'border-gray-200 bg-gray-50 text-gray-500 hover:border-primary hover:text-primary'
+                    : 'border-gray-200 bg-gray-50 text-gray-600 hover:border-primary hover:text-primary'
                 }`}
               >
                 {label}
@@ -369,7 +369,7 @@ export default function CreateContent() {
             />
             <div className="flex items-center justify-end px-4 pb-3">
               <span className={`text-xs font-mono ${
-                charOver ? "text-red-500" : charWarn ? "text-amber-500" : "text-gray-400"
+                charOver ? "text-red-500" : charWarn ? "text-amber-500" : "text-gray-500"
               }`}>
                 {t('createContent.charLimit', { count: charCount })}
               </span>
@@ -378,7 +378,7 @@ export default function CreateContent() {
 
           {/* Creativity */}
           <div className="flex flex-col gap-2">
-            <p className="text-xs text-gray-400 font-medium">{t('createContent.creativityLabel')}</p>
+            <p className="text-xs text-gray-500 font-medium">{t('createContent.creativityLabel')}</p>
             <div className="grid grid-cols-3 gap-2">
               {CREATIVITY_LEVELS.map(({ id, label, emoji, desc }) => (
                 <button
@@ -387,12 +387,12 @@ export default function CreateContent() {
                   className={`flex flex-col items-center gap-1 px-3 py-3 rounded-xl border text-xs font-medium transition-all ${
                     creativity === id
                       ? "bg-primary/8 border-primary/30 text-primary shadow-sm"
-                      : "bg-gray-50 border-gray-200 text-gray-500 hover:border-gray-300"
+                      : "bg-gray-50 border-gray-200 text-gray-600 hover:border-gray-300"
                   }`}
                 >
                   <span className="text-xl leading-none">{emoji}</span>
                   <span className="font-semibold">{label}</span>
-                  <span className={`text-center leading-tight ${creativity === id ? "text-primary/70" : "text-gray-400"}`}>
+                  <span className={`text-center leading-tight ${creativity === id ? "text-primary/70" : "text-gray-500"}`}>
                     {desc}
                   </span>
                 </button>
@@ -433,12 +433,12 @@ export default function CreateContent() {
         {variations && (
           <section className="flex flex-col gap-4">
             <div className="flex items-center justify-between">
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
                 {t('createContent.step3')}
               </p>
               <button
                 onClick={handleReset}
-                className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+                className="text-xs text-gray-500 hover:text-gray-600 transition-colors"
               >
                 {t('createContent.startOver')}
               </button>

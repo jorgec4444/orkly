@@ -55,7 +55,7 @@ export default function AddClientModal({ onClose, onCreated, apiFetch }) {
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition"
+            className="p-1.5 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition"
           >
             <X className="w-4 h-4" />
           </button>
@@ -65,7 +65,7 @@ export default function AddClientModal({ onClose, onCreated, apiFetch }) {
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
             <label className="text-sm font-medium text-gray-700">
-              {t('addClient.clientName')} <span className="text-red-400">*</span>
+              {t('addClient.clientName')} <span className="text-red-500">*</span>
             </label>
             <input
               autoFocus
@@ -82,7 +82,7 @@ export default function AddClientModal({ onClose, onCreated, apiFetch }) {
           <div className="flex flex-col gap-1.5">
             <label className="text-sm font-medium text-gray-700">
               {t('addClient.brandVoice')}{" "}
-              <span className="text-gray-400 font-normal">{t('addClient.brandVoiceOptional')}</span>
+              <span className="text-gray-500 font-normal">{t('addClient.brandVoiceOptional')}</span>
             </label>
             <textarea
               value={brandVoice}
@@ -92,7 +92,7 @@ export default function AddClientModal({ onClose, onCreated, apiFetch }) {
               rows={3}
               className="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-primary transition resize-none"
             />
-            <span className="text-xs text-gray-400 text-right">
+            <span className="text-xs text-gray-500 text-right">
               {brandVoice.length}/1000
             </span>
           </div>
@@ -109,7 +109,7 @@ export default function AddClientModal({ onClose, onCreated, apiFetch }) {
         <div className="flex gap-3 justify-end">
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-xl text-sm font-medium text-gray-500 hover:bg-gray-100 transition"
+            className="px-4 py-2 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition"
           >
             {t('addClient.cancel')}
           </button>

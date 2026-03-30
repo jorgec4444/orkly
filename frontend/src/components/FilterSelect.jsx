@@ -23,7 +23,7 @@ export default function FilterSelect({ options, value, onChange, placeholder = "
       >
         {current?.emoji && <span>{current.emoji}</span>}
         <span>{current?.label || placeholder}</span>
-        <ChevronDown className={`w-3.5 h-3.5 text-gray-400 transition-transform ${open ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`w-3.5 h-3.5 text-gray-500 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
 
       {open && (

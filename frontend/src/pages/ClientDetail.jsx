@@ -173,7 +173,7 @@ function ClientDetail() {
     });
 
   if (loading) return (
-    <div className="flex items-center justify-center py-20 text-gray-400 text-sm">
+    <div className="flex items-center justify-center py-20 text-gray-500 text-sm">
       {t('clientDetail.loading')}
     </div>
   );
@@ -190,7 +190,7 @@ function ClientDetail() {
       {/* ── Back ── */}
       <button
         onClick={() => navigate("/dashboard/clients")}
-        className="flex items-center gap-1.5 text-sm text-gray-400 hover:text-primary transition-colors mb-6"
+        className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-primary transition-colors mb-6"
       >
         <ArrowLeft className="w-4 h-4" />
         {t('clientDetail.back')}
@@ -204,13 +204,13 @@ function ClientDetail() {
           </div>
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{client.client_name}</h1>
-            <p className="text-sm text-gray-400">{t('clientDetail.addedOn')} {formattedDate(client.created_at)}</p>
+            <p className="text-sm text-gray-500">{t('clientDetail.addedOn')} {formattedDate(client.created_at)}</p>
           </div>
         </div>
         <button
           onClick={handleDeleteClient}
           disabled={deleting}
-          className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm text-red-400 border border-red-200 hover:bg-red-50 transition disabled:opacity-40"
+          className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm text-red-500 border border-red-200 hover:bg-red-50 transition disabled:opacity-40"
         >
           <Trash2 className="w-4 h-4" />
           {t('clientDetail.deleteClient')}
@@ -225,7 +225,7 @@ function ClientDetail() {
             <div className="flex items-center gap-1.5">
               <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">{t('clientDetail.brandVoice')}</h2>
               <div className="relative group/tooltip">
-                <span className="text-xs text-gray-400 cursor-help">ⓘ</span>
+                <span className="text-xs text-gray-500 cursor-help">ⓘ</span>
                 <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-56 px-3 py-2 bg-gray-800 text-white text-xs rounded-xl opacity-0 group-hover/tooltip:opacity-95 transition-opacity pointer-events-none z-10 leading-relaxed">
                   {t('clientDetail.brandVoiceTooltip')}
                 </div>
@@ -234,7 +234,7 @@ function ClientDetail() {
             {!editingVoice && (
               <button
                 onClick={() => setEditingVoice(true)}
-                className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-primary transition-colors"
+                className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-primary transition-colors"
               >
                 <Pencil className="w-3.5 h-3.5" /> {t('clientDetail.editBrandVoice')}
               </button>
@@ -255,7 +255,7 @@ function ClientDetail() {
               <div className="flex gap-2 justify-end">
                 <button
                   onClick={() => { setVoiceDraft(client.brand_voice || ""); setEditingVoice(false); }}
-                  className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs text-gray-500 hover:bg-gray-100 transition"
+                  className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs text-gray-600 hover:bg-gray-100 transition"
                 >
                   <X className="w-3.5 h-3.5" /> {t('clientDetail.cancel')}
                 </button>
@@ -271,7 +271,7 @@ function ClientDetail() {
           ) : (
             <p className="text-sm text-gray-600 leading-relaxed">
               {client.brand_voice || (
-                <span className="text-gray-400 italic">{t('clientDetail.noBrandVoice')}</span>
+                <span className="text-gray-500 italic">{t('clientDetail.noBrandVoice')}</span>
               )}
             </p>
           )}
@@ -281,7 +281,7 @@ function ClientDetail() {
         <section className="bg-white border border-gray-200 rounded-2xl p-5">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">{t('clientDetail.platforms')}</h2>
-            {savingPlatforms && <span className="text-xs text-gray-400">{t('clientDetail.saving')}</span>}
+            {savingPlatforms && <span className="text-xs text-gray-500">{t('clientDetail.saving')}</span>}
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {PLATFORMS.map(({ id: pid, label, emoji, color, bg }) => {
@@ -293,7 +293,7 @@ function ClientDetail() {
                   className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl border text-sm font-medium transition-all ${
                     active
                       ? `${bg} ${color} shadow-sm`
-                      : "bg-gray-50 border-gray-200 text-gray-400 hover:border-gray-300"
+                      : "bg-gray-50 border-gray-200 text-gray-500 hover:border-gray-300"
                   }`}
                 >
                   <span className="text-base leading-none">{emoji}</span>
@@ -311,7 +311,7 @@ function ClientDetail() {
             <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">{t('clientDetail.folders')}</h2>
             <button
               onClick={() => setAddingFolder(true)}
-              className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-primary transition-colors"
+              className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-primary transition-colors"
             >
               <Plus className="w-3.5 h-3.5" /> {t('clientDetail.newFolder')}
             </button>
@@ -327,19 +327,19 @@ function ClientDetail() {
                   >
                     {openFolder === folder
                       ? <FolderOpen className="w-4 h-4 text-primary" />
-                      : <Folder className="w-4 h-4 text-gray-400" />
+                      : <Folder className="w-4 h-4 text-gray-500" />
                     }
                     {folder}
                   </button>
                   <button
                     onClick={() => handleDeleteFolder(folder)}
-                    className="opacity-0 group-hover:opacity-100 p-1 rounded-lg text-gray-400 hover:text-red-400 hover:bg-red-50 transition"
+                    className="opacity-0 group-hover:opacity-100 p-1 rounded-lg text-gray-500 hover:text-red-500 hover:bg-red-50 transition"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
                 </div>
                 {openFolder === folder && (
-                  <div className="ml-9 mt-1 mb-2 px-3 py-3 bg-gray-50 rounded-xl text-xs text-gray-400 italic">
+                  <div className="ml-9 mt-1 mb-2 px-3 py-3 bg-gray-50 rounded-xl text-xs text-gray-500 italic">
                     {t('clientDetail.fileUploadSoon')}
                   </div>
                 )}
@@ -363,7 +363,7 @@ function ClientDetail() {
                 <button onClick={handleAddFolder} className="text-primary hover:opacity-70 transition">
                   <Check className="w-4 h-4" />
                 </button>
-                <button onClick={() => { setAddingFolder(false); setNewFolderName(""); }} className="text-gray-400 hover:text-gray-600 transition">
+                <button onClick={() => { setAddingFolder(false); setNewFolderName(""); }} className="text-gray-500 hover:text-gray-600 transition">
                   <X className="w-4 h-4" />
                 </button>
               </div>
@@ -376,7 +376,7 @@ function ClientDetail() {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
               {t('clientDetail.generationHistory')}
-              <span className="ml-2 text-xs font-normal text-gray-400 normal-case">
+              <span className="ml-2 text-xs font-normal text-gray-500 normal-case">
                 {t('clientDetail.totalGenerations')} {generations.length}
               </span>
             </h2>
@@ -391,7 +391,7 @@ function ClientDetail() {
           </div>
 
           {filteredGenerations.length === 0 ? (
-            <p className="text-sm text-gray-400 italic py-4 text-center">
+            <p className="text-sm text-gray-500 italic py-4 text-center">
               {platformFilter === "all"
                 ? t('clientDetail.noGenerations')
                 : t('clientDetail.noGenerationsForPlatform', { platform: platformFilter })}
@@ -407,12 +407,12 @@ function ClientDetail() {
                       </span>
                     )}
                     {g.platform && (
-                      <span className="text-xs text-gray-400 capitalize">{g.platform}</span>
+                      <span className="text-xs text-gray-500 capitalize">{g.platform}</span>
                     )}
                     <span className="text-xs text-gray-300 ml-auto">{formattedDate(g.created_at)}</span>
                   </div>
                   {g.text_original && (
-                    <p className="text-xs text-gray-400 line-clamp-1">
+                    <p className="text-xs text-gray-500 line-clamp-1">
                       <span className="font-medium">{t('clientDetail.original')}:</span> {g.text_original}
                     </p>
                   )}
