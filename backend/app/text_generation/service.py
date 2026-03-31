@@ -82,9 +82,16 @@ async def improve_text(request: TextRequest, req: Request, user = None):
         rate_limit_error(status)
 
     brand_voice = None
-    if request.client_id:
-        result = db.table("clients").select("brand_voice").eq("id", request.client_id).single().execute()
-        brand_voice = result.data.get("brand_voice") if result.data else None
+    if request.client_id and user:
+    result = (
+        db.table("clients")
+        .select("brand_voice")
+        .eq("id", request.client_id)
+        .eq("user_id", user.id)
+        .single()
+        .execute()
+    )
+    brand_voice = result.data.get("brand_voice") if result.data else None
 
     # Run all three styles in parallel
     professional, casual, viral = await asyncio.gather(
