@@ -91,7 +91,7 @@ async def improve_text(request: TextRequest, req: Request, user = None):
             .single()
             .execute()
         )
-    brand_voice = result.data.get("brand_voice") if result.data else None
+        brand_voice = result.data.get("brand_voice") if result.data else None
 
     # Run all three styles in parallel
     professional, casual, viral = await asyncio.gather(
