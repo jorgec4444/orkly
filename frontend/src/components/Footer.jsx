@@ -100,6 +100,7 @@ export default function Footer() {
             </button>
             <a href="/terms" className="hover:text-primary transition-colors">{t('footer.terms')}</a>
             <a href="/privacy" className="hover:text-primary transition-colors">{t('footer.privacy')}</a>
+            <a href="/pricing" className="hover:text-primary transition-colors">{t('footer.pricing')}</a>
             <a
               href="mailto:jorgecdev444@gmail.com"
               className="hover:text-primary transition-colors"

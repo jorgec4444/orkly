@@ -152,6 +152,11 @@
       "allPlatforms": "Todas las plataformas",
       "platformsUpdated": "Plataformas actualizadas",
       "folders": "Carpetas",
+      "folderBranding": "Gestión de marca",
+      "folderPhotos": "Fotos",
+      "folderVideos": "Videos",
+      "folderContracts": "Contratos",
+      "folderContent": "Contenido",
       "newFolder": "Nueva carpeta",
       "folderNamePlaceholder": "Nombre de la carpeta",
       "deleteFolderConfirm": "¿Eliminar la carpeta \"{{name}}\"? Esta acción no se puede deshacer.",
@@ -235,13 +240,15 @@
       "save": "Guardar",
       "saving": "Guardando…",
       "cancel": "Cancelar",
-      "noName": "Sin nombre"
+      "noName": "Sin nombre",
+      "upgradePlan": "Mejorar plan"
     },
     "footer": {
       "feedback": "Envíanos tu opinión",
       "terms": "Términos",
       "privacy": "Privacidad",
-      "contact": "Contacto"
+      "contact": "Contacto",
+      "pricing": "Precios"
     },
     "feedback": {
       "title": "Deja tu opinión",
@@ -258,6 +265,99 @@
       "ca": "Català",
       "fr": "Français",
       "zh": "中文"
+    },
+    "pricing": {
+      "badge": "Simple, precio transparente",
+      "title1": "Planes para cada nivel de",
+      "title2": "community manager",
+      "subtitle": "Comienza gratis, mejora cuando lo necesites. Ninguna tarifa oculta, cancela en cualquier momento.",
+      "monthly": "Mensual",
+      "yearly": "Anual",
+      "saveBadge": "Ahorra hasta 27%",
+      "savedVsMonthly": "€{{amount}} ahorrados vs mensual",
+      "orBilledYearly": "o €{{amount}}/mo facturado anualmente",
+      "perMonth": "/mo",
+      "back": "← Atrás a la página de inicio",
+      "reassurance": {
+        "noCard": {
+          "icon": "🔒",
+          "title": "No se requiere tarjeta de crédito",
+          "desc": "Comienza gratis, mejora cuando lo necesites."
+        },
+        "cancel": {
+          "icon": "↩️",
+          "title": "Cancela en cualquier momento",
+          "desc": "0 compromisos. Reduce o cancela en un clic."
+        },
+        "instant": {
+          "icon": "⚡",
+          "title": "Acceso instantáneo",
+          "desc": "Tu plan se activa en el momento en que te suscribes."
+        }
+      },
+      "plans": {
+        "free": {
+          "name": "Gratuito",
+          "description": "Prueba Orkly y ve la diferencia.",
+          "cta": "Comienza con el plan gratuito",
+          "features": [
+            "3 clientes",
+            "30 Generaciones de IA / mes",
+            "3 estilos de contenido (professional, casual, viral)",
+            "Historial de generaciones por cliente",
+            "Soporte para 6 plataformas de redes sociales",
+            "Interfaz multi-idioma"
+          ]
+        },
+        "solo": {
+          "name": "Solo",
+          "description": "Para el community manager autónomo que empieza.",
+          "cta": "Comienza con el plan Solo",
+          "features": [
+            "15 clientes",
+            "300 Generaciones de IA / mes",
+            "Todo lo del plan gratuito",
+            "Voz de marca por cliente",
+            "Configuración de plataforma por cliente",
+            "5 GB de almacenamiento",
+            "Recomendaciones de hashtags",
+            "Repurposing de contenido"
+          ]
+        },
+        "pro": {
+          "name": "Pro",
+          "description": "Para el community manager que gestiona diversos clientes y quiere más potencia y organización.",
+          "cta": "Comienza con el plan Pro",
+          "badge": "El más popular",
+          "features": [
+            "Clientes ilimitados",
+            "Generaciones de IA ilimitadas",
+            "Todo lo del plan Solo",
+            "50 GB de almacenamiento",
+            "Comparte carpetas con clientes",
+            "Extractor de branding de la web",
+            "Generación de carrusels de Instagram",
+            "Calendario de contenido con IA",
+            "Programación de publicaciones",
+            "Post recurrentes",
+            "Aprovació de contingut per clients",
+            "Informes per client"
+          ]
+        },
+        "agency": {
+          "name": "Agency",
+          "description": "Para pequeñas agencias que gestionan múltiples equipos y marcas.",
+          "cta": "Comienza con el plan Agency",
+          "features": [
+            "Todo lo del plan Pro",
+            "200 GB de almacenamiento",
+            "Múltiples usuarios / seats",
+            "Múltiples cuentas de redes sociales por cliente",
+            "Publicación directa (Instagram, LinkedIn, X)",
+            "White-label"
+          ]
+        }
+      }
     }
   }
 }

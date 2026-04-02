@@ -154,6 +154,11 @@
       "platformsUpdated": "Platforms updated",
       "folders": "Folders",
       "newFolder": "New folder",
+      "folderBranding": "Branding",
+      "folderPhotos": "Photos",
+      "folderVideos": "Videos",
+      "folderContracts": "Contracts",
+      "folderContent": "Content",
       "folderNamePlaceholder": "Folder name",
       "deleteFolderConfirm": "Delete folder \"{{name}}\"? This cannot be undone.",
       "generationHistory": "Generation history",
@@ -236,13 +241,15 @@
       "save": "Save",
       "saving": "Saving…",
       "cancel": "Cancel",
-      "noName": "No name set"
+      "noName": "No name set",
+      "upgradePlan": "Upgrade plan"
     },
     "footer": {
       "feedback": "Send us your feedback",
       "terms": "Terms",
       "privacy": "Privacy",
-      "contact": "Contact"
+      "contact": "Contact",
+      "pricing": "Pricing"
     },
     "feedback": {
       "title": "Leave feedback",
@@ -259,6 +266,99 @@
       "ca": "Català",
       "fr": "Français",
       "zh": "中文"
+    },
+    "pricing": {
+      "badge": "Simple, transparent pricing",
+      "title1": "Plans for every",
+      "title2": "community manager",
+      "subtitle": "Start free, upgrade when you need it. No hidden fees, cancel anytime.",
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "saveBadge": "Save up to 27%",
+      "savedVsMonthly": "€{{amount}} saved vs monthly",
+      "orBilledYearly": "or €{{amount}}/mo billed yearly",
+      "perMonth": "/mo",
+      "back": "← Back",
+      "reassurance": {
+        "noCard": {
+          "icon": "🔒",
+          "title": "No credit card required",
+          "desc": "Start with Free, upgrade when you're ready."
+        },
+        "cancel": {
+          "icon": "↩️",
+          "title": "Cancel anytime",
+          "desc": "No lock-in. Downgrade or cancel in one click."
+        },
+        "instant": {
+          "icon": "⚡",
+          "title": "Instant access",
+          "desc": "Your plan activates the moment you subscribe."
+        }
+      },
+      "plans": {
+        "free": {
+          "name": "Free",
+          "description": "Try Orkly and see the difference.",
+          "cta": "Get started free",
+          "features": [
+            "3 clients",
+            "30 AI generations / month",
+            "3 content styles (professional, casual, viral)",
+            "Generation history per client",
+            "6 platforms supported",
+            "Multi-language interface"
+          ]
+        },
+        "solo": {
+          "name": "Solo",
+          "description": "For the freelance community manager starting out.",
+          "cta": "Start Solo",
+          "features": [
+            "15 clients",
+            "300 AI generations / month",
+            "Everything in Free plan",
+            "Brand voice per client",
+            "Platform settings per client",
+            "5 GB file storage",
+            "Hashtag recommendations",
+            "Content repurposing"
+          ]
+        },
+        "pro": {
+          "name": "Pro",
+          "description": "For the established freelancer who needs everything.",
+          "cta": "Start Pro",
+          "badge": "Most popular",
+          "features": [
+            "Unlimited clients",
+            "Unlimited AI generations",
+            "Everything in Solo plan",
+            "50 GB file storage",
+            "Share folders with clients",
+            "Branding extractor from web",
+            "Carousel generation",
+            "AI content calendar",
+            "Post scheduling",
+            "Recurring posts",
+            "Client content approval",
+            "Per-client reports"
+          ]
+        },
+        "agency": {
+          "name": "Agency",
+          "description": "For small agencies managing multiple teams and brands.",
+          "cta": "Start Agency",
+          "features": [
+            "Everything in Pro plan",
+            "200 GB file storage",
+            "Multiple users / seats",
+            "Multiple social accounts per client",
+            "Direct publishing (Instagram, LinkedIn, X)",
+            "White-label"
+          ]
+        }
+      }
     }
   }
 }

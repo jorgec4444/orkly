@@ -10,6 +10,7 @@ import StaticPage from './components/StaticPage'
 import ClientDetail from './pages/ClientDetail'
 import CreateContent from './pages/CreateContent'
 import Settings from './pages/Settings'
+import Pricing from './pages/Pricing'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/terms" element={<StaticPage src="/terms.html" />} />
         <Route path="/privacy" element={<StaticPage src="/privacy.html" />} />
+        <Route path="/pricing" element={<Pricing />} />
         <Route path="/dashboard" element={<Dashboard />}>
         <Route index element={<Navigate to="clients" replace />} />
           <Route path="clients" element={<Clients />} />

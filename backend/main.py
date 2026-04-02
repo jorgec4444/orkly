@@ -45,7 +45,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://orkly-testing.vinagre444.workers.dev", "https://orkly.app", "https://orkly.vinagre444.workers.dev"],
+    allow_origins=["https://orkly-testing.vinagre444.workers.dev", "https://orkly.app", "https://orkly.vinagre444.workers.dev", "http://localhost:5173"],
     allow_credentials=False,
     allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"]

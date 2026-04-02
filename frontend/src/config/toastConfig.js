@@ -1,4 +1,3 @@
-import { AlignCenter } from "lucide-react";
 
 export const toastConfig = {
   position: 'bottom-center',

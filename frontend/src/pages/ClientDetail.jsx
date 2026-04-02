@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { supabase } from "../supabase";
 import { ArrowLeft, Pencil, Check, X, Plus, Folder, FolderOpen, Trash2 } from "lucide-react";
@@ -45,7 +45,7 @@ const STYLE_COLORS = {
   viral: "bg-rose-50 text-rose-700 border-rose-200",
 };
 
-const DEFAULT_FOLDERS = ["Branding", "Photos", "Videos", "Contracts", "Content"];
+const DEFAULT_FOLDER_KEYS = ["folderBranding", "folderPhotos", "folderVideos", "folderContracts", "folderContent"];
 
 function ClientDetail() {
   const { id } = useParams();
@@ -68,6 +68,14 @@ function ClientDetail() {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
+  const DEFAULT_FOLDERS = useMemo(() => [
+    t('clientDetail.folderBranding'),
+    t('clientDetail.folderPhotos'),
+    t('clientDetail.folderVideos'),
+    t('clientDetail.folderContracts'),
+    t('clientDetail.folderContent'),
+  ], [t]);
+
   useEffect(() => {
     (async () => {
       try {
@@ -76,7 +84,7 @@ function ClientDetail() {
           setClient(cached);
           setVoiceDraft(cached.brand_voice || "");
           setActivePlatforms(cached.platforms || []);
-          setFolders(cached.folders || DEFAULT_FOLDERS);
+          setFolders(cached.folders || DEFAULT_FOLDER_KEYS);
         } else {
           const clientData = await apiFetch(`/client/${id}`);
           setClient(clientData);
@@ -329,7 +337,10 @@ function ClientDetail() {
                       ? <FolderOpen className="w-4 h-4 text-primary" />
                       : <Folder className="w-4 h-4 text-gray-500" />
                     }
-                    {folder}
+                    {DEFAULT_FOLDER_KEYS.includes(folder) 
+                      ? t(`clientDetail.${folder}`) 
+                      : folder
+                    }
                   </button>
                   <button
                     onClick={() => handleDeleteFolder(folder)}

@@ -90,7 +90,7 @@ export default function Settings() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-4xl mx-auto">
       {/* ── Header ── */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">{t('settings.title')}</h1>
@@ -142,15 +142,25 @@ export default function Settings() {
 
         {/* ── Plan ── */}
         <section className="bg-white border border-gray-200 rounded-2xl p-5">
-          <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">{t('settings.plan')}</h2>
+          <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">
+            {t('settings.plan')}
+          </h2>
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-semibold text-gray-900">{t('settings.freePlan')}</p>
               <p className="text-xs text-gray-500 mt-0.5">{t('settings.freeLimit')}</p>
             </div>
-            <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 text-gray-600">
-              {t('settings.free')}
-            </span>
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 text-gray-600">
+                {t('settings.free')}
+              </span>
+              <button
+                onClick={() => navigate("/pricing")}
+                className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-primary text-white hover:opacity-90 transition"
+              >
+                {t('settings.upgradePlan')}
+              </button>
+            </div>
           </div>
         </section>
 

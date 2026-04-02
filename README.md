@@ -368,11 +368,12 @@ wrangler deploy
 - [ ] Hashtag recommendations per post and platform
 - [ ] Content repurposing — paste a long text, get posts for every platform
 - [ ] Carousel generation — structured slide-by-slide content for Instagram
+- [ ] Branding extractor — extract logos, colors and typography from a client's website
 
 ### 📋 Phase 4 — Social publishing
 - [ ] Instagram publishing (Meta Graph API) — photos, carousels, reels
 - [ ] LinkedIn publishing
-- [ ] Twitter / X publishing
+- [ ] Twitter / X publishing (API cost: ~$100/mo — charged as €5/mo add-on)
 - [ ] Multiple social accounts per client
 
 ### 📅 Phase 5 — Scheduling & calendar
@@ -380,10 +381,9 @@ wrangler deploy
 - [ ] Recurring posts
 - [ ] AI-powered content calendar — suggest a full week of content per client
 
-### Based on competitor research
-
-#### Must-have for agencies
+### 🗂️ Phase 6 — Client file storage
 - [ ] Cloud media library per client — store logos, images, videos and brand assets (Cloudflare R2)
+- [ ] Share folders with clients — controlled access per folder
 - [ ] Approval workflow — review and approve content before it goes live
 - [ ] Post preview — show exactly how the post will look on each platform
 - [ ] Image auto-resize — automatically adapt images to each platform's specs
@@ -395,11 +395,16 @@ wrangler deploy
 - [ ] Canva integration — import designs directly from Canva
 - [ ] Per-client analytics — impressions, clicks and performance per client
 
-### 💳 Phase 6 — Monetisation
-- [ ] Stripe integration
-- [ ] Plans: Free (5/day, no account), Starter (€12/mo, 1 client), Pro (€29/mo, 5 clients), Agency (€79/mo, unlimited clients)
-- [ ] Video support (Pro feature)
-- [ ] Donations via Ko-fi or Buy Me a Coffee
+### 💳 Phase 7 — Monetisation
+- [ ] Stripe integration — subscriptions + webhooks
+- [ ] Subscription enforcement — plan limits applied per endpoint (clients, generations, storage)
+- [ ] Plans:
+  - Free — 3 clients, 30 generations/month, no storage
+  - Solo — €12/mo or €107/year (~25% off) — 15 clients, 300 gen/month, 5GB storage
+  - Pro — €29/mo or €261/year (~25% off) — unlimited clients, unlimited gen, 50GB storage
+  - Agency — €59/mo or €520/year (~27% off) — everything in Pro + seats + publishing + 200GB
+  - Twitter/X publishing — €5/mo add-on (API cost pass-through)
+- [x] Donations via Buy Me a Coffee
 
 ---
 
