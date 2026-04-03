@@ -353,10 +353,10 @@
           "features": [
             "Tout ce qui est inclus dans Pro",
             "200 Go de stockage de fichiers",
-            "Plusieurs utilisateurs / sièges",
-            "Plusieurs comptes sociaux par client",
-            "Publication directe (Instagram, LinkedIn, X)",
-            "Marque blanche"
+            "*Plusieurs utilisateurs / sièges",
+            "*Plusieurs comptes sociaux par client",
+            "*Publication directe (Instagram, LinkedIn, X)",
+            "*Marque blanche"
           ]
         }
       }
