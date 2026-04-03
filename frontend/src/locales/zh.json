@@ -279,6 +279,7 @@
       "orBilledYearly": "或按年计费€{{amount}}/月",
       "perMonth": "/月",
       "back": "← 返回",
+      "comingSoon": "敬请期待",
       "reassurance": {
         "noCard": {
           "icon": "🔒",

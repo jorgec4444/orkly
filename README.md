@@ -400,9 +400,9 @@ wrangler deploy
 - [ ] Subscription enforcement — plan limits applied per endpoint (clients, generations, storage)
 - [ ] Plans:
   - Free — 3 clients, 30 generations/month, no storage
-  - Solo — €12/mo or €107/year (~25% off) — 15 clients, 300 gen/month, 5GB storage
-  - Pro — €29/mo or €261/year (~25% off) — unlimited clients, unlimited gen, 50GB storage
-  - Agency — €59/mo or €520/year (~27% off) — everything in Pro + seats + publishing + 200GB
+  - Solo — €12/mo or €107/year (~26% off) — 15 clients, 300 gen/month, 10GB storage
+  - Pro — €29/mo or €261/year (~25% off) — unlimited clients, unlimited gen, 100GB storage
+  - Agency — €59/mo or €520/year (~27% off) — everything in Pro + seats + publishing + 500GB storage
   - Twitter/X publishing — €5/mo add-on (API cost pass-through)
 - [x] Donations via Buy Me a Coffee
 

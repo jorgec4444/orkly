@@ -278,6 +278,7 @@
       "orBilledYearly": "o €{{amount}}/mo facturado anualmente",
       "perMonth": "/mo",
       "back": "← Atrás a la página de inicio",
+      "comingSoon": "Próximamente",
       "reassurance": {
         "noCard": {
           "icon": "🔒",

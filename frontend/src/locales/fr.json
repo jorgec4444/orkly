@@ -279,6 +279,7 @@
       "orBilledYearly": "ou €{{amount}}/mois facturé annuellement",
       "perMonth": "/mois",
       "back": "← Retour",
+      "comingSoon": "Bientôt disponible",
       "reassurance": {
         "noCard": {
           "icon": "🔒",

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { plansConfig } from "../config/plans";
 import AuthModal from "../components/AuthModal";
 import { supabase } from "../supabase";
+import { toast } from "react-hot-toast";
 
 const yearlySaving = (plan) => {
   if (plan.monthly === 0) return null;
@@ -34,10 +35,22 @@ export default function Pricing() {
   }));
 
   const handleCta = (planId) => {
+    if (planId === "free") {
+      // Free plan — open auth modal or go to dashboard
+      if (!isAuthenticated) {
+        setIsAuthModalOpen(true);
+      } else {
+        navigate("/dashboard");
+      }
+      return;
+    }
+
+    // Paid plans — coming soon
     if (!isAuthenticated) {
       setIsAuthModalOpen(true);
     } else {
-      navigate("/dashboard/settings");
+      // TODO: replace with Stripe checkout when ready
+      toast(t("pricing.comingSoon"), { icon: "🚀", duration: 3000 });
     }
   };
 
@@ -153,7 +166,7 @@ export default function Pricing() {
                 )}
 
                 {/* Plan name & price */}
-                <div className="mb-4">
+                <div className="mb-4 min-h-[88px]">
                   <p className={`text-xs font-bold uppercase tracking-widest mb-2 ${plan.highlight ? "text-white/70" : "text-gray-400"}`}>
                     {plan.name}
                   </p>
@@ -185,14 +198,14 @@ export default function Pricing() {
                   )}
                 </div>
 
-                <p className={`text-sm leading-relaxed mb-5 ${plan.highlight ? "text-white/80" : "text-gray-500"}`}>
+                <p className={`text-sm leading-relaxed mb-5 min-h-[40px] ${plan.highlight ? "text-white/80" : "text-gray-500"}`}>
                   {plan.description}
                 </p>
 
                 {/* CTA */}
                 <button
                   onClick={() => handleCta(plan.id)}
-                  className={`w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold transition-all mb-6 ${
+                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-semibold transition-all mb-6 ${
                     plan.highlight
                       ? "bg-white text-primary hover:bg-white/90"
                       : plan.ctaVariant === "primary"
@@ -200,15 +213,16 @@ export default function Pricing() {
                         : "border border-gray-200 text-gray-700 hover:border-primary hover:text-primary"
                   }`}
                 >
-                  {plan.cta}
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span className="w-3.5" />
+                  <span>{plan.cta}</span>
+                  <ArrowRight className="w-3.5 h-3.5 flex-shrink-0" />
                 </button>
 
                 {/* Divider */}
                 <div className={`h-px mb-5 ${plan.highlight ? "bg-white/15" : "bg-gray-100"}`} />
 
                 {/* Features */}
-                <ul className="flex flex-col gap-2.5 flex-1">
+                <ul className="flex flex-col gap-2.5">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2.5 text-sm">
                       <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.highlight ? "text-white" : "text-primary"}`} />
@@ -226,7 +240,7 @@ export default function Pricing() {
         {/* ── Reassurance ── */}
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
           {reassuranceItems.map(({ icon, title, desc }) => (
-            <div key={title} className="flex flex-col items-center gap-2">
+            <div key={title} className="flex flex-col flex-1 items-center gap-2">
               <span className="text-2xl">{icon}</span>
               <p className="text-sm font-semibold text-gray-900">{title}</p>
               <p className="text-xs text-gray-500">{desc}</p>
