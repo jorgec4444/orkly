@@ -223,14 +223,36 @@ export default function Pricing() {
 
                 {/* Features */}
                 <ul className="flex flex-col gap-2.5">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2.5 text-sm">
-                      <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.highlight ? "text-white" : "text-primary"}`} />
-                      <span className={plan.highlight ? "text-white/90" : "text-gray-600"}>
-                        {feature}
-                      </span>
-                    </li>
-                  ))}
+                  {plan.features.map((feature) => {
+                    const isComingSoon = feature.startsWith("*");
+                    const label = isComingSoon ? feature.slice(1) : feature;
+
+                    return (
+                      <li key={feature} className="flex items-start gap-2.5 text-sm">
+                        <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${
+                          isComingSoon
+                            ? plan.highlight ? "text-white/30" : "text-gray-300"
+                            : plan.highlight ? "text-white" : "text-primary"
+                        }`} />
+                        <span className={`flex items-center gap-1.5 flex-wrap ${
+                          plan.highlight
+                            ? isComingSoon ? "text-white/50" : "text-white/90"
+                            : isComingSoon ? "text-gray-400" : "text-gray-600"
+                        }`}>
+                          {label}
+                          {isComingSoon && (
+                            <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium ${
+                              plan.highlight
+                                ? "bg-white/10 text-white/60"
+                                : "bg-gray-100 text-gray-400"
+                            }`}>
+                              {t("pricing.comingSoon")}
+                            </span>
+                          )}
+                        </span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             );

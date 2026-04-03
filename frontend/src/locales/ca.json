@@ -322,8 +322,8 @@
             "Veu de marca per client",
             "Configuració de plataforma per client",
             "5 GB emmagatzematge",
-            "Recomanacions de hashtags",
-            "Repurposing de contingut"
+            "*Recomanacions de hashtags",
+            "*Repurposing de contingut"
           ]
         },
         "pro": {
@@ -337,13 +337,13 @@
             "Tot el del plan Solo",
             "50 GB emmagatzematge",
             "Comparteix carpetes amb clients",
-            "Extractor de branding de la web",
-            "Generació de carrusels de Instagram",
-            "Calendari de contingut amb IA",
-            "Programació de publicacions",
-            "Post recurrents",
-            "Aprovació de contingut per clients",
-            "Informes per client"
+            "*Extractor de branding de la web",
+            "*Generació de carrusels de Instagram",
+            "*Calendari de contingut amb IA",
+            "*Programació de publicacions",
+            "*Post recurrents",
+            "*Aprovació de contingut per clients",
+            "*Informes per client"
           ]
         },
         "agency": {
@@ -353,10 +353,10 @@
           "features": [
             "Tot el del plan Pro",
             "200 GB emmagatzematge",
-            "Múltiples usuaris / seats",
-            "Múltiples comptes de xarxes socials per client",
-            "Publicació directa (Instagram, LinkedIn, X)",
-            "White-label"
+            "*Múltiples usuaris / seats",
+            "*Múltiples comptes de xarxes socials per client",
+            "*Publicació directa (Instagram, LinkedIn, X)",
+            "*White-label"
           ]
         }
       }

@@ -322,8 +322,8 @@
             "Voix de marque par client",
             "Paramètres de plateforme par client",
             "5 Go de stockage de fichiers",
-            "Recommandations de hashtags",
-            "Réutilisation de contenu"
+            "*Recommandations de hashtags",
+            "*Réutilisation de contenu"
           ]
         },
         "pro": {
@@ -336,14 +336,14 @@
             "Générations IA illimitées",
             "Tout ce qui est inclus dans Solo",
             "50 Go de stockage de fichiers",
-            "Partager des dossiers avec les clients",
-            "Extracteur de branding depuis le web",
-            "Génération de carrousels",
-            "Calendrier de contenu IA",
-            "Programmation de publications",
-            "Publications récurrentes",
-            "Approbation de contenu client",
-            "Rapports par client"
+            "*Partager des dossiers avec les clients",
+            "*Extracteur de branding depuis le web",
+            "*Génération de carrousels",
+            "*Calendrier de contenu IA",
+            "*Programmation de publications",
+            "*Publications récurrentes",
+            "*Approbation de contenu client",
+            "*Rapports par client"
           ]
         },
         "agency": {

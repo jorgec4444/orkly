@@ -321,8 +321,8 @@
             "Voz de marca por cliente",
             "Configuración de plataforma por cliente",
             "5 GB de almacenamiento",
-            "Recomendaciones de hashtags",
-            "Repurposing de contenido"
+            "*Recomendaciones de hashtags",
+            "*Repurposing de contenido"
           ]
         },
         "pro": {
@@ -335,14 +335,14 @@
             "Generaciones de IA ilimitadas",
             "Todo lo del plan Solo",
             "50 GB de almacenamiento",
-            "Comparte carpetas con clientes",
-            "Extractor de branding de la web",
-            "Generación de carrusels de Instagram",
-            "Calendario de contenido con IA",
-            "Programación de publicaciones",
-            "Post recurrentes",
-            "Aprovació de contingut per clients",
-            "Informes per client"
+            "*Comparte carpetas con clientes",
+            "*Extractor de branding de la web",
+            "*Generación de carrusels de Instagram",
+            "*Calendario de contenido con IA",
+            "*Programación de publicaciones",
+            "*Post recurrentes",
+            "*Aprobación de contenido para clientes",
+            "*Informes por cliente"
           ]
         },
         "agency": {
@@ -352,10 +352,10 @@
           "features": [
             "Todo lo del plan Pro",
             "200 GB de almacenamiento",
-            "Múltiples usuarios / seats",
-            "Múltiples cuentas de redes sociales por cliente",
-            "Publicación directa (Instagram, LinkedIn, X)",
-            "White-label"
+            "*Múltiples usuarios / seats",
+            "*Múltiples cuentas de redes sociales por cliente",
+            "*Publicación directa (Instagram, LinkedIn, X)",
+            "*White-label"
           ]
         }
       }

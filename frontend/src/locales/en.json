@@ -322,8 +322,8 @@
             "Brand voice per client",
             "Platform settings per client",
             "5 GB file storage",
-            "Hashtag recommendations",
-            "Content repurposing"
+            "*Hashtag recommendations",
+            "*Content repurposing"
           ]
         },
         "pro": {
@@ -336,14 +336,14 @@
             "Unlimited AI generations",
             "Everything in Solo plan",
             "50 GB file storage",
-            "Share folders with clients",
-            "Branding extractor from web",
-            "Carousel generation",
-            "AI content calendar",
-            "Post scheduling",
-            "Recurring posts",
-            "Client content approval",
-            "Per-client reports"
+            "*Share folders with clients",
+            "*Branding extractor from web",
+            "*Carousel generation",
+            "*AI content calendar",
+            "*Post scheduling",
+            "*Recurring posts",
+            "*Client content approval",
+            "*Per-client reports"
           ]
         },
         "agency": {
@@ -353,10 +353,10 @@
           "features": [
             "Everything in Pro plan",
             "200 GB file storage",
-            "Multiple users / seats",
-            "Multiple social accounts per client",
-            "Direct publishing (Instagram, LinkedIn, X)",
-            "White-label"
+            "*Multiple users / seats",
+            "*Multiple social accounts per client",
+            "*Direct publishing (Instagram, LinkedIn, X)",
+            "*White-label"
           ]
         }
       }
