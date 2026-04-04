@@ -71,37 +71,26 @@ async def create_client(user_id: str, client_name: str, brand_voice: str | None)
     response = db.table("clients").insert(payload).execute()
     return response.data[0]
 
+ALLOWED_FIELDS = {"client_name", "brand_voice", "platforms"}
 
 async def update_client(
-    client_id: int, user_id: str, client_name: str | None, brand_voice: str | None, platforms: list[str] | None
+    client_id: int, user_id: str, **fields
 ) -> dict | None:
-    """Update a client's name/brand_voice. Returns None if not found or not owned."""
-
-    payload = {}
-    if client_name is not None:
-        payload["client_name"] = client_name
     
-    payload["brand_voice"] = brand_voice
-
-    if platforms is not None:
-        payload["platforms"] = platforms
-    
-    if not payload:
+    safe_fields = {k: v for k, v in fields.items() if k in ALLOWED_FIELDS}
+    if not safe_fields:
         return None
 
     db = get_supabase()
-
     response = (
         db.table("clients")
-        .update(payload)
+        .update(safe_fields)
         .eq("id", client_id)
         .eq("user_id", user_id)
         .is_("deleted_at", "null")
         .execute()
     )
-
     logger.info(f"Updated client {client_id} for user {user_id}")
-
     return response.data[0] if response.data else None
 
 
