@@ -16,7 +16,7 @@
       "feature3Title": "文件存储",
       "feature3Desc": "按客户整理品牌资产、照片和合同 — 随时可用。",
       "feature4Title": "支持6个平台",
-      "feature4Desc": "Instagram、LinkedIn、Twitter/X、TikTok、YouTube和Twitch — 内容适配每个平台。",
+      "feature4Desc": "Instagram、LinkedIn、Twitter/X、TikTok、YouTube和Facebook — 内容适配每个平台。",
       "howLabel": "工作原理",
       "howTitle": "从草稿到发布就绪，只需几秒",
       "step1Title": "添加客户",
@@ -206,7 +206,11 @@
       "fileName": "名称",
       "fileSize": "尺寸",
       "deleteFile": "删除 {{name}}",
-      "deleteFolder": "删除文件夹 {{name}}"
+      "deleteFolder": "删除文件夹 {{name}}",
+      "uploadLogo": "上传徽标",
+      "deleteLogo": "删除徽标",
+      "logoUploaded": "徽标已更新",
+      "logoDeleted": "徽标已删除"
     },
     "createContent": {
       "title": "创建内容",

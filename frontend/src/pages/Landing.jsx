@@ -266,7 +266,7 @@ export default function Landing() {
 
               <div className="flex items-center justify-center lg:justify-start gap-2 text-xs text-gray-500 flex-wrap">
                 <span>{t("hero.builtFor")}</span>
-                {["Instagram", "LinkedIn", "Twitter / X", "TikTok", "YouTube", "Twitch"].map((p) => (
+                {["Instagram", "LinkedIn", "Twitter / X", "TikTok", "YouTube", "Facebook"].map((p) => (
                   <span key={p} className="px-2.5 py-1 rounded-full border border-gray-200 bg-white text-gray-600 font-medium">
                     {p}
                   </span>
@@ -425,7 +425,7 @@ export default function Landing() {
           <FeatureCard
             icon={Zap}
             title={t("landing.feature4Title") || "6 platforms supported"}
-            desc={t("landing.feature4Desc") || "Instagram, LinkedIn, Twitter/X, TikTok, YouTube and Twitch — content adapted to each one."}
+            desc={t("landing.feature4Desc") || "Instagram, LinkedIn, Twitter/X, TikTok, YouTube and Facebook — content adapted to each one."}
             className="sm:col-span-2 lg:col-span-2"
           />
         </div>

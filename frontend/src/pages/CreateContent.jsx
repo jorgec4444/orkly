@@ -12,8 +12,8 @@ const PLATFORMS = [
   { id: "twitter",   label: "Twitter/X", emoji: "𝕏"  },
   { id: "tiktok",    label: "TikTok",    emoji: "♪"  },
   { id: "youtube",   label: "YouTube",   emoji: "▶"  },
-  { id: "twitch",    label: "Twitch",    emoji: "🎮" },
-];
+  { id: "facebook",  label: "Facebook",   emoji: "📘" },
+]; 
 
 const STYLE_COLORS = {
   professional: "bg-blue-50 text-blue-700 border-blue-200",

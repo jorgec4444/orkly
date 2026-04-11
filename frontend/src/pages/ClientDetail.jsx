@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import FilterSelect from "../components/FilterSelect";
 import { apiFetch } from "../utils/apiFetch";
 import FolderSection from "../components/FolderSection";
+import ClientAvatar from "../components/ClientAvatar";
 
 const PLATFORMS = [
   { id: "instagram", label: "Instagram", emoji: "📸", color: "text-pink-500", bg: "bg-pink-50 border-pink-200" },
@@ -13,7 +14,7 @@ const PLATFORMS = [
   { id: "twitter", label: "Twitter / X", emoji: "𝕏", color: "text-sky-500", bg: "bg-sky-50 border-sky-200" },
   { id: "tiktok", label: "TikTok", emoji: "♪", color: "text-gray-900", bg: "bg-gray-50 border-gray-200" },
   { id: "youtube", label: "YouTube", emoji: "▶", color: "text-red-500", bg: "bg-red-50 border-red-200" },
-  { id: "twitch", label: "Twitch", emoji: "🎮", color: "text-purple-600", bg: "bg-purple-50 border-purple-200" },
+  { id: "facebook", label: "Facebook", emoji: "📘", color: "text-blue-700", bg: "bg-blue-50 border-blue-200" },
 ];
 
 const STYLE_COLORS = {
@@ -42,6 +43,7 @@ function ClientDetail() {
   const [newFolderName, setNewFolderName] = useState("");
   const [addingFolder, setAddingFolder] = useState(false);
   const [platformFilter, setPlatformFilter] = useState("all");
+  const [uploadingLogo, setUploadingLogo] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -161,19 +163,59 @@ const handleDeleteFolder = async (folder) => {
   if (openFolder === folder) setOpenFolder(null);
 
   const updatedCustom = updatedFolders.filter(f => !DEFAULT_FOLDER_KEYS.includes(f));
-  try {
-    await apiFetch(`/client/${id}`, {
-      method: "PUT",
-      body: JSON.stringify({ custom_folders: updatedCustom }),
-    });
-    await apiFetch(`/storage/delete-folder/${id}/${folder}`, {
-      method: "DELETE"
-    });
-    toast.success(t("clientDetail.folderDeleted"));
-  } catch(e) {
-    toast.error(e.message)
-  }
-};
+    try {
+      await apiFetch(`/client/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({ custom_folders: updatedCustom }),
+      });
+      await apiFetch(`/storage/delete-folder/${id}/${folder}`, {
+        method: "DELETE"
+      });
+      toast.success(t("clientDetail.folderDeleted"));
+    } catch(e) {
+      toast.error(e.message)
+    }
+  };
+
+  const handleUploadLogo = async (file) => {
+    setUploadingLogo(true);
+    try {
+      const { url, file_path } = await apiFetch(`/storage/upload/${id}/logo`, {
+        method: "POST",
+        body: JSON.stringify({ file_name: file.name, mime_type: file.type }),
+      });
+      await fetch(url, {
+        method: "PUT",
+        headers: { "Content-Type": file.type },
+        body: file,
+      });
+      const updated = await apiFetch(`/client/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({ logo_url: file_path }),
+      });
+      setClient(updated);
+      setClients(prev => prev.map(c => c.id === updated.id ? updated : c));
+      toast.success(t("clientDetail.logoUploaded"));
+    } catch (e) {
+      toast.error(e.message);
+    } finally {
+      setUploadingLogo(false);
+    }
+  };
+
+  const handleDeleteLogo = async () => {
+    try {
+      const updated = await apiFetch(`/client/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({ logo_url: null }),
+      });
+      setClient(updated);
+      setClients(prev => prev.map(c => c.id === updated.id ? updated : c));
+      toast.success(t("clientDetail.logoDeleted"));
+    } catch (e) {
+      toast.error(e.message);
+    }
+  };
 
   const handleDeleteClient = async () => {
     if (!window.confirm(t('clientDetail.deleteConfirm', { name: client.client_name }))) return;
@@ -225,9 +267,14 @@ const handleDeleteFolder = async (folder) => {
       {/* ── Header ── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-lg shadow-sm flex-shrink-0">
-            {initials}
-          </div>
+          <ClientAvatar
+            initials={initials}
+            logoUrl={client.logo_url}
+            onUpload={handleUploadLogo}
+            onDelete={handleDeleteLogo}
+            uploading={uploadingLogo}
+            editable
+          />
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{client.client_name}</h1>
             <p className="text-sm text-gray-500">{t('clientDetail.addedOn')} {formattedDate(client.created_at)}</p>

@@ -16,7 +16,7 @@
       "feature3Title": "Emmagatzematge de fitxers",
       "feature3Desc": "Guarda assets de branding, fotos i contractes organitzats per client — sempre a mà.",
       "feature4Title": "6 plataformes suportades",
-      "feature4Desc": "Instagram, LinkedIn, Twitter/X, TikTok, YouTube i Twitch — contingut adaptat a cadascuna.",
+      "feature4Desc": "Instagram, LinkedIn, Twitter/X, TikTok, YouTube i Facebook — contingut adaptat a cadascuna.",
       "howLabel": "Com funciona",
       "howTitle": "De l'esborrany a llest per publicar en segons",
       "step1Title": "Afegeix el teu client",
@@ -206,7 +206,11 @@
       "fileName": "Nom",
       "fileSize": "Mida",
       "deleteFile": "El·liminar {{name}}",
-      "deleteFolder": "El·liminar carpeta {{name}}"
+      "deleteFolder": "El·liminar carpeta {{name}}",
+      "uploadLogo": "Pujar logo",
+      "deleteLogo": "El·liminar logo",
+      "logoUploaded": "Logo actualitzar",
+      "logoDeleted": "Logo el·liminat"
     },
     "createContent": {
       "title": "Crear contingut",

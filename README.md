@@ -388,7 +388,7 @@ wrangler deploy
 - [ ] AI-powered content calendar — suggest a full week of content per client
 
 ### 🗂️ Phase 6 — Client file storage
-- [ ] Cloud media library per client — store logos, images, videos and brand assets (Cloudflare R2)
+- [x] Cloud media library per client — store logos, images, videos and brand assets (Cloudflare R2)
 - [ ] Share folders with clients — controlled access per folder
 - [ ] Approval workflow — review and approve content before it goes live
 - [ ] Post preview — show exactly how the post will look on each platform

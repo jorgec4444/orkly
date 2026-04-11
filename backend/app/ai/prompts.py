@@ -24,9 +24,9 @@ PLATFORM_SPECS: dict[str, dict] = {
         "max_chars": 500,
         "notes": "This is a video description or community post. Clear and engaging, include a call to action, 2-3 hashtags.",
     },
-    "twitch": {
-        "max_chars": 300,
-        "notes": "Casual and gamer-oriented tone, short and direct, emojis and gaming slang welcome.",
+    "facebook": {
+        "max_chars": 500,
+        "notes": "Conversational and engaging tone, mix of personal and professional, longer posts work well, emojis welcome, encourage interaction with questions.",
     },
 }
 

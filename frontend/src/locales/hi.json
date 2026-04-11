@@ -183,7 +183,11 @@
       "folderCreated": "फोल्डर बनाया गया",
       "folderAlreadyExists": "इस नाम का फोल्डर पहले से मौजूद है",
       "cannotDeleteDefaultFolder": "डिफ़ॉल्ट फोल्डर हटाए नहीं जा सकते",
-      "loadFilesError": "फ़ाइलें लोड करने में त्रुटि।"
+      "loadFilesError": "फ़ाइलें लोड करने में त्रुटि।",
+      "uploadLogo": "लोगो अपलोड करें",
+      "deleteLogo": "लोगो हटाएँ",
+      "logoUploaded": "लोगो अपडेट हो गया",
+      "logoDeleted": "लोगो हटा दिया गया"
     },
     "createContent": {
       "title": "कंटेंट बनाएं",
@@ -409,7 +413,7 @@
       "feature3Title": "फ़ाइल स्टोरेज",
       "feature3Desc": "ब्रांडिंग एसेट्स, फोटो और कॉन्ट्रैक्ट्स क्लाइंट के अनुसार व्यवस्थित करें — हमेशा उपलब्ध।",
       "feature4Title": "6 प्लेटफॉर्म सपोर्टेड",
-      "feature4Desc": "Instagram, LinkedIn, Twitter/X, TikTok, YouTube और Twitch — हर प्लेटफॉर्म के लिए अनुकूलित कंटेंट।",
+      "feature4Desc": "Instagram, LinkedIn, Twitter/X, TikTok, YouTube और Facebook — हर प्लेटफॉर्म के लिए अनुकूलित कंटेंट।",
       "howLabel": "यह कैसे काम करता है",
       "howTitle": "ड्राफ्ट से पब्लिश-रेडी तक सेकंड में",
       "step1Title": "क्लाइंट जोड़ें",

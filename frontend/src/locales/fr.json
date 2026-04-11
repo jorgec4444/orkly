@@ -16,7 +16,7 @@
       "feature3Title": "Stockage de fichiers",
       "feature3Desc": "Conservez les assets de branding, photos et contrats organisés par client — toujours à portée.",
       "feature4Title": "6 plateformes supportées",
-      "feature4Desc": "Instagram, LinkedIn, Twitter/X, TikTok, YouTube et Twitch — contenu adapté à chacune.",
+      "feature4Desc": "Instagram, LinkedIn, Twitter/X, TikTok, YouTube et Facebook — contenu adapté à chacune.",
       "howLabel": "Comment ça marche",
       "howTitle": "Du brouillon au prêt à publier en quelques secondes",
       "step1Title": "Ajoutez votre client",
@@ -206,7 +206,11 @@
       "fileName": "Nom",
       "fileSize": "Taille",
       "deleteFile": "Supprimer {{name}}",
-      "deleteFolder": "Supprimer le dossier {{name}}"
+      "deleteFolder": "Supprimer le dossier {{name}}",
+      "uploadLogo": "Télécharger le logo",
+      "deleteLogo": "Supprimer le logo",
+      "logoUploaded": "Logo mis à jour",
+      "logoDeleted": "Logo supprimé"
     },
     "createContent": {
       "title": "Créer du contenu",

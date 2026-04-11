@@ -183,7 +183,11 @@
       "folderCreated": "Ordner erstellt",
       "folderAlreadyExists": "Ein Ordner mit diesem Namen existiert bereits",
       "cannotDeleteDefaultFolder": "Standardordner können nicht gelöscht werden",
-      "loadFilesError": "Fehler beim Laden der Dateien."
+      "loadFilesError": "Fehler beim Laden der Dateien.",
+      "uploadLogo": "Logo hochladen",
+      "deleteLogo": "Logo löschen",
+      "logoUploaded": "Logo aktualisiert",
+      "logoDeleted": "Logo entfernt"
     },
     "createContent": {
       "title": "Inhalte erstellen",
@@ -409,7 +413,7 @@
       "feature3Title": "Dateispeicher",
       "feature3Desc": "Bewahren Sie Branding-Assets, Fotos und Verträge geordnet nach Kunde — immer griffbereit.",
       "feature4Title": "6 Plattformen unterstützt",
-      "feature4Desc": "Instagram, LinkedIn, Twitter/X, TikTok, YouTube und Twitch — Inhalte für jede Plattform angepasst.",
+      "feature4Desc": "Instagram, LinkedIn, Twitter/X, TikTok, YouTube und Facebook — Inhalte für jede Plattform angepasst.",
       "howLabel": "So funktioniert es",
       "howTitle": "Vom Entwurf zur Veröffentlichung in Sekunden",
       "step1Title": "Kunden hinzufügen",

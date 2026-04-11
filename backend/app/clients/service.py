@@ -71,9 +71,7 @@ async def create_client(user_id: str, client_name: str, brand_voice: str | None)
     response = db.table("clients").insert(payload).execute()
     return response.data[0]
 
-ALLOWED_FIELDS = {"client_name", "brand_voice", "platforms"}
-
-ALLOWED_FIELDS = {"client_name", "brand_voice", "platforms", "custom_folders"}
+ALLOWED_FIELDS = {"client_name", "brand_voice", "platforms", "custom_folders", "logo_url"}
 
 async def update_client(client_id: int, user_id: str, **fields) -> dict | None:
     safe_fields = {k: v for k, v in fields.items() if k in ALLOWED_FIELDS}

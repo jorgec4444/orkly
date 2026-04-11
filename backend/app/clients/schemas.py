@@ -10,10 +10,11 @@ from pydantic import BaseModel, Field
 class ClientResponse(BaseModel):
     id: int
     client_name: str
-    created_at: datetime
+    created_at: Optional[datetime] | None
     brand_voice: Optional[str] | None
     platforms: Optional[list[str]] | None
     custom_folders: Optional[list[str]] | None
+    logo_url: Optional[str] | None
 
     model_config = {"from_attributes": True}
 
@@ -26,3 +27,4 @@ class ClientUpdateRequest(BaseModel):
     brand_voice: str | None = Field(default=None, max_length=1000)
     platforms: list[str] | None = Field(default=None)
     custom_folders: list[str] | None = Field(default=None)
+    logo_url: str | None = Field(default=None)

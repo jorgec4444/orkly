@@ -183,7 +183,11 @@
       "folderCreated": "フォルダ作成済み",
       "folderAlreadyExists": "この名前のフォルダはすでに存在します",
       "cannotDeleteDefaultFolder": "デフォルトフォルダは削除できません",
-      "loadFilesError": "ファイルの読み込みエラー。"
+      "loadFilesError": "ファイルの読み込みエラー。",
+      "uploadLogo": "ロゴをアップロード",
+      "deleteLogo": "ロゴを削除する",
+      "logoUploaded": "ロゴを更新しました",
+      "logoDeleted": "ロゴを削除しました"
     },
     "createContent": {
       "title": "コンテンツを作成",
@@ -409,7 +413,7 @@
       "feature3Title": "ファイルストレージ",
       "feature3Desc": "ブランディング素材、写真、契約書をクライアントごとに整理 — いつでもすぐアクセス。",
       "feature4Title": "6プラットフォーム対応",
-      "feature4Desc": "Instagram、LinkedIn、Twitter/X、TikTok、YouTube、Twitch — 各プラットフォームに最適化。",
+      "feature4Desc": "Instagram、LinkedIn、Twitter/X、TikTok、YouTube、Facebook — 各プラットフォームに最適化。",
       "howLabel": "使い方",
       "howTitle": "下書きから公開準備まで数秒で",
       "step1Title": "クライアントを追加",

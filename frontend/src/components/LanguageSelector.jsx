@@ -7,8 +7,8 @@ const LANGUAGES = [
   { code: 'es', flag: '🇪🇸', label: 'Español' },
   { code: 'ca', flag: '🏴', label: 'Català' },
   { code: 'fr', flag: '🇫🇷', label: 'Français' },
-  { code: 'zh', flag: '🇨🇳', label: '中文' },
   { code: 'de', flag: '🇩🇪', label: 'Deutsch' },
+  { code: 'zh', flag: '🇨🇳', label: '中文' },
   { code: 'ja', flag: '🇯🇵', label: '日本語' },
   { code: 'hi', flag: '🇮🇳', label: 'हिन्दी' },
 ];
