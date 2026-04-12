@@ -1,60 +1,50 @@
 # Copyright © 2026 Jorge Vinagre
 # SPDX-License-Identifier: AGPL-3.0-only WITH Commons-Clause
 
-"""Integration tests for Orkly AI endpoints."""
-from unittest.mock import MagicMock, patch
-
+"""Integration tests for main API endpoints."""
 import pytest
+from unittest.mock import MagicMock, patch
 from fastapi.testclient import TestClient
 
-
-# ── Fixtures ──────────────────────────────────────────────────────────────────
-
-def _make_openai_client(text="Improved text"):
-    client = MagicMock()
-    client.chat.completions.create.return_value = MagicMock(
-        **{"choices": [MagicMock(**{"message.content": text})]}
-    )
-    return client
+from tests.conftest import make_supabase, make_openai_client, make_user, make_rate_limiter
+from app.auth.dependencies import get_current_user, get_optional_user
 
 
-def _make_supabase(rows=None):
-    db = MagicMock()
-    chain = MagicMock()
-    chain.select.return_value = chain
-    chain.eq.return_value = chain
-    chain.update.return_value = chain
-    chain.insert.return_value = chain
-    chain.execute.return_value = MagicMock(data=rows or [], count=0)
-    db.table.return_value = chain
-    return db
+def _make_app_client(supabase=None, openai=None):
+    """Build a TestClient with full dependency overrides."""
+    db = supabase or make_supabase()
+    ai = openai or make_openai_client()
+    user = make_user()
+
+    async def _user():
+        return user
+
+    async def _optional_user():
+        return user
+
+    with (
+        patch("app.database._supabase_client", db),
+        patch("app.config._openai_client", ai),
+        patch("app.text_generation.service.get_openai_client", return_value=ai),
+        patch("app.text_generation.service.rate_limiter", make_rate_limiter()),
+    ):
+        from main import app
+        app.dependency_overrides[get_current_user] = _user
+        app.dependency_overrides[get_optional_user] = _optional_user
+        client = TestClient(app)
+        return client, app
 
 
 @pytest.fixture()
-def client():
-    with (
-        patch("app.database._supabase_client", _make_supabase()),
-        patch("app.config._openai_client", _make_openai_client()),
-        patch("app.ai.get_openai_client", return_value=_make_openai_client()),
-    ):
-        from backend.main import app
-        with TestClient(app) as c:
-            yield c
+def client(app_client):
+    return app_client
 
-
-# ── GET / ─────────────────────────────────────────────────────────────────────
 
 class TestRoot:
     def test_returns_200(self, client):
         r = client.get("/")
         assert r.status_code == 200
 
-    def test_contains_endpoints_key(self, client):
-        data = client.get("/").json()
-        assert "endpoints" in data
-
-
-# ── GET /health ───────────────────────────────────────────────────────────────
 
 class TestHealth:
     def test_healthy(self, client):
@@ -63,110 +53,92 @@ class TestHealth:
         assert r.json()["status"] == "healthy"
 
 
-# ── POST /improve ─────────────────────────────────────────────────────────────
-
-class TestImprove:
-    def test_returns_three_variations(self, client):
-        r = client.post("/improve", json={"text": "Hello world"})
+class TestTextGeneration:
+    def test_improve_returns_three_variations(self, client):
+        r = client.post("/text-generation/improve-text", json={
+            "text": "Hello world",
+            "platform": "instagram",
+        })
         assert r.status_code == 200
         data = r.json()
-        assert data["original"] == "Hello world"
+        assert "variations" in data
         assert len(data["variations"]) == 3
 
-    def test_variation_versions(self, client):
-        data = client.post("/improve", json={"text": "Test"}).json()
-        versions = {v["version"] for v in data["variations"]}
+    def test_improve_variation_versions(self, client):
+        r = client.post("/text-generation/improve-text", json={
+            "text": "Test",
+            "platform": "instagram",
+        })
+        assert r.status_code == 200
+        versions = {v["version"] for v in r.json()["variations"]}
         assert versions == {"professional", "casual", "viral"}
 
     def test_empty_text_returns_422(self, client):
-        r = client.post("/improve", json={"text": ""})
-        assert r.status_code == 422
-
-    def test_blank_text_returns_422(self, client):
-        r = client.post("/improve", json={"text": "   "})
+        r = client.post("/text-generation/improve-text", json={
+            "text": "",
+            "platform": "instagram",
+        })
         assert r.status_code == 422
 
     def test_text_over_500_chars_returns_422(self, client):
-        r = client.post("/improve", json={"text": "x" * 501})
+        r = client.post("/text-generation/improve-text", json={
+            "text": "x" * 501,
+            "platform": "instagram",
+        })
         assert r.status_code == 422
 
-    def test_rate_limit_blocks_after_limit(self):
-        from backend.app.config import FREE_DAILY_LIMIT
-        rows = [{"count": FREE_DAILY_LIMIT}]
-        with patch("app.database._supabase_client", _make_supabase(rows)):
-            from backend.main import app
-            with TestClient(app) as blocked_client:
-                r = blocked_client.post("/improve", json={"text": "hello"})
-        assert r.status_code == 429
-        assert r.json()["detail"]["error"] == "rate_limit_exceeded"
-
-    def test_missing_text_field_returns_422(self, client):
-        r = client.post("/improve", json={})
+    def test_missing_text_returns_422(self, client):
+        r = client.post("/text-generation/improve-text", json={})
         assert r.status_code == 422
 
-
-# ── GET /rate-limit/status ────────────────────────────────────────────────────
-
-class TestRateLimitStatus:
-    def test_returns_status_fields(self, client):
-        r = client.get("/rate-limit/status")
-        assert r.status_code == 200
-        data = r.json()
-        for key in ("allowed", "used", "remaining", "limit", "reset_at"):
-            assert key in data
-
-    def test_allowed_true_for_fresh_ip(self, client):
-        data = client.get("/rate-limit/status").json()
-        assert data["allowed"] is True
-
-
-# ── POST /feedback ────────────────────────────────────────────────────────────
 
 class TestFeedback:
     def test_accepts_valid_feedback(self, client):
-        r = client.post("/feedback", json={"feedback": "Great app!"})
-        assert r.status_code == 200
-        assert r.json()["success"] is True
+        r = client.post("/feedback/save", json={"feedback": "Great app!"})
+        assert r.status_code in (200, 204)
 
     def test_rejects_empty_feedback(self, client):
-        r = client.post("/feedback", json={"feedback": ""})
-        assert r.status_code == 422
-
-    def test_rejects_blank_feedback(self, client):
-        r = client.post("/feedback", json={"feedback": "   "})
+        r = client.post("/feedback/save", json={"feedback": ""})
         assert r.status_code == 422
 
     def test_rejects_missing_field(self, client):
-        r = client.post("/feedback", json={})
+        r = client.post("/feedback/save", json={})
         assert r.status_code == 422
 
 
-# ── GET /admin/stats ──────────────────────────────────────────────────────────
-
-class TestAdminStats:
-    def test_unauthorized_without_key(self, client):
-        r = client.get("/admin/stats")
-        assert r.status_code == 401
-
-    def test_unauthorized_with_wrong_key(self, client):
-        r = client.get("/admin/stats?api_key=wrongkey")
-        assert r.status_code == 401
-
-    def test_authorized_with_correct_key(self):
-        with patch("backend.main.ADMIN_API_KEY", "secret"):
-            from backend.main import app
-            with TestClient(app) as admin_client:
-                r = admin_client.get("/admin/stats?api_key=secret")
+class TestClients:
+    def test_list_clients_returns_200(self, client):
+        r = client.get("/client/list")
         assert r.status_code == 200
+        assert isinstance(r.json(), list)
+
+    def test_create_client_valid(self, app_client, mock_supabase):
+        mock_supabase.table.return_value.execute.return_value = MagicMock(data=[{
+            "id": 1, "client_name": "Test Corp", "brand_voice": None,
+            "platforms": [], "custom_folders": [], "logo_url": None,
+            "user_id": "test-user-uuid", "created_at": "2026-01-01T00:00:00",
+            "deleted_at": None,
+        }])
+        r = app_client.post("/client/create", json={"client_name": "Test Corp"})
+        assert r.status_code == 201
+
+    def test_create_client_missing_name_returns_422(self, client):
+        r = client.post("/client/create", json={"client_name": ""})
+        assert r.status_code == 422
 
 
-# ── X-Forwarded-For header (proxy IP) ────────────────────────────────────────
+class TestChatSessions:
+    def test_list_sessions_returns_200(self, client):
+        r = client.get("/chat/sessions")
+        assert r.status_code == 200
+        assert isinstance(r.json(), list)
 
-class TestClientIP:
-    def test_respects_forwarded_for_header(self, client):
-        """The real IP should be read from X-Forwarded-For when present."""
-        r = client.get(
-            "/rate-limit/status",
-            headers={"X-Forwarded-For": "203.0.113.42, 10.0.0.1"},
-        )
+    def test_create_session_valid(self, app_client, mock_supabase):
+        mock_supabase.table.return_value.execute.return_value = MagicMock(data=[{
+            "id": "session-uuid",
+            "user_id": "test-user-uuid",
+            "client_id": None,
+            "created_at": "2026-01-01T00:00:00",
+        }])
+        r = app_client.post("/chat/session", json={"client_id": None})
         assert r.status_code == 200

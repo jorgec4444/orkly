@@ -20,6 +20,15 @@ async def list_clients(user = Depends(get_current_user)):
 
     return await service.get_clients_by_user(user.id)
 
+@router.post("/create", response_model=ClientResponse, status_code=status.HTTP_201_CREATED)
+async def create_client(body: ClientCreateRequest, user = Depends(get_current_user)):
+    """Create a new client."""
+
+    return await service.create_client(
+        user_id=user.id,
+        client_name=body.client_name,
+        brand_voice=body.brand_voice,
+    )
  
 @router.get("/{client_id}", response_model=ClientResponse)
 async def get_client(client_id: int, user = Depends(get_current_user)):
@@ -37,16 +46,6 @@ async def get_client_generations(client_id: int, user = Depends(get_current_user
 
     return await service.get_client_generations(client_id=client_id, user_id=user.id)
 
-
-@router.post("/create", response_model=ClientResponse, status_code=status.HTTP_201_CREATED)
-async def create_client(body: ClientCreateRequest, user = Depends(get_current_user)):
-    """Create a new client."""
-
-    return await service.create_client(
-        user_id=user.id,
-        client_name=body.client_name,
-        brand_voice=body.brand_voice,
-    )
  
  
 @router.put("/{client_id}", response_model=ClientResponse)
