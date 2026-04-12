@@ -35,7 +35,7 @@ function ClientSelector({ clients, selected, onSelect }) {
         {selectedClient ? (
           <>
             {selectedClient.logo_url ? (
-              <img src={selectedClient.logo_url} alt="" className="w-4 h-4 rounded object-cover" aria-hidden="true" />
+              <img src={selectedClient.logo_url} alt="Client selector" className="w-4 h-4 rounded object-cover" style={{ width: "1rem", height: "1rem", borderRadius: "4px" }} aria-hidden="true" />
             ) : (
               <div className="w-4 h-4 rounded bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-xs font-bold" aria-hidden="true">
                 {selectedClient.client_name[0].toUpperCase()}
@@ -74,7 +74,7 @@ function ClientSelector({ clients, selected, onSelect }) {
               className="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-gray-50 transition-colors"
             >
               {c.logo_url ? (
-                <img src={c.logo_url} alt="" className="w-5 h-5 rounded object-cover flex-shrink-0" aria-hidden="true" />
+                <img src={c.logo_url} alt="Client selector opened" className="w-5 h-5 rounded object-cover flex-shrink-0" style={{ width: "1.25rem", height: "1.25rem", borderRadius: "4px" }} aria-hidden="true" />
               ) : (
                 <div className="w-5 h-5 rounded bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-xs font-bold flex-shrink-0" aria-hidden="true">
                   {c.client_name[0].toUpperCase()}
@@ -203,7 +203,9 @@ export default function Chat() {
       const data = await apiFetch("/chat/sessions");
       setSessions(data || []);
       if (data?.length > 0) {
-        await selectSession(data[0].id);
+        setActiveSessionId(data[0].id);
+        const messages = await apiFetch(`/chat/session/${data[0].id}/messages`);
+        setMessages(messages || []);
       }
     } catch {
       toast.error(t("chat.errorLoadingSessions") || "Could not load sessions");
@@ -388,7 +390,7 @@ export default function Chat() {
                   const client = session.client_id ? clients.find(c => c.id === session.client_id) : null;
                   return client ? (
                     client.logo_url ? (
-                      <img src={client.logo_url} alt="" className="w-6 h-6 rounded-lg object-cover flex-shrink-0" />
+                      <img src={client.logo_url} alt="Sessions list" className="w-6 h-6 rounded-lg object-cover flex-shrink-0" />
                     ) : (
                       <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
                         {client.client_name[0].toUpperCase()}
@@ -439,7 +441,7 @@ export default function Chat() {
               const client = clients.find(c => c.id === selectedClientId);
               if (!client) return null;
               return client.logo_url ? (
-                <img src={client.logo_url} alt="" className="w-6 h-6 rounded-lg object-cover" />
+                <img src={client.logo_url} alt="Logo of the client in the selections list" className="w-6 h-6 rounded-lg object-cover" />
               ) : (
                 <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
                   {client.client_name[0].toUpperCase()}
@@ -458,9 +460,14 @@ export default function Chat() {
           <ClientSelector
             clients={clients}
             selected={selectedClientId}
-            onSelect={(id) => {
+            onSelect={async (id) => {
               setSelectedClientId(id);
-              createSession(id);
+              const existing = sessions.find(s => s.client_id === id);
+              if (existing) {
+                await selectSession(existing.id);
+              } else {
+                await createSession(id);
+              }
             }}
           />
         </div>
