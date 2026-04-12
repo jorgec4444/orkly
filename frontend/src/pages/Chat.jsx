@@ -204,6 +204,7 @@ export default function Chat() {
       setSessions(data || []);
       if (data?.length > 0) {
         setActiveSessionId(data[0].id);
+        setSelectedClientId(data[0].client_id);
         const messages = await apiFetch(`/chat/session/${data[0].id}/messages`);
         setMessages(messages || []);
       }
@@ -217,6 +218,10 @@ export default function Chat() {
   const selectSession = async (sessionId) => {
     setActiveSessionId(sessionId);
     setMessages([]);
+    
+    const session = sessions.find(s => s.id === sessionId);
+    if (session) setSelectedClientId(session.client_id);
+    
     try {
       const data = await apiFetch(`/chat/session/${sessionId}/messages`);
       setMessages(data || []);
