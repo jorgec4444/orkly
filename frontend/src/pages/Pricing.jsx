@@ -194,7 +194,7 @@ export default function Pricing() {
                   )}
                   {billing === "monthly" && plan.monthly > 0 && (
                     <p className={`text-xs ${plan.highlight ? "text-white/50" : "text-gray-400"}`}>
-                      {t("pricing.orBilledYearly", { amount: (plan.yearly / 12).toFixed(1) })}
+                      {t("pricing.orBilledYearly", { amount: (plan.yearly / 12).toFixed(2) })}
                     </p>
                   )}
                 </div>

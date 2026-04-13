@@ -405,10 +405,10 @@ wrangler deploy
 - [ ] Stripe integration — subscriptions + webhooks
 - [ ] Subscription enforcement — plan limits applied per endpoint (clients, generations, storage)
 - [ ] Plans:
-  - Free — 3 clients, 30 generations/month, no storage
-  - Solo — €12/mo or €107/year (~26% off) — 15 clients, 300 gen/month, 10GB storage
-  - Pro — €29/mo or €261/year (~25% off) — unlimited clients, unlimited gen, 100GB storage
-  - Agency — €59/mo or €520/year (~27% off) — everything in Pro + seats + publishing + 500GB storage
+  - Free — 3 clients, 30 generations/month, no storage, no image generation
+  - Solo — €18.99/mo or €161.99/year (~29% off) — 15 clients, 300 gen/month, 5GB storage, 20 AI images/month
+  - Pro — €33.99/mo or €288.99/year (~29% off) — unlimited clients, unlimited gen, 50GB storage, 50 AI images/month
+  - Agency — €63.99/mo or €543.99/year (~29% off) — everything in Pro + seats + publishing + 200GB storage + 100 AI images/month
   - Twitter/X publishing — €5/mo add-on (API cost pass-through)
 - [x] Donations via Buy Me a Coffee
 
@@ -457,7 +457,7 @@ Privacy Policy and Terms of Service available at [orkly.app/privacy](https://ork
 ## 📞 Contact
 
 - 📧 [jorgecdev444@gmail.com](mailto:jorgecdev444@gmail.com)
-- 🐦 [@vinagre444](https://x.com/vinagre444)
+- 🐦 [@vinagre444](https://x.com/jorgecdev444)
 
 ---
 

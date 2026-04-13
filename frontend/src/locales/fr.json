@@ -321,7 +321,7 @@
       "subtitle": "Commencez gratuitement, évoluez quand vous en avez besoin. Sans frais cachés, annulez à tout moment.",
       "monthly": "Mensuel",
       "yearly": "Annuel",
-      "saveBadge": "Économisez jusqu'à 27%",
+      "saveBadge": "Économisez jusqu'à 29%",
       "savedVsMonthly": "€{{amount}} économisés vs mensuel",
       "orBilledYearly": "ou €{{amount}}/mois facturé annuellement",
       "perMonth": "/mois",
@@ -331,7 +331,7 @@
         "noCard": {
           "icon": "🔒",
           "title": "Aucune carte de crédit requise",
-          "desc": "Commencez avec Free, évoluez quand vous êtes prêt."
+          "desc": "Commencez gratuitement, évoluez quand vous êtes prêt."
         },
         "cancel": {
           "icon": "↩️",
@@ -341,7 +341,7 @@
         "instant": {
           "icon": "⚡",
           "title": "Accès instantané",
-          "desc": "Votre plan s'active dès que vous souscrivez."
+          "desc": "Votre plan s'active dès que vous vous abonnez."
         }
       },
       "plans": {
@@ -352,7 +352,7 @@
           "features": [
             "3 clients",
             "30 générations IA / mois",
-            "3 styles de contenu (professionnel, décontracté, viral)",
+            "3 styles de contenu (professionnel, casual, viral)",
             "Historique des générations par client",
             "6 plateformes supportées",
             "Interface multilingue"
@@ -360,50 +360,53 @@
         },
         "solo": {
           "name": "Solo",
-          "description": "Pour le community manager freelance qui débute.",
-          "cta": "Démarrer Solo",
+          "description": "Pour le community manager freelance qui démarre.",
+          "cta": "Commencer avec Solo",
           "features": [
             "15 clients",
             "300 générations IA / mois",
-            "Tout ce qui est inclus dans Gratuit",
-            "Voix de marque par client",
+            "Tout du plan gratuit",
+            "Description par client",
             "Paramètres de plateforme par client",
-            "5 Go de stockage de fichiers",
+            "10 Go de stockage",
+            "*20 images IA / mois",
             "*Recommandations de hashtags",
             "*Réutilisation de contenu"
           ]
         },
         "pro": {
           "name": "Pro",
-          "description": "Pour le freelance confirmé qui a besoin de tout.",
-          "cta": "Démarrer Pro",
+          "description": "Pour le freelance établi qui a besoin de tout.",
+          "cta": "Commencer avec Pro",
           "badge": "Le plus populaire",
           "features": [
             "Clients illimités",
             "Générations IA illimitées",
-            "Tout ce qui est inclus dans Solo",
-            "50 Go de stockage de fichiers",
-            "*Partager des dossiers avec les clients",
-            "*Extracteur de branding depuis le web",
+            "Tout du plan Solo",
+            "250 Go de stockage",
+            "*50 images IA / mois",
+            "*Partage de dossiers avec clients",
+            "*Extracteur de branding web",
             "*Génération de carrousels",
             "*Calendrier de contenu IA",
-            "*Programmation de publications",
-            "*Publications récurrentes",
-            "*Approbation de contenu client",
+            "*Planification de publications",
+            "*Posts récurrents",
+            "*Approbation de contenu",
             "*Rapports par client"
           ]
         },
         "agency": {
-          "name": "Agence",
+          "name": "Agency",
           "description": "Pour les petites agences gérant plusieurs équipes et marques.",
-          "cta": "Démarrer Agence",
+          "cta": "Commencer avec Agency",
           "features": [
-            "Tout ce qui est inclus dans Pro",
-            "200 Go de stockage de fichiers",
+            "Tout du plan Pro",
+            "1 To de stockage",
+            "*100 images IA / mois",
             "*Plusieurs utilisateurs / sièges",
             "*Plusieurs comptes sociaux par client",
             "*Publication directe (Instagram, LinkedIn, X)",
-            "*Marque blanche"
+            "*White-label"
           ]
         }
       }

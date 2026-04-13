@@ -321,7 +321,7 @@
       "subtitle": "Start free, upgrade when you need it. No hidden fees, cancel anytime.",
       "monthly": "Monthly",
       "yearly": "Yearly",
-      "saveBadge": "Save up to 27%",
+      "saveBadge": "Save up to 29%",
       "savedVsMonthly": "€{{amount}} saved vs monthly",
       "orBilledYearly": "or €{{amount}}/mo billed yearly",
       "perMonth": "/mo",
@@ -368,7 +368,8 @@
             "Everything in Free plan",
             "Brand voice per client",
             "Platform settings per client",
-            "5 GB file storage",
+            "10 GB file storage",
+            "*20 AI images / month",
             "*Hashtag recommendations",
             "*Content repurposing"
           ]
@@ -382,7 +383,8 @@
             "Unlimited clients",
             "Unlimited AI generations",
             "Everything in Solo plan",
-            "50 GB file storage",
+            "250 GB file storage",
+            "*50 AI images / month",
             "*Share folders with clients",
             "*Branding extractor from web",
             "*Carousel generation",
@@ -392,22 +394,23 @@
             "*Client content approval",
             "*Per-client reports"
           ]
-        },
-        "agency": {
-          "name": "Agency",
-          "description": "For small agencies managing multiple teams and brands.",
-          "cta": "Start Agency",
-          "features": [
-            "Everything in Pro plan",
-            "200 GB file storage",
-            "*Multiple users / seats",
-            "*Multiple social accounts per client",
-            "*Direct publishing (Instagram, LinkedIn, X)",
-            "*White-label"
-          ]
-        }
+      },
+      "agency": {
+        "name": "Agency",
+        "description": "For small agencies managing multiple teams and brands.",
+        "cta": "Start Agency",
+        "features": [
+          "Everything in Pro plan",
+          "1 TB file storage",
+          "*100 AI images / month",
+          "*Multiple users / seats",
+          "*Multiple social accounts per client",
+          "*Direct publishing (Instagram, LinkedIn, X)",
+          "*White-label"
+        ]
       }
-    },
+    }
+  },
     "chat": {
       "conversations": "Conversations",
       "newChat": "New chat",

@@ -320,10 +320,10 @@
       "subtitle": "Comienza gratis, mejora cuando lo necesites. Ninguna tarifa oculta, cancela en cualquier momento.",
       "monthly": "Mensual",
       "yearly": "Anual",
-      "saveBadge": "Ahorra hasta 27%",
+      "saveBadge": "Ahorra hasta 29%",
       "savedVsMonthly": "€{{amount}} ahorrados vs mensual",
-      "orBilledYearly": "o €{{amount}}/mo facturado anualmente",
-      "perMonth": "/mo",
+      "orBilledYearly": "o €{{amount}}/mes facturado anualmente",
+      "perMonth": "/mes",
       "back": "← Atrás a la página de inicio",
       "comingSoon": "Próximamente",
       "reassurance": {
@@ -350,10 +350,10 @@
           "cta": "Comienza con el plan gratuito",
           "features": [
             "3 clientes",
-            "30 Generaciones de IA / mes",
-            "3 estilos de contenido (professional, casual, viral)",
+            "30 generaciones de IA / mes",
+            "3 estilos de contenido (profesional, casual, viral)",
             "Historial de generaciones por cliente",
-            "Soporte para 6 plataformas de redes sociales",
+            "Soporte para 6 plataformas",
             "Interfaz multi-idioma"
           ]
         },
@@ -363,11 +363,12 @@
           "cta": "Comienza con el plan Solo",
           "features": [
             "15 clientes",
-            "300 Generaciones de IA / mes",
+            "300 generaciones de IA / mes",
             "Todo lo del plan gratuito",
             "Descripción por cliente",
             "Configuración de plataforma por cliente",
-            "5 GB de almacenamiento",
+            "10 GB de almacenamiento",
+            "*20 imágenes con IA / mes",
             "*Recomendaciones de hashtags",
             "*Repurposing de contenido"
           ]
@@ -381,13 +382,14 @@
             "Clientes ilimitados",
             "Generaciones de IA ilimitadas",
             "Todo lo del plan Solo",
-            "50 GB de almacenamiento",
+            "250 GB de almacenamiento",
+            "*50 imágenes con IA / mes",
             "*Comparte carpetas con clientes",
             "*Extractor de branding de la web",
             "*Generación de carrusels de Instagram",
             "*Calendario de contenido con IA",
             "*Programación de publicaciones",
-            "*Post recurrentes",
+            "*Posts recurrentes",
             "*Aprobación de contenido para clientes",
             "*Informes por cliente"
           ]
@@ -398,15 +400,16 @@
           "cta": "Comienza con el plan Agency",
           "features": [
             "Todo lo del plan Pro",
-            "200 GB de almacenamiento",
+            "1 TB de almacenamiento",
+            "*100 imágenes con IA / mes",
             "*Múltiples usuarios / seats",
             "*Múltiples cuentas de redes sociales por cliente",
             "*Publicación directa (Instagram, LinkedIn, X)",
             "*White-label"
           ]
         }
-      }
-    },
+    }
+  },
     "chat": {
       "conversations": "Conversaciones",
       "newChat": "Nueva conversación",

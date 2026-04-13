@@ -315,92 +315,95 @@
       "hi": "हिन्दी"
     },
     "pricing": {
-      "badge": "Simple, preu transparent",
-      "title1": "Plans per a cada nivell de",
+      "badge": "Preus simples i transparents",
+      "title1": "Plans per a cada",
       "title2": "community manager",
-      "subtitle": "Comença gratuït, millora quan ho necessitis. Cap tarifa oculta, cancel·la en qualsevol moment.",
+      "subtitle": "Comença gratis, millora quan ho necessitis. Sense tarifes ocultes, cancel·la quan vulguis.",
       "monthly": "Mensual",
       "yearly": "Anual",
-      "saveBadge": "Estalvia fins a 27%",
-      "savedVsMonthly": "€{{amount}} estalviat vs mensual",
-      "orBilledYearly": "o €{{amount}}/mo facturat anualment",
-      "perMonth": "/mo",
-      "back": "← Enrrere",
-      "comingSoon": "Proximament",
+      "saveBadge": "Estalvia fins a un 29%",
+      "savedVsMonthly": "€{{amount}} estalviats vs mensual",
+      "orBilledYearly": "o €{{amount}}/mes facturats anualment",
+      "perMonth": "/mes",
+      "back": "← Enrere",
+      "comingSoon": "Pròximament",
       "reassurance": {
         "noCard": {
           "icon": "🔒",
-          "title": "No es necessita targeta de crèdit",
-          "desc": "Comença gratis, millora quan ho necessitis."
+          "title": "No cal targeta de crèdit",
+          "desc": "Comença gratis, millora quan estiguis a punt."
         },
         "cancel": {
           "icon": "↩️",
-          "title": "Cancel·la en qualsevol moment",
-          "desc": "Cap compromís. Redueix o cancel·la en un clic."
+          "title": "Cancel·la quan vulguis",
+          "desc": "Sense compromís. Redueix o cancel·la en un clic."
         },
         "instant": {
           "icon": "⚡",
           "title": "Accés instantani",
-          "desc": "El teu pla s'activa en el moment que et subscrigues."
+          "desc": "El teu pla s'activa en el moment que et subscrius."
         }
       },
       "plans": {
         "free": {
-          "name": "Gratuit",
+          "name": "Gratuït",
           "description": "Prova Orkly i veu la diferència.",
-          "cta": "Comença amb el plan gratuit",
+          "cta": "Comença gratuïtament",
           "features": [
             "3 clients",
-            "30 Generacions de IA / mes",
+            "30 generacions d'IA / mes",
             "3 estils de contingut (professional, casual, viral)",
             "Historial de generacions per client",
-            "Support per a 6 plataformes de xarxes socials",
-            "Interfaç multi-idioma"
+            "6 plataformes compatibles",
+            "Interfície multiidioma"
           ]
         },
         "solo": {
           "name": "Solo",
           "description": "Per al community manager autònom que comença.",
-          "cta": "Comença amb el plan Solo",
+          "cta": "Comença amb Solo",
           "features": [
             "15 clients",
-            "300 Generacions de IA / mes",
-            "Tot el del plan Free",
-            "Veu de marca per client",
+            "300 generacions d'IA / mes",
+            "Tot el del pla gratuït",
+            "Descripció per client",
             "Configuració de plataforma per client",
-            "5 GB emmagatzematge",
+            "10 GB d'emmagatzematge",
+            "*20 imatges amb IA / mes",
             "*Recomanacions de hashtags",
-            "*Repurposing de contingut"
+            "*Reutilització de contingut"
           ]
         },
         "pro": {
           "name": "Pro",
-          "description": "Per al community manager que gestiona diversos clients i vol més potència i organització.",
-          "cta": "Comença amb el plan Pro",
+          "description": "Per al community manager establert que necessita-ho tot.",
+          "cta": "Comença amb Pro",
           "badge": "El més popular",
           "features": [
             "Clients il·limitats",
-            "Generacions de IA il·limitades",
-            "Tot el del plan Solo",
-            "50 GB emmagatzematge",
-            "Comparteix carpetes amb clients",
+            "Generacions d'IA il·limitades",
+            "Tot el del pla Solo",
+            "250 GB d'emmagatzematge",
+            "*50 imatges amb IA / mes",
+            "*Comparteix carpetes amb clients",
             "*Extractor de branding de la web",
-            "*Generació de carrusels de Instagram",
+            "*Generació de carrusels",
             "*Calendari de contingut amb IA",
             "*Programació de publicacions",
-            "*Post recurrents",
-            "*Aprovació de contingut per clients",
+            "*Posts recurrents",
+            "*Aprovació de contingut",
             "*Informes per client"
           ]
         },
         "agency": {
           "name": "Agency",
           "description": "Per a petites agències que gestionen múltiples equips i marques.",
-          "cta": "Comença amb el plan Agency",
+          "cta": "Comença amb Agency",
           "features": [
-            "Tot el del plan Pro",
-            "200 GB emmagatzematge",
-            "*Múltiples usuaris / seats",
+            "Tot el del pla Pro",
+            "1 TB d'emmagatzematge",
+            "*100 imatges amb IA / mes",
+            "*Múltiples usuaris / seients",
             "*Múltiples comptes de xarxes socials per client",
             "*Publicació directa (Instagram, LinkedIn, X)",
             "*White-label"

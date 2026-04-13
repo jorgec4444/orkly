@@ -313,10 +313,10 @@
       "badge": "Einfache, transparente Preise",
       "title1": "Pläne für jeden",
       "title2": "Community Manager",
-      "subtitle": "Kostenlos starten, upgraden wenn nötig. Keine versteckten Gebühren.",
+      "subtitle": "Kostenlos starten, upgraden wenn nötig. Keine versteckten Gebühren, jederzeit kündbar.",
       "monthly": "Monatlich",
       "yearly": "Jährlich",
-      "saveBadge": "Bis zu 27% sparen",
+      "saveBadge": "Bis zu 29% sparen",
       "savedVsMonthly": "€{{amount}} gespart vs. monatlich",
       "orBilledYearly": "oder €{{amount}}/Mo. jährlich abgerechnet",
       "perMonth": "/Mo.",
@@ -347,7 +347,7 @@
           "features": [
             "3 Kunden",
             "30 KI-Generierungen / Monat",
-            "3 Inhaltsstile",
+            "3 Inhaltsstile (professionell, locker, viral)",
             "Generierungsverlauf pro Kunde",
             "6 Plattformen unterstützt",
             "Mehrsprachige Oberfläche"
@@ -361,23 +361,25 @@
             "15 Kunden",
             "300 KI-Generierungen / Monat",
             "Alles aus dem kostenlosen Plan",
-            "Markenstimme pro Kunde",
+            "Beschreibung pro Kunde",
             "Plattformeinstellungen pro Kunde",
-            "5 GB Speicher",
+            "10 GB Speicher",
+            "*20 KI-Bilder / Monat",
             "*Hashtag-Empfehlungen",
             "*Content-Wiederverwendung"
           ]
         },
         "pro": {
           "name": "Pro",
-          "description": "Für den etablierten Freelancer.",
+          "description": "Für den etablierten Freelancer der alles braucht.",
           "cta": "Pro starten",
           "badge": "Beliebteste",
           "features": [
             "Unbegrenzte Kunden",
             "Unbegrenzte KI-Generierungen",
             "Alles aus dem Solo-Plan",
-            "50 GB Speicher",
+            "250 GB Speicher",
+            "*50 KI-Bilder / Monat",
             "*Ordner mit Kunden teilen",
             "*Branding-Extraktor",
             "*Karussell-Generierung",
@@ -390,14 +392,15 @@
         },
         "agency": {
           "name": "Agentur",
-          "description": "Für kleine Agenturen.",
+          "description": "Für kleine Agenturen die mehrere Teams und Marken verwalten.",
           "cta": "Agentur starten",
           "features": [
             "Alles aus dem Pro-Plan",
-            "200 GB Speicher",
-            "*Mehrere Benutzer",
+            "1 TB Speicher",
+            "*100 KI-Bilder / Monat",
+            "*Mehrere Benutzer / Sitze",
             "*Mehrere Social-Konten pro Kunde",
-            "*Direktveröffentlichung",
+            "*Direktveröffentlichung (Instagram, LinkedIn, X)",
             "*White-Label"
           ]
         }
