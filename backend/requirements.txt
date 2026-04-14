@@ -68,4 +68,3 @@ yarl==1.23.0
 zstandard==0.25.0
 boto3==1.42.82
 python-multipart==0.0.26
-stripe==15.0.1
