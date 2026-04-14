@@ -22,7 +22,7 @@ async def get_user_subscription(user_id: str) -> SubscriptionResponse:
             .select("*")
             .eq("user_id", user_id)
             .in_("status", ["active", "trialing"])
-            .single().execute()
+            .execute()
         )
         if not user_subscription.data:
             return SubscriptionResponse(
@@ -36,14 +36,18 @@ async def get_user_subscription(user_id: str) -> SubscriptionResponse:
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Error fetching subscription from user {user_id}: {e}")
-        return None
+        logger.error(f"Error fetching subscription: {e}")
+        return SubscriptionResponse(
+            active_plan="free", plan_state="active",
+            end_date=None, is_trial=False
+        )
     
+    user_subscription = user_subscription.data[0]
     return SubscriptionResponse(
-        active_plan=user_subscription.data["plan"],
-        plan_state=user_subscription.data["status"],
-        end_date=user_subscription.data["current_period_end"],
-        is_trial=user_subscription.data["status"] == "trialing"
+        active_plan=user_subscription["plan"],
+        plan_state=user_subscription["status"],
+        end_date=user_subscription["current_period_end"],
+        is_trial=user_subscription["status"] == "trialing"
     )
 
 async def create_user_checkout_session(
@@ -114,7 +118,7 @@ async def process_webhooks(request: Request) -> dict:
         event = stripe.Webhook.construct_event(
             payload, sig_header, STRIPE_WEBHOOK_SECRET
         )
-    except stripe.error.SignatureVerificationError:
+    except stripe.SignatureVerificationError:
         raise HTTPException(status_code=400, detail="Invalid signature")
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid payload")
@@ -146,13 +150,15 @@ async def handle_checkout_completed(data: dict):
             subscription.current_period_end, tz=timezone.utc
         ).isoformat()
 
-        db.table("subscriptions").update({
+        result = db.table("subscriptions").update({
             "plan": data["metadata"]["plan"],
             "stripe_subscription_id": data["subscription"],
             "status": status,
             "current_period_end": current_period_end,
             "updated_at": datetime.now(timezone.utc).isoformat(),
         }).eq("stripe_customer_id", data["customer"]).execute()
+        if not result.data:
+            logger.error(f"No subscription row found for customer {data['customer']}")
 
         logger.info(f"Checkout completed for customer {data['customer']}, plan {data['metadata']['plan']}")
     except Exception as e:
