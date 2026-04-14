@@ -55,7 +55,7 @@ export default function Pricing() {
     setLoadingPlan(planId);
 
     try {
-      const checkout_url = await apiFetch(`/billing/create-checkout-session`, {
+      const { checkout_url } = await apiFetch(`/billing/create-checkout-session`, {
         method: "POST",
         body: JSON.stringify({ plan: planId, billing }),
       });
