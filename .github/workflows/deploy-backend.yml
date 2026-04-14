@@ -43,4 +43,5 @@ jobs:
             STRIPE_PRO_YEARLY=${{ secrets.STRIPE_PRO_YEARLY }}
             STRIPE_AGENCY_MONTHLY=${{ secrets.STRIPE_AGENCY_MONTHLY }}
             STRIPE_AGENCY_YEARLY=${{ secrets.STRIPE_AGENCY_YEARLY }}
+            STRIPE_WEBHOOK_SECRET=${{ secrets.STRIPE_WEBHOOK_SECRET }}
           flags: --clear-base-image

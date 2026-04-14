@@ -18,6 +18,7 @@ from app.admin.controller import router as admin_router
 from app.clients.controller import router as clients_router
 from app.storage.controller import router as storage_router
 from app.chat.controller import router as chat_router
+from app.billing.controller import router as billing_router
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s  %(name)s: %(message)s")
 logger = logging.getLogger(__name__)
@@ -65,6 +66,7 @@ app.include_router(admin_router)
 app.include_router(clients_router)
 app.include_router(storage_router)
 app.include_router(chat_router)
+app.include_router(billing_router)
 
 @app.get("/", tags=["meta"])
 async def root():

@@ -11,5 +11,5 @@ class CreateCheckoutSessionRequest(BaseModel):
 class SubscriptionResponse(BaseModel):
     active_plan: str
     plan_state: str
-    end_date: datetime
+    end_date: datetime | None
     is_trial: bool

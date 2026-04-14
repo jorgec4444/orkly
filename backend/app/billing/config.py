@@ -5,6 +5,7 @@ import os
 
 TRIAL_PERIOD_DAYS = 14
 STRIPE_SECRET_KEY: str = os.getenv("STRIPE_SECRET_KEY") 
+STRIPE_WEBHOOK_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET")
 
 stripe_price_ids = {
     "solo": {
