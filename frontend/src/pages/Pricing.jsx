@@ -38,7 +38,8 @@ export default function Pricing() {
   }));
 
   const handleCta = async (planId) => {
-    if (planId === "free") {
+    toast.success(t('pricing.comingSoon'));
+    /*if (planId === "free") {
       if (!isAuthenticated) {
         setIsAuthModalOpen(true);
       } else {
@@ -65,7 +66,7 @@ export default function Pricing() {
       toast.error("Something went wrong. Please try again.");
     } finally {
       setLoadingPlan(null);
-    }
+    }*/
   };
 
   const reassuranceItems = [
