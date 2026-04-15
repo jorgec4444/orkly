@@ -36,4 +36,12 @@ jobs:
             R2_ENDPOINT=${{ secrets.R2_ENDPOINT }}
             R2_LOGOS_BUCKET_NAME=${{ secrets.R2_LOGOS_BUCKET_NAME }}
             R2_PUBLIC_URL=${{ secrets.R2_PUBLIC_URL }}
+            STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}
+            STRIPE_SOLO_MONTHLY=${{ secrets.STRIPE_SOLO_MONTHLY }}
+            STRIPE_SOLO_YEARLY=${{ secrets.STRIPE_SOLO_YEARLY }}
+            STRIPE_PRO_MONTHLY=${{ secrets.STRIPE_PRO_MONTHLY }}
+            STRIPE_PRO_YEARLY=${{ secrets.STRIPE_PRO_YEARLY }}
+            STRIPE_AGENCY_MONTHLY=${{ secrets.STRIPE_AGENCY_MONTHLY }}
+            STRIPE_AGENCY_YEARLY=${{ secrets.STRIPE_AGENCY_YEARLY }}
+            STRIPE_WEBHOOK_SECRET=${{ secrets.STRIPE_WEBHOOK_SECRET }}
           flags: --clear-base-image

@@ -7,6 +7,7 @@ import AuthModal from "../components/AuthModal";
 import Button from "../components/Button";
 import { supabase } from "../supabase";
 import { toast } from "react-hot-toast";
+import { apiFetch } from "../utils/apiFetch";
 
 const yearlySaving = (plan) => {
   if (plan.monthly === 0) return null;
@@ -17,6 +18,7 @@ export default function Pricing() {
   const [billing, setBilling] = useState("monthly");
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loadingPlan, setLoadingPlan] = useState(null);
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -35,9 +37,8 @@ export default function Pricing() {
     features:    t(`pricing.plans.${plan.id}.features`, { returnObjects: true }),
   }));
 
-  const handleCta = (planId) => {
+  const handleCta = async (planId) => {
     if (planId === "free") {
-      // Free plan — open auth modal or go to dashboard
       if (!isAuthenticated) {
         setIsAuthModalOpen(true);
       } else {
@@ -46,12 +47,24 @@ export default function Pricing() {
       return;
     }
 
-    // Paid plans — coming soon
     if (!isAuthenticated) {
       setIsAuthModalOpen(true);
-    } else {
-      // TODO: replace with Stripe checkout when ready
-      toast(t("pricing.comingSoon"), { icon: "🚀", duration: 3000 });
+      return;
+    }
+
+    setLoadingPlan(planId);
+
+    try {
+      const checkout_url = await apiFetch(`/billing/create-checkout-session`, {
+        method: "POST",
+        body: JSON.stringify({ plan: planId, billing }),
+      });
+
+      window.location.href = checkout_url;
+    } catch (e) {
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoadingPlan(null);
     }
   };
 
@@ -206,6 +219,7 @@ export default function Pricing() {
                 {/* CTA */}
                 <Button
                   onClick={() => handleCta(plan.id)}
+                  loading={loadingPlan === plan.id}
                   variant={plan.highlight ? "secondary" : plan.ctaVariant === "primary" ? "primary" : "secondary"}
                   className={`w-full justify-between px-4 mb-6 ${
                     plan.highlight ? "bg-white text-primary hover:bg-white/90 border-white" : ""
