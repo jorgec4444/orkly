@@ -146,9 +146,10 @@ async def handle_checkout_completed(data: dict):
     try:
         subscription = stripe.Subscription.retrieve(data["subscription"])
         status = subscription.status
+        period_end = subscription.trial_end or subscription.current_period_end
         current_period_end = datetime.fromtimestamp(
-            subscription.current_period_end, tz=timezone.utc
-        ).isoformat()
+            period_end, tz=timezone.utc
+        ).isoformat() if period_end else None
 
         result = db.table("subscriptions").update({
             "plan": data["metadata"]["plan"],
@@ -175,9 +176,10 @@ async def handle_subscription_updated(data: dict):
                 plan = plan_name
                 break
 
+        period_end = data.get("trial_end") or data.get("current_period_end")
         current_period_end = datetime.fromtimestamp(
-            data["current_period_end"], tz=timezone.utc
-        ).isoformat()
+            period_end, tz=timezone.utc
+        ).isoformat() if period_end else None
 
         db.table("subscriptions").update({
             "plan": plan,
