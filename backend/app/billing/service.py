@@ -101,7 +101,7 @@ async def create_user_checkout_session(
         )
 
         logger.info(f"Checkout session created for user {user_id}, plan {request.plan}")
-        return {"checkout_url": session.url}
+        return {"url": session.url}
 
     except HTTPException:
         raise
