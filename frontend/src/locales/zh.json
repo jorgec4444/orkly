@@ -285,7 +285,10 @@
       "saving": "保存中…",
       "cancel": "取消",
       "noName": "未设置名称",
-      "upgradePlan": "升级计划"
+      "upgradePlan": "升级计划",
+      "trialActive": "试用期有效",
+      "renewsOn": "续费日期：{{date}}",
+      "manageSubscription": "管理订阅"
     },
     "footer": {
       "feedback": "发送反馈",

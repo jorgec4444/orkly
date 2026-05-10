@@ -95,8 +95,8 @@ async def create_user_checkout_session(
                 "trial_period_days": TRIAL_PERIOD_DAYS,
                 "metadata": {"user_id": user_id, "plan": request.plan}
             },
-            success_url="https://orkly.app/dashboard?success=true",
-            cancel_url="https://orkly.app/pricing",
+            success_url="https://orkly-testing.vinagre444.workers.dev/dashboard?success=true",
+            cancel_url="https://orkly-testing.vinagre444.workers.dev/pricing",
             metadata={"user_id": user_id, "plan": request.plan}
         )
 
@@ -252,9 +252,9 @@ async def create_portal_session(user_id: str) -> dict:
         
         session = stripe.billing_portal.Session.create(
             customer=stripe_customer_id,
-            return_url="https://orkly.app/dashboard/settings",
+            return_url="https://orkly-testing.vinagre444.workers.dev/settings",
         )
-        return {"portal_url": session.url}
+        return {"url": session.url}
     except HTTPException:
         raise
     except Exception as e:

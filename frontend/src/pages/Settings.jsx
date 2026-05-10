@@ -3,6 +3,8 @@ import { useState } from "react";
 import { supabase } from "../supabase";
 import { LogOut, Trash2, ExternalLink } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import { apiFetch } from "../utils/apiFetch";
 import toast from "react-hot-toast";
 import LanguageSelector from "../components/LanguageSelector";
 import FeedbackModal from "../components/FeedbackModal";
@@ -74,6 +76,13 @@ export default function Settings() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [showFeedback, setShowFeedback] = useState(false);
+  const [subscription, setSubscription] = useState(null);
+
+  useEffect(() => {
+    apiFetch("/billing/subscription")
+      .then(setSubscription)
+      .catch(() => {});
+  }, []);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -144,16 +153,37 @@ export default function Settings() {
           </h2>
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-semibold text-gray-900">{t('settings.freePlan')}</p>
-              <p className="text-xs text-gray-500 mt-0.5">{t('settings.freeLimit')}</p>
+              <p className="text-sm font-semibold text-gray-900 capitalize">
+                {subscription ? subscription.active_plan : "..."}
+              </p>
+              <p className="text-xs text-gray-500 mt-0.5">
+                {subscription?.is_trial
+                  ? t('settings.trialActive')
+                  : subscription?.end_date
+                  ? t('settings.renewsOn', { date: new Date(subscription.end_date).toLocaleDateString() })
+                  : t('settings.freeLimit')}
+              </p>
             </div>
             <div className="flex items-center gap-3">
-              <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 text-gray-600">
-                {t('settings.free')}
+              <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 text-gray-600 capitalize">
+                {subscription?.active_plan || "free"}
               </span>
-              <Button size="sm" onClick={() => navigate("/pricing")}>
-                {t('settings.upgradePlan')}
-              </Button>
+              {subscription?.active_plan === "free" ? (
+                <Button size="sm" onClick={() => navigate("/pricing")}>
+                  {t('settings.upgradePlan')}
+                </Button>
+              ) : (
+                <Button size="sm" variant="secondary" onClick={async () => {
+                  try {
+                    const { url } = await apiFetch("/billing/portal", { method: "POST" });
+                    window.location.href = url;
+                  } catch {
+                    toast.error("Something went wrong.");
+                  }
+                }}>
+                  {t('settings.manageSubscription')}
+                </Button>
+              )}
             </div>
           </div>
         </section>

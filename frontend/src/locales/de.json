@@ -280,7 +280,10 @@
       "saving": "Wird gespeichert…",
       "cancel": "Abbrechen",
       "noName": "Kein Name gesetzt",
-      "upgradePlan": "Plan upgraden"
+      "upgradePlan": "Plan upgraden",
+      "trialActive": "Testphase aktiv",
+      "renewsOn": "Verlängert am {{date}}",
+      "manageSubscription": "Abonnement verwalten"
     },
     "footer": {
       "feedback": "Feedback senden",

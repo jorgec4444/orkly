@@ -280,7 +280,10 @@
       "saving": "सहेजा जा रहा है…",
       "cancel": "रद्द करें",
       "noName": "कोई नाम सेट नहीं",
-      "upgradePlan": "प्लान अपग्रेड करें"
+      "upgradePlan": "प्लान अपग्रेड करें",
+      "trialActive": "परीक्षण सक्रिय",
+      "renewsOn": "{{date}} को नवीनीकृत होगा",
+      "manageSubscription": "सदस्यता प्रबंधित करें"
     },
     "footer": {
       "feedback": "फीडबैक भेजें",

@@ -285,7 +285,10 @@
       "saving": "Desant…",
       "cancel": "Cancel·lar",
       "noName": "Sense nom",
-      "upgradePlan": "Millorar pla"
+      "upgradePlan": "Millorar subscripció",
+      "trialActive": "Prova activa",
+      "renewsOn": "Es renova el {{date}}",
+      "manageSubscription": "Gestionar subscripció"
     },
     "footer": {
       "feedback": "Envia'ns la teva opinió",

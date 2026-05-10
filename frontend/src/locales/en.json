@@ -285,7 +285,10 @@
       "saving": "Saving…",
       "cancel": "Cancel",
       "noName": "No name set",
-      "upgradePlan": "Upgrade plan"
+      "upgradePlan": "Upgrade plan",
+      "trialActive": "Trial active",
+      "renewsOn": "Renews on {{date}}",
+      "manageSubscription": "Manage subscription"
     },
     "footer": {
       "feedback": "Send us your feedback",

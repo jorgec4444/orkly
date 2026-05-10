@@ -280,7 +280,10 @@
       "saving": "保存中…",
       "cancel": "キャンセル",
       "noName": "名前未設定",
-      "upgradePlan": "プランをアップグレード"
+      "upgradePlan": "プランをアップグレード",
+      "trialActive": "トライアル有効",
+      "renewsOn": "{{date}}に更新",
+      "manageSubscription": "サブスクリプション管理"
     },
     "footer": {
       "feedback": "フィードバックを送る",

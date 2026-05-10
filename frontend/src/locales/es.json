@@ -284,7 +284,10 @@
       "saving": "Guardando…",
       "cancel": "Cancelar",
       "noName": "Sin nombre",
-      "upgradePlan": "Mejorar plan"
+      "upgradePlan": "Mejorar plan",
+      "trialActive": "Prueba activa",
+      "renewsOn": "Se renueva el {{date}}",
+      "manageSubscription": "Gestionar suscripción"
     },
     "footer": {
       "feedback": "Envíanos tu opinión",

@@ -285,7 +285,10 @@
       "saving": "Enregistrement en cours…",
       "cancel": "Annuler",
       "noName": "Nom non défini",
-      "upgradePlan": "Améliorez votre plan"
+      "upgradePlan": "Améliorez votre plan",
+      "trialActive": "Essai actif",
+      "renewsOn": "Renouvellement le {{date}}",
+      "manageSubscription": "Gérer l'abonnement"
     },
     "footer": {
       "feedback": "Envoyez-nous vos commentaires",
