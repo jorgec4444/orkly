@@ -55,12 +55,12 @@ export default function Pricing() {
     setLoadingPlan(planId);
 
     try {
-      const checkout_url = await apiFetch(`/billing/create-checkout-session`, {
+      const { url } = await apiFetch(`/billing/create-checkout-session`, {
         method: "POST",
         body: JSON.stringify({ plan: planId, billing }),
       });
 
-      window.location.href = checkout_url;
+      window.location.href = url;
     } catch (e) {
       toast.error("Something went wrong. Please try again.");
     } finally {
