@@ -66,7 +66,7 @@ export default function Pricing() {
     } finally {
       setLoadingPlan(null);
     }
-  };
+  }; 
 
   const reassuranceItems = [
     {
